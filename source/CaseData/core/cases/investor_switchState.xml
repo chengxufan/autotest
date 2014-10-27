@@ -1,0 +1,34 @@
+<case id="switchState">
+	<context>
+		<item name="investorID">00000006</item>
+		<item name="newState">2</item>
+	</context>
+	<step note="初始化状态">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="investorID" statement="update"><![CDATA[update INVESTOR  set INVESTOR_STATE= '1' WHERE INVESTOR_ID='%s']]></item>
+		</helper>
+	</step>
+	<step note="修改投资者状态">
+		<helper name="helper.thrift">
+			<item name="call" function="investor_switchState">
+			    <param type="String">
+					<val name="investorID" format="investorID">%s</val>
+				</param>
+				<param type="int">
+					<val name="newState" format="newState">%s</val>
+				</param>
+			</item>
+		</helper>
+	</step>
+	<step note="检查数据库">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="investorID" statement="select"><![CDATA[SELECT INVESTOR_STATE as s FROM INVESTOR WHERE INVESTOR_ID ='%s']]></item>
+		</helper>
+		<return>
+			<item name="INVESTOR_STATE">s</item>
+		</return>
+		<assert>
+			<item name="equals" var="INVESTOR_STATE" param="2"></item>
+		</assert>
+	</step>
+</case>

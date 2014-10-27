@@ -24,17 +24,18 @@ public class CaseCommand extends BaseCommand {
 	HashMap<String, String> vars;
 	public String caseId = null;
 
-	// public boolean success = false;
 	@Override
-	public void run(String id) throws TestApiException {
-		caseId = id;
-		vars = new HashMap<String, String>();
-		String filePath = Config.getInstance().caseDataPath + "cases/"
-				+ id + ".xml";
-		if (!new File(filePath).exists())
-			throw new TestApiException("case file " + id
-					+ " not find.");
+	public void run(String id) {
+		boolean ret = false;
 		try {
+			caseId = id;
+			vars = new HashMap<String, String>();
+			String filePath = Config.getInstance().caseDataPath
+					+ "cases/" + id + ".xml";
+			if (!new File(filePath).exists())
+				throw new TestApiException("case file " + id
+						+ " not find.");
+
 			SAXReader reader = new SAXReader();
 			Document doc = reader.read(filePath);
 
@@ -47,7 +48,6 @@ public class CaseCommand extends BaseCommand {
 				vars.put(name, value);
 			}
 
-			boolean ret = false;
 			list = doc.selectNodes("//case/step");
 			for (Iterator<Element> it = list.iterator(); it
 					.hasNext();) {
@@ -58,10 +58,14 @@ public class CaseCommand extends BaseCommand {
 					break;
 			}
 
-			Report.getInstance().add(caseId, ret);
-
 		} catch (DocumentException e) {
-			e.printStackTrace();
+			Utils.debugLog("case parse error, " + e.getMessage());
+			ret = false;
+		} catch (TestApiException e) {
+			Utils.debugLog("case error, " + e.getMessage());
+			ret = false;
+		} finally {
+			Report.getInstance().add(caseId, ret);
 		}
 	}
 
@@ -92,50 +96,67 @@ public class CaseCommand extends BaseCommand {
 
 		JsonObject jo = BaseHelper.execute(helperNamespace, caseXml,
 				vars);
-		if (jo == null)
-			return false;
-		el = step.element("return");
-		if (el != null) {
-			for (Iterator<Element> it = el.elementIterator("item"); it
-					.hasNext();) {
-				Element item = it.next();
-				String key = item.attributeValue("name");
-				String jName = item.getText();
-				String[] jNameArray = jName.split("\\.");
-				JsonObject data = new JsonObject();
-				for (int i = 0; i < jNameArray.length; i++) {
-					if (i == 0) {
-						if (jNameArray.length == 1)
+		try {
+			if (jo == null)
+				return false;
+			if (jo.toString().equals("{}"))
+				jo = new JsonObject();
+			el = step.element("return");
+			if (el != null) {
+				for (Iterator<Element> it = el
+						.elementIterator("item"); it
+						.hasNext();) {
+					Element item = it.next();
+					String key = item
+							.attributeValue("name");
+					String jName = item.getText();
+					String[] jNameArray = jName
+							.split("\\.");
+					JsonObject data = new JsonObject();
+					for (int i = 0; i < jNameArray.length; i++) {
+						if (i == 0) {
+
+							if (jNameArray.length == 1)
+								vars.put(key,
+										jo.get(jName)
+												.getAsString());
+							else if (jNameArray.length == 2) {
+								data = (JsonObject) jo
+										.get(jNameArray[i]);
+							}
+						} else if (i == 1) {
 							vars.put(key,
-									jo.get(jName)
+									data.get(jNameArray[i])
 											.getAsString());
-						else if (jNameArray.length == 2) {
-							data = (JsonObject) jo
-									.get(jNameArray[i]);
 						}
-					} else if (i == 1) {
-						vars.put(key,
-								data.get(jNameArray[i])
-										.getAsString());
 					}
 				}
 			}
-		}
-		el = step.element("assert");
-		if (el != null) {
-			for (Iterator<Element> it = el.elementIterator("item"); it
-					.hasNext();) {
+			el = step.element("assert");
+			if (el != null) {
+				for (Iterator<Element> it = el
+						.elementIterator("item"); it
+						.hasNext();) {
 
-				Element item = it.next();
-				String name = item.attributeValue("name");
-				String message = vars.get(item
-						.attributeValue("var"));
-				String param = item.attributeValue("param");
-				boolean ret = Assert.run(name, message, param);
-				if (ret == false) {
-					return false;
+					Element item = it.next();
+					String name = item
+							.attributeValue("name");
+					String message = vars.get(item
+							.attributeValue("var"));
+					String param = item
+							.attributeValue("param");
+					boolean ret = Assert.run(name, message,
+							param);
+					if (ret == false) {
+						return false;
+					}
 				}
 			}
+		} catch (ClassCastException e) {
+			throw new TestApiException(
+					"json response parse error, "
+							+ e.getMessage()
+							+ "json:" + jo);
 		}
 		return true;
 	}

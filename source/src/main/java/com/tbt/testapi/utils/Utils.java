@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.dom4j.Element;
 
+import com.tbt.testapi.main.Command;
+
 public class Utils {
 	public static Element formatElement(HashMap<String, String> vars,
 			Element item) {
@@ -44,4 +46,11 @@ public class Utils {
 					.append(s.substring(1)).toString();
 
 	}
+
+	public static void debugLog(String message) {
+		if (Command.options.debug == true) {
+			System.out.println(message);
+		}
+	}
+
 }

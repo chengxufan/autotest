@@ -2,7 +2,7 @@ package com.tbt.testapi.main;
 
 import com.tbt.testapi.Report;
 import com.tbt.testapi.TestApiException;
-import com.tbt.testapi.command.TaskCommand;
+import com.tbt.testapi.command.CaseCommand;
 
 public class AutoApi {
 	public static void main(String[] args) {
@@ -10,9 +10,9 @@ public class AutoApi {
 			Config.init(Command.options.configPath
 					+ "autoapi.properties");
 
-			TaskCommand command = new TaskCommand();
+			CaseCommand command = new CaseCommand();
 
-			command.run("core");
+			command.run("login");
 			Report.getInstance().print();
 		} catch (TestApiException e) {
 			System.out.println(e.getMessage());

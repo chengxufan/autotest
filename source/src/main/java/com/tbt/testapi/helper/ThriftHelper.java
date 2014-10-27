@@ -67,40 +67,75 @@ public class ThriftHelper extends BaseHelper {
 					.hasNext();) {
 				Element pel = it.next();
 				String type = pel.attributeValue("type");
-				Class param = Class.forName(packageName + "."
-						+ type);
-				Object object = Class.forName(
-						packageName + "." + type)
-						.newInstance();
+				Class param = null;
+				if (type.equals("String")) {
+					param = String.class;
+				} else if (type.equals("int")) {
+
+					param = int.class;
+				} else {
+					param = Class.forName(packageName + "."
+							+ type);
+				}
+				Object object = null;
+				if (type.equals("String")) {
+					object = new String();
+				} else if (type.equals("int")) {
+					object = new Integer(0);
+				} else {
+					object = Class.forName(
+							packageName + "."
+									+ type)
+							.newInstance();
+				}
+
+				// Object object = Class.forName(
+				// packageName + "." + type)
+				// .newInstance();
+
 				for (Iterator<Element> varsIt = pel
 						.elementIterator("val"); varsIt
 						.hasNext();) {
 					Element vel = varsIt.next();
+
 					String name = vel
 							.attributeValue("name");
 					Utils.formatElement(vars, vel);
+
 					String val = vel.getText();
-					Field f = object.getClass()
-							.getDeclaredField(name);
-					method = object.getClass()
-							.getMethod("set"
-									+ Utils.toUpperCaseFirstOne(name),
-									new Class[] { f.getType() });
 
-					Object obj = null;
-					if (f.getType().isAssignableFrom(
-							Integer.TYPE)) {
-						obj = Integer.parseInt(val);
-					} else if (f.getType()
-							.isAssignableFrom(
-									Float.TYPE)) {
-						obj = Float.parseFloat(val);
+					if (type.equals("String")) {
+						object = val;
+					} else if (type.equals("int")) {
+						object = Integer.parseInt(val);
 					} else {
-						obj = val;
-					}
 
-					method.invoke(object,
-							new Object[] { obj });
+						Field f = object.getClass()
+								.getDeclaredField(
+										name);
+
+						method = object.getClass()
+								.getMethod("set"
+										+ Utils.toUpperCaseFirstOne(name),
+										new Class[] { f.getType() });
+
+						Object obj = null;
+
+						if (f.getType()
+								.isAssignableFrom(
+										Integer.TYPE)) {
+							obj = Integer.parseInt(val);
+						} else if (f.getType()
+								.isAssignableFrom(
+										Float.TYPE)) {
+							obj = Float.parseFloat(val);
+						} else {
+							obj = val;
+						}
+
+						method.invoke(object,
+								new Object[] { obj });
+					}
 				}
 
 				params.add(param);
@@ -114,29 +149,34 @@ public class ThriftHelper extends BaseHelper {
 			Object ret = method.invoke(client, runParams.toArray());
 
 			Element rel = (Element) el.selectSingleNode("ret");
-			list = rel.selectNodes("val");
-			for (Iterator<Element> retIt = list.iterator(); retIt
-					.hasNext();) {
+			if (rel != null) {
+				list = rel.selectNodes("val");
+				for (Iterator<Element> retIt = list.iterator(); retIt
+						.hasNext();) {
 
-				Element rvel = retIt.next();
+					Element rvel = retIt.next();
 
-				Field f = ret.getClass().getDeclaredField(
-						rvel.getText());
-				method = ret.getClass()
-						.getMethod("get"
-								+ Utils.toUpperCaseFirstOne(rvel
-										.getText()),
-								new Class[] {});
+					Field f = ret.getClass()
+							.getDeclaredField(
+									rvel.getText());
+					method = ret.getClass()
+							.getMethod("get"
+									+ Utils.toUpperCaseFirstOne(rvel
+											.getText()),
+									new Class[] {});
 
-				Object retObj = method.invoke(ret,
-						new Object[] {});
+					Object retObj = method.invoke(ret,
+							new Object[] {});
 
-				String retVal = String.valueOf(retObj);
-				// vars.put(rel.attributeValue("name"), retVal);
-				jo.addProperty(rvel.attributeValue("name"),
-						retVal);
+					String retVal = String.valueOf(retObj);
+					// vars.put(rel.attributeValue("name"),
+					// retVal);
+					jo.addProperty(rvel
+							.attributeValue("name"),
+							retVal);
+				}
+
 			}
-
 			// System.out.println("ret = " + ret);
 
 			transport.close();
@@ -153,7 +193,8 @@ public class ThriftHelper extends BaseHelper {
 			e.printStackTrace();
 
 		} catch (Exception e) {
-			throw new TestApiException("thrift server error");
+			e.printStackTrace();
+			throw new TestApiException("thrift server error:" + e);
 		}
 		return jo;
 	}

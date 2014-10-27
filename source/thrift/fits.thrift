@@ -168,56 +168,75 @@ struct IssuBankInfoStruct
 //发行行产品注册信息
 struct IssuBankProductInfoStruct
 {
-   //产品ID
-   1: string name
+   //产品name
+   1: required string name
    
-   //产品类型  1 理财； 2 信托
-   2: i32 type
+   //产品类型  1 债权型; 2 准基金型; 3 特定资产型; 4指数挂钩型
+   2: required i32 type
+   
+   //收益计算方式 1 一次性；2 按月；3 按季；4 按年
+   3: required i32 calculationearn
+   
+   //收益计算基础  （产品目标收益率计算基础）
+   // 0 '30/360';  1 'Act/360';  2 'Act/366'
+   4: required i32 target_rate_formula
+   
+   //资产管理人ID
+   5: required string assetManager
+   
+   //资产托管人ID
+   6: required string assetTrustee
    
    //发行行ID
-   3: string issubankid
+   7: required string issubankid
    
    //币种 0 人民币；1 港币；2 美元；3 其他
-   4: i32 currency
+   8: required  i32 currency
    
    //风险级别
-   5: i32 risk_level
+   9: required i32 risk_level
    
    // 目标收益率
-   6: double target_rate
+   10: required double target_rate
    
    // 募集金额上限
-   7: double raise_upper
+   11: required double raise_upper
    
    //募集金额下限
-   8: double raise_low
+   12: required double raise_low
    
    //单一投资人申购上限
-   9: double investment_upper_limit
+   13: required double investment_upper_limit
    
    //单一投资人申购下限
-   10: double investment_low_limit
+   14: required double investment_low_limit
    
    //募集人数上限
-   11: i32 max_raise_number
+   15: required i32 max_raise_number
    
    //产品上线日
-   12: i32 launch_date
+   16: required i32 launch_date
    
    //募集起始日
-   13: i32 raise_start_date
+   17: required i32 raise_start_date
    
    //募集截止日
-   14: i32 raise_end_date
+   18: required i32 raise_end_date
    
    //产品起息日
-   15: i32 value_date
+   19: required i32 value_date
    
    //产品到期日
-   16: i32 due_date
+   20: required i32 due_date
    
    //产品清算日
-   17: i32 reckon_date
+   21: required  i32 reckon_date
+   
+   //预计回款日
+   22: required  i32 expected_payment_date
+   
+   //状态 0 正常；1 无效；2 已清算
+   23: i32 productStatus
 }
 
 //发行行产品注册处理结果信息

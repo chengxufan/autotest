@@ -11,22 +11,27 @@ import org.dom4j.Element;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mysql.jdbc.ResultSetMetaData;
+import com.tbt.testapi.TestApiException;
 
 public class MysqlExecuteHelper extends BaseMysqlHelper {
 	ResultSet rs;
 
 	@Override
-	public JsonObject run(Document doc, HashMap<String, String> vars) {
+	public JsonObject run(Document doc, HashMap<String, String> vars)
+			throws TestApiException {
 		JsonObject jo = new JsonObject();
 		try {
+
 			Statement stmt = conn.createStatement();
 			Element sql = (Element) doc
 					.selectSingleNode("/root/item[@name='sql']");
 			String statement = sql.attributeValue("statement");
+
 			if (statement == null
 					|| statement.toString()
 							.equals("select")) {
 				ResultSet rs = stmt.executeQuery(sql.getText());
+
 				ResultSetMetaData rsmd = (ResultSetMetaData) rs
 						.getMetaData();
 				int cols = rsmd.getColumnCount();
@@ -70,9 +75,9 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 					}
 				}
 			}
-			// System.out.println(jo);
+
 		} catch (SQLException e) {
-			return null;
+			throw new TestApiException("db error:" + e.getMessage());
 		}
 		if (rs != null) {
 			try {

@@ -105,7 +105,6 @@ public class RequestPostHelper extends BaseHelper {
 		URL url;
 		try {
 			url = new URL(strUrl);
-			// System.out.println(url);
 			HttpURLConnection connection = (HttpURLConnection) url
 					.openConnection();
 			connection.setDoOutput(true);
@@ -147,7 +146,6 @@ public class RequestPostHelper extends BaseHelper {
 				jo.remove("data");
 				jo.add("data", countData);
 			}
-			// /System.out.println(jo);
 			return jo;
 		} catch (MalformedURLException e) {
 			throw new TestApiException(

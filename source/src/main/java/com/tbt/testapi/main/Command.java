@@ -23,6 +23,8 @@ public class Command {
 				options.name = it.next();
 			} else if (opt.equals("-configPath")) {
 				options.configPath = it.next();
+			} else if (opt.equals("-debug")) {
+				options.debug = Boolean.parseBoolean(it.next());
 			}
 		}
 		return true;
