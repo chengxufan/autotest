@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.tbt.testapi.TestApiException;
+
 public class Config {
 
 	public String caseDataPath = null;
@@ -14,7 +16,7 @@ public class Config {
 
 	private static Config instance = null;
 
-	public Config(String configPath) {
+	public Config(String configPath) throws TestApiException {
 		Properties prop = new Properties();
 		try {
 			prop.load(new FileInputStream(configPath));
@@ -23,13 +25,15 @@ public class Config {
 			reportPath = prop.getProperty("REPORT_PATH");
 			apiKey = prop.getProperty("API_KEY");
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw new TestApiException(
+					"Invalid config file autotest.properties.");
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new TestApiException(
+					"Unable to read config file autotest.properties.");
 		}
 	}
 
-	public static Config init(String configPath) {
+	public static Config init(String configPath) throws TestApiException {
 		if (instance == null) {
 			instance = new Config(configPath);
 		}

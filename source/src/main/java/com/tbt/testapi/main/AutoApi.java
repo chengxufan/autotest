@@ -6,15 +6,17 @@ import com.tbt.testapi.command.TaskCommand;
 
 public class AutoApi {
 	public static void main(String[] args) {
-		Config.init(Command.options.configPath + "autoapi.properties");
-		TaskCommand command = new TaskCommand();
 		try {
+			Config.init(Command.options.configPath
+					+ "autoapi.properties");
+
+			TaskCommand command = new TaskCommand();
+
 			command.run("core");
 			Report.getInstance().print();
 		} catch (TestApiException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			System.exit(1);
 		}
 	}
 }

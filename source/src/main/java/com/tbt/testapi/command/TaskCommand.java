@@ -19,7 +19,7 @@ public class TaskCommand extends BaseCommand {
 		String filePath = Config.getInstance().caseDataPath + "task/"
 				+ id + ".xml";
 		if (!new File(filePath).exists())
-			throw new TestApiException("group file not find.");
+			throw new TestApiException("task file not find.");
 
 		SAXReader reader = new SAXReader();
 		Document doc;
@@ -38,7 +38,7 @@ public class TaskCommand extends BaseCommand {
 				}
 			}
 		} catch (DocumentException e) {
-			e.printStackTrace();
+			throw new TestApiException("Unable to parse task xml");
 		}
 	}
 

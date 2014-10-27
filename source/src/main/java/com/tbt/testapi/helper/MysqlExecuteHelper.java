@@ -23,9 +23,6 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 			Element sql = (Element) doc
 					.selectSingleNode("/root/item[@name='sql']");
 			String statement = sql.attributeValue("statement");
-			// System.out.println(sql.getText());
-
-			// sql statement default select
 			if (statement == null
 					|| statement.toString()
 							.equals("select")) {

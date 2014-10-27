@@ -40,7 +40,7 @@ public class GroupCommand extends BaseCommand {
 				}
 			}
 		} catch (DocumentException e) {
-			e.printStackTrace();
+			throw new TestApiException("Unable to parse group xml");
 		}
 	}
 }

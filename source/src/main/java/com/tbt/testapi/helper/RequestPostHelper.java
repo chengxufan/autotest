@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.tbt.testapi.BaseHelper;
 import com.tbt.testapi.EnvConfig;
+import com.tbt.testapi.TestApiException;
 import com.tbt.testapi.main.Config;
 
 public class RequestPostHelper extends BaseHelper {
@@ -59,7 +60,8 @@ public class RequestPostHelper extends BaseHelper {
 	}
 
 	@Override
-	public JsonObject run(Document doc, HashMap<String, String> vars) {
+	public JsonObject run(Document doc, HashMap<String, String> vars)
+			throws TestApiException {
 		Element uri = (Element) doc
 				.selectSingleNode("/root/item[@name='uri']");
 		Element params = (Element) doc
@@ -148,12 +150,13 @@ public class RequestPostHelper extends BaseHelper {
 			// /System.out.println(jo);
 			return jo;
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			throw new TestApiException(
+					"Unable to request api server");
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new TestApiException(
+					"Unable to request read or write");
 		}
 
-		return null;
 	}
 
 }

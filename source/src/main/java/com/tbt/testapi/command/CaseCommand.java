@@ -65,7 +65,7 @@ public class CaseCommand extends BaseCommand {
 		}
 	}
 
-	public boolean step(Element step) {
+	public boolean step(Element step) throws TestApiException {
 		Element el;
 		Element hel = step.element("helper");
 		String helperNamespace = hel.attributeValue("name");

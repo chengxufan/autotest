@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
@@ -20,6 +19,7 @@ import org.dom4j.Element;
 import com.google.gson.JsonObject;
 import com.tbt.testapi.BaseHelper;
 import com.tbt.testapi.EnvConfig;
+import com.tbt.testapi.TestApiException;
 import com.tbt.testapi.utils.Utils;
 import com.tongbaotu.fits.thrift.idl.Fits;
 import com.tongbaotu.fits.thrift.idl.FitsException;
@@ -36,7 +36,6 @@ public class ThriftHelper extends BaseHelper {
 		host = el.element("host").getText();
 		port = Integer.parseInt(el.element("port").getText());
 		packageName = el.element("packageName").getText();
-
 	}
 
 	@Override
@@ -45,7 +44,8 @@ public class ThriftHelper extends BaseHelper {
 	}
 
 	@Override
-	public JsonObject run(Document doc, HashMap<String, String> vars) {
+	public JsonObject run(Document doc, HashMap<String, String> vars)
+			throws TestApiException {
 		JsonObject jo = new JsonObject();
 		try {
 			Element el = (Element) doc
@@ -141,32 +141,6 @@ public class ThriftHelper extends BaseHelper {
 
 			transport.close();
 
-		} catch (TTransportException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
-		} catch (TException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (InvocationTargetException e) {
 			if (e.getCause() instanceof FitsException) {
 				FitsException ee = (FitsException) e
@@ -177,6 +151,9 @@ public class ThriftHelper extends BaseHelper {
 				return null;
 			}
 			e.printStackTrace();
+
+		} catch (Exception e) {
+			throw new TestApiException("thrift server error");
 		}
 		return jo;
 	}

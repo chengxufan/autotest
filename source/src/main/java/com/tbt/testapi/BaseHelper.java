@@ -7,12 +7,12 @@ import org.dom4j.Document;
 import com.google.gson.JsonObject;
 
 abstract public class BaseHelper {
-	abstract public void init();
+	abstract public void init() throws TestApiException;
 
 	abstract public void destroy();
 
 	static public JsonObject execute(String namespace, Document doc,
-			HashMap<String, String> vars) {
+			HashMap<String, String> vars) throws TestApiException {
 		BaseHelper base = createHelper(namespace);
 		base.init();
 		JsonObject jo = base.run(doc, vars);
@@ -21,7 +21,7 @@ abstract public class BaseHelper {
 	}
 
 	abstract public JsonObject run(Document doc,
-			HashMap<String, String> vars);
+			HashMap<String, String> vars) throws TestApiException;
 
 	static public BaseHelper createHelper(String namespace) {
 		String helperNamespace = namespace.substring(7);

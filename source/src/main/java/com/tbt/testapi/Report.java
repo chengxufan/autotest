@@ -40,7 +40,7 @@ public class Report {
 			System.out.print(".");
 	}
 
-	public void print() {
+	public void print() throws TestApiException {
 		StringBuffer sb = new StringBuffer();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String time = df.format(new Date());
@@ -88,7 +88,8 @@ public class Report {
 				bw.close();
 
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw new TestApiException(
+						"Unable to write report file.");
 			}
 		}
 	}
