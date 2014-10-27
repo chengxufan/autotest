@@ -1,0 +1,39 @@
+<case id="investor_register">
+	<context>
+		<item name="phone">18111101809</item>
+	</context>
+	<step note="清理投资人">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="phone" statement="delete"><![CDATA[DELETE FROM INVESTOR WHERE MOBILE_PHONE_NUMBER='%s']]></item>
+		</helper>
+	</step>
+	<step note="投资人注册">
+		<helper name="helper.thrift">
+			<item name="call" function="investor_register">
+				<param type="InvestorRegisterInfoStruct">
+					<val name="mobilePhoneNumber" format="phone">%s</val>
+				</param>
+				<ret type="ResultInfoStruct">
+					<val name="investorID">investorID</val>
+				</ret>
+			</item>
+		</helper>
+		<return>
+			<item name="investorID">investorID</item>
+		</return>
+		<assert>
+			<item name="notnull" var="investorID"></item>
+		</assert>
+	</step>
+	<step note="检查数据库">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="phone" statement="select"><![CDATA[SELECT COUNT(*) as c FROM INVESTOR WHERE MOBILE_PHONE_NUMBER='%s']]></item>
+		</helper>
+		<return>
+			<item name="count">c</item>
+		</return>
+		<assert>
+			<item name="equals" var="count" param="1"></item>
+		</assert>
+	</step>
+</case>

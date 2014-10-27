@@ -1,0 +1,14 @@
+<group id="product">
+	<case id="check"></case>
+	<case id="create"></case>
+	<case id="getById"></case>
+	<case id="getList"></case>
+	<case id="getQuestionnaire"></case>
+	<case id="login"></case>
+	<case id="myaccount"></case>
+	<case id="questionnaire"></case>
+	<case id="register_failed"></case>
+	<case id="regiser_phonenumber_failed"></case>
+	<case id="register_empty"></case>
+	<case id="topUp"></case>
+</group>

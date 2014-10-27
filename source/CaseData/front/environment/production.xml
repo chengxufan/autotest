@@ -1,0 +1,12 @@
+<environment>
+	<item name="mysql">
+		<host>192.168.1.111</host>
+		<user>root</user>
+		<pass>tb11tmysql</pass>
+		<port>3306</port>
+		<db>tbt</db>
+	</item>
+	<item name="request">
+		<url>http://api.tongbaotu.com/</url>
+	</item>
+</environment>
