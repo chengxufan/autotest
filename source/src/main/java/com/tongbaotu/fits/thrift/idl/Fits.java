@@ -38,17 +38,19 @@ public class Fits {
 
     public InvestorRegisterResultInfoStruct investor_register(InvestorRegisterInfoStruct investorInfo) throws FitsException, org.apache.thrift.TException;
 
-    public ResultInfoStruct investor_switchState(String investorID, int newState) throws FitsException, org.apache.thrift.TException;
+    public void investor_switchState(String investorID, int newState) throws FitsException, org.apache.thrift.TException;
 
-    public ResultInfoStruct investor_updateRiskLevel(RiskLevelStruct riskLevel) throws FitsException, org.apache.thrift.TException;
+    public void investor_updateRiskLevel(RiskLevelStruct riskLevel) throws FitsException, org.apache.thrift.TException;
 
     public BankSignResultStruct investor_bankSign(BankSignInfoStruct bankSignInfo) throws FitsException, org.apache.thrift.TException;
 
-    public ResultInfoStruct issubank_register(IssuBankInfoStruct bInfo) throws FitsException, org.apache.thrift.TException;
+    public void issubank_register(IssuBankInfoStruct bInfo) throws FitsException, org.apache.thrift.TException;
+
+    public IssuBankProductInfoResultStruct issubank_productregister(IssuBankProductInfoStruct productInfo) throws FitsException, org.apache.thrift.TException;
 
     public IssuBankInfoStruct issubank_getBankInfo(String issu_bank_id) throws FitsException, org.apache.thrift.TException;
 
-    public ResultInfoStruct proxybank_regist(ProxyBankInfoStruct proxyBankInfo) throws FitsException, org.apache.thrift.TException;
+    public void proxybank_regist(ProxyBankInfoStruct proxyBankInfo) throws FitsException, org.apache.thrift.TException;
 
     public ProxyBankInfoStruct proxybank_get(String id) throws FitsException, org.apache.thrift.TException;
 
@@ -65,6 +67,8 @@ public class Fits {
     public void investor_bankSign(BankSignInfoStruct bankSignInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void issubank_register(IssuBankInfoStruct bInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void issubank_productregister(IssuBankProductInfoStruct productInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void issubank_getBankInfo(String issu_bank_id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -120,10 +124,10 @@ public class Fits {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "investor_register failed: unknown result");
     }
 
-    public ResultInfoStruct investor_switchState(String investorID, int newState) throws FitsException, org.apache.thrift.TException
+    public void investor_switchState(String investorID, int newState) throws FitsException, org.apache.thrift.TException
     {
       send_investor_switchState(investorID, newState);
-      return recv_investor_switchState();
+      recv_investor_switchState();
     }
 
     public void send_investor_switchState(String investorID, int newState) throws org.apache.thrift.TException
@@ -134,23 +138,20 @@ public class Fits {
       sendBase("investor_switchState", args);
     }
 
-    public ResultInfoStruct recv_investor_switchState() throws FitsException, org.apache.thrift.TException
+    public void recv_investor_switchState() throws FitsException, org.apache.thrift.TException
     {
       investor_switchState_result result = new investor_switchState_result();
       receiveBase(result, "investor_switchState");
-      if (result.isSetSuccess()) {
-        return result.success;
-      }
       if (result.fe != null) {
         throw result.fe;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "investor_switchState failed: unknown result");
+      return;
     }
 
-    public ResultInfoStruct investor_updateRiskLevel(RiskLevelStruct riskLevel) throws FitsException, org.apache.thrift.TException
+    public void investor_updateRiskLevel(RiskLevelStruct riskLevel) throws FitsException, org.apache.thrift.TException
     {
       send_investor_updateRiskLevel(riskLevel);
-      return recv_investor_updateRiskLevel();
+      recv_investor_updateRiskLevel();
     }
 
     public void send_investor_updateRiskLevel(RiskLevelStruct riskLevel) throws org.apache.thrift.TException
@@ -160,17 +161,14 @@ public class Fits {
       sendBase("investor_updateRiskLevel", args);
     }
 
-    public ResultInfoStruct recv_investor_updateRiskLevel() throws FitsException, org.apache.thrift.TException
+    public void recv_investor_updateRiskLevel() throws FitsException, org.apache.thrift.TException
     {
       investor_updateRiskLevel_result result = new investor_updateRiskLevel_result();
       receiveBase(result, "investor_updateRiskLevel");
-      if (result.isSetSuccess()) {
-        return result.success;
-      }
       if (result.fe != null) {
         throw result.fe;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "investor_updateRiskLevel failed: unknown result");
+      return;
     }
 
     public BankSignResultStruct investor_bankSign(BankSignInfoStruct bankSignInfo) throws FitsException, org.apache.thrift.TException
@@ -199,10 +197,10 @@ public class Fits {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "investor_bankSign failed: unknown result");
     }
 
-    public ResultInfoStruct issubank_register(IssuBankInfoStruct bInfo) throws FitsException, org.apache.thrift.TException
+    public void issubank_register(IssuBankInfoStruct bInfo) throws FitsException, org.apache.thrift.TException
     {
       send_issubank_register(bInfo);
-      return recv_issubank_register();
+      recv_issubank_register();
     }
 
     public void send_issubank_register(IssuBankInfoStruct bInfo) throws org.apache.thrift.TException
@@ -212,17 +210,40 @@ public class Fits {
       sendBase("issubank_register", args);
     }
 
-    public ResultInfoStruct recv_issubank_register() throws FitsException, org.apache.thrift.TException
+    public void recv_issubank_register() throws FitsException, org.apache.thrift.TException
     {
       issubank_register_result result = new issubank_register_result();
       receiveBase(result, "issubank_register");
+      if (result.fe != null) {
+        throw result.fe;
+      }
+      return;
+    }
+
+    public IssuBankProductInfoResultStruct issubank_productregister(IssuBankProductInfoStruct productInfo) throws FitsException, org.apache.thrift.TException
+    {
+      send_issubank_productregister(productInfo);
+      return recv_issubank_productregister();
+    }
+
+    public void send_issubank_productregister(IssuBankProductInfoStruct productInfo) throws org.apache.thrift.TException
+    {
+      issubank_productregister_args args = new issubank_productregister_args();
+      args.setProductInfo(productInfo);
+      sendBase("issubank_productregister", args);
+    }
+
+    public IssuBankProductInfoResultStruct recv_issubank_productregister() throws FitsException, org.apache.thrift.TException
+    {
+      issubank_productregister_result result = new issubank_productregister_result();
+      receiveBase(result, "issubank_productregister");
       if (result.isSetSuccess()) {
         return result.success;
       }
       if (result.fe != null) {
         throw result.fe;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "issubank_register failed: unknown result");
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "issubank_productregister failed: unknown result");
     }
 
     public IssuBankInfoStruct issubank_getBankInfo(String issu_bank_id) throws FitsException, org.apache.thrift.TException
@@ -251,10 +272,10 @@ public class Fits {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "issubank_getBankInfo failed: unknown result");
     }
 
-    public ResultInfoStruct proxybank_regist(ProxyBankInfoStruct proxyBankInfo) throws FitsException, org.apache.thrift.TException
+    public void proxybank_regist(ProxyBankInfoStruct proxyBankInfo) throws FitsException, org.apache.thrift.TException
     {
       send_proxybank_regist(proxyBankInfo);
-      return recv_proxybank_regist();
+      recv_proxybank_regist();
     }
 
     public void send_proxybank_regist(ProxyBankInfoStruct proxyBankInfo) throws org.apache.thrift.TException
@@ -264,17 +285,14 @@ public class Fits {
       sendBase("proxybank_regist", args);
     }
 
-    public ResultInfoStruct recv_proxybank_regist() throws FitsException, org.apache.thrift.TException
+    public void recv_proxybank_regist() throws FitsException, org.apache.thrift.TException
     {
       proxybank_regist_result result = new proxybank_regist_result();
       receiveBase(result, "proxybank_regist");
-      if (result.isSetSuccess()) {
-        return result.success;
-      }
       if (result.fe != null) {
         throw result.fe;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "proxybank_regist failed: unknown result");
+      return;
     }
 
     public ProxyBankInfoStruct proxybank_get(String id) throws FitsException, org.apache.thrift.TException
@@ -378,13 +396,13 @@ public class Fits {
         prot.writeMessageEnd();
       }
 
-      public ResultInfoStruct getResult() throws FitsException, org.apache.thrift.TException {
+      public void getResult() throws FitsException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_investor_switchState();
+        (new Client(prot)).recv_investor_switchState();
       }
     }
 
@@ -410,13 +428,13 @@ public class Fits {
         prot.writeMessageEnd();
       }
 
-      public ResultInfoStruct getResult() throws FitsException, org.apache.thrift.TException {
+      public void getResult() throws FitsException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_investor_updateRiskLevel();
+        (new Client(prot)).recv_investor_updateRiskLevel();
       }
     }
 
@@ -474,13 +492,45 @@ public class Fits {
         prot.writeMessageEnd();
       }
 
-      public ResultInfoStruct getResult() throws FitsException, org.apache.thrift.TException {
+      public void getResult() throws FitsException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_issubank_register();
+        (new Client(prot)).recv_issubank_register();
+      }
+    }
+
+    public void issubank_productregister(IssuBankProductInfoStruct productInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      issubank_productregister_call method_call = new issubank_productregister_call(productInfo, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class issubank_productregister_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private IssuBankProductInfoStruct productInfo;
+      public issubank_productregister_call(IssuBankProductInfoStruct productInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.productInfo = productInfo;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("issubank_productregister", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        issubank_productregister_args args = new issubank_productregister_args();
+        args.setProductInfo(productInfo);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public IssuBankProductInfoResultStruct getResult() throws FitsException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_issubank_productregister();
       }
     }
 
@@ -538,13 +588,13 @@ public class Fits {
         prot.writeMessageEnd();
       }
 
-      public ResultInfoStruct getResult() throws FitsException, org.apache.thrift.TException {
+      public void getResult() throws FitsException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_proxybank_regist();
+        (new Client(prot)).recv_proxybank_regist();
       }
     }
 
@@ -598,6 +648,7 @@ public class Fits {
       processMap.put("investor_updateRiskLevel", new investor_updateRiskLevel());
       processMap.put("investor_bankSign", new investor_bankSign());
       processMap.put("issubank_register", new issubank_register());
+      processMap.put("issubank_productregister", new issubank_productregister());
       processMap.put("issubank_getBankInfo", new issubank_getBankInfo());
       processMap.put("proxybank_regist", new proxybank_regist());
       processMap.put("proxybank_get", new proxybank_get());
@@ -644,7 +695,7 @@ public class Fits {
       public investor_switchState_result getResult(I iface, investor_switchState_args args) throws org.apache.thrift.TException {
         investor_switchState_result result = new investor_switchState_result();
         try {
-          result.success = iface.investor_switchState(args.investorID, args.newState);
+          iface.investor_switchState(args.investorID, args.newState);
         } catch (FitsException fe) {
           result.fe = fe;
         }
@@ -668,7 +719,7 @@ public class Fits {
       public investor_updateRiskLevel_result getResult(I iface, investor_updateRiskLevel_args args) throws org.apache.thrift.TException {
         investor_updateRiskLevel_result result = new investor_updateRiskLevel_result();
         try {
-          result.success = iface.investor_updateRiskLevel(args.riskLevel);
+          iface.investor_updateRiskLevel(args.riskLevel);
         } catch (FitsException fe) {
           result.fe = fe;
         }
@@ -716,7 +767,31 @@ public class Fits {
       public issubank_register_result getResult(I iface, issubank_register_args args) throws org.apache.thrift.TException {
         issubank_register_result result = new issubank_register_result();
         try {
-          result.success = iface.issubank_register(args.bInfo);
+          iface.issubank_register(args.bInfo);
+        } catch (FitsException fe) {
+          result.fe = fe;
+        }
+        return result;
+      }
+    }
+
+    public static class issubank_productregister<I extends Iface> extends org.apache.thrift.ProcessFunction<I, issubank_productregister_args> {
+      public issubank_productregister() {
+        super("issubank_productregister");
+      }
+
+      public issubank_productregister_args getEmptyArgsInstance() {
+        return new issubank_productregister_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public issubank_productregister_result getResult(I iface, issubank_productregister_args args) throws org.apache.thrift.TException {
+        issubank_productregister_result result = new issubank_productregister_result();
+        try {
+          result.success = iface.issubank_productregister(args.productInfo);
         } catch (FitsException fe) {
           result.fe = fe;
         }
@@ -764,7 +839,7 @@ public class Fits {
       public proxybank_regist_result getResult(I iface, proxybank_regist_args args) throws org.apache.thrift.TException {
         proxybank_regist_result result = new proxybank_regist_result();
         try {
-          result.success = iface.proxybank_regist(args.proxyBankInfo);
+          iface.proxybank_regist(args.proxyBankInfo);
         } catch (FitsException fe) {
           result.fe = fe;
         }
@@ -814,6 +889,7 @@ public class Fits {
       processMap.put("investor_updateRiskLevel", new investor_updateRiskLevel());
       processMap.put("investor_bankSign", new investor_bankSign());
       processMap.put("issubank_register", new issubank_register());
+      processMap.put("issubank_productregister", new issubank_productregister());
       processMap.put("issubank_getBankInfo", new issubank_getBankInfo());
       processMap.put("proxybank_regist", new proxybank_regist());
       processMap.put("proxybank_get", new proxybank_get());
@@ -877,7 +953,7 @@ public class Fits {
       }
     }
 
-    public static class investor_switchState<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, investor_switchState_args, ResultInfoStruct> {
+    public static class investor_switchState<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, investor_switchState_args, Void> {
       public investor_switchState() {
         super("investor_switchState");
       }
@@ -886,12 +962,11 @@ public class Fits {
         return new investor_switchState_args();
       }
 
-      public AsyncMethodCallback<ResultInfoStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<ResultInfoStruct>() { 
-          public void onComplete(ResultInfoStruct o) {
+        return new AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
             investor_switchState_result result = new investor_switchState_result();
-            result.success = o;
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -929,12 +1004,12 @@ public class Fits {
         return false;
       }
 
-      public void start(I iface, investor_switchState_args args, org.apache.thrift.async.AsyncMethodCallback<ResultInfoStruct> resultHandler) throws TException {
+      public void start(I iface, investor_switchState_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
         iface.investor_switchState(args.investorID, args.newState,resultHandler);
       }
     }
 
-    public static class investor_updateRiskLevel<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, investor_updateRiskLevel_args, ResultInfoStruct> {
+    public static class investor_updateRiskLevel<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, investor_updateRiskLevel_args, Void> {
       public investor_updateRiskLevel() {
         super("investor_updateRiskLevel");
       }
@@ -943,12 +1018,11 @@ public class Fits {
         return new investor_updateRiskLevel_args();
       }
 
-      public AsyncMethodCallback<ResultInfoStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<ResultInfoStruct>() { 
-          public void onComplete(ResultInfoStruct o) {
+        return new AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
             investor_updateRiskLevel_result result = new investor_updateRiskLevel_result();
-            result.success = o;
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -986,7 +1060,7 @@ public class Fits {
         return false;
       }
 
-      public void start(I iface, investor_updateRiskLevel_args args, org.apache.thrift.async.AsyncMethodCallback<ResultInfoStruct> resultHandler) throws TException {
+      public void start(I iface, investor_updateRiskLevel_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
         iface.investor_updateRiskLevel(args.riskLevel,resultHandler);
       }
     }
@@ -1048,7 +1122,7 @@ public class Fits {
       }
     }
 
-    public static class issubank_register<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, issubank_register_args, ResultInfoStruct> {
+    public static class issubank_register<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, issubank_register_args, Void> {
       public issubank_register() {
         super("issubank_register");
       }
@@ -1057,12 +1131,11 @@ public class Fits {
         return new issubank_register_args();
       }
 
-      public AsyncMethodCallback<ResultInfoStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<ResultInfoStruct>() { 
-          public void onComplete(ResultInfoStruct o) {
+        return new AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
             issubank_register_result result = new issubank_register_result();
-            result.success = o;
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -1100,8 +1173,65 @@ public class Fits {
         return false;
       }
 
-      public void start(I iface, issubank_register_args args, org.apache.thrift.async.AsyncMethodCallback<ResultInfoStruct> resultHandler) throws TException {
+      public void start(I iface, issubank_register_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
         iface.issubank_register(args.bInfo,resultHandler);
+      }
+    }
+
+    public static class issubank_productregister<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, issubank_productregister_args, IssuBankProductInfoResultStruct> {
+      public issubank_productregister() {
+        super("issubank_productregister");
+      }
+
+      public issubank_productregister_args getEmptyArgsInstance() {
+        return new issubank_productregister_args();
+      }
+
+      public AsyncMethodCallback<IssuBankProductInfoResultStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<IssuBankProductInfoResultStruct>() { 
+          public void onComplete(IssuBankProductInfoResultStruct o) {
+            issubank_productregister_result result = new issubank_productregister_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            issubank_productregister_result result = new issubank_productregister_result();
+            if (e instanceof FitsException) {
+                        result.fe = (FitsException) e;
+                        result.setFeIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, issubank_productregister_args args, org.apache.thrift.async.AsyncMethodCallback<IssuBankProductInfoResultStruct> resultHandler) throws TException {
+        iface.issubank_productregister(args.productInfo,resultHandler);
       }
     }
 
@@ -1162,7 +1292,7 @@ public class Fits {
       }
     }
 
-    public static class proxybank_regist<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, proxybank_regist_args, ResultInfoStruct> {
+    public static class proxybank_regist<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, proxybank_regist_args, Void> {
       public proxybank_regist() {
         super("proxybank_regist");
       }
@@ -1171,12 +1301,11 @@ public class Fits {
         return new proxybank_regist_args();
       }
 
-      public AsyncMethodCallback<ResultInfoStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<ResultInfoStruct>() { 
-          public void onComplete(ResultInfoStruct o) {
+        return new AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
             proxybank_regist_result result = new proxybank_regist_result();
-            result.success = o;
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -1214,7 +1343,7 @@ public class Fits {
         return false;
       }
 
-      public void start(I iface, proxybank_regist_args args, org.apache.thrift.async.AsyncMethodCallback<ResultInfoStruct> resultHandler) throws TException {
+      public void start(I iface, proxybank_regist_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
         iface.proxybank_regist(args.proxyBankInfo,resultHandler);
       }
     }
@@ -2553,7 +2682,6 @@ public class Fits {
   public static class investor_switchState_result implements org.apache.thrift.TBase<investor_switchState_result, investor_switchState_result._Fields>, java.io.Serializable, Cloneable, Comparable<investor_switchState_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("investor_switchState_result");
 
-    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
     private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
@@ -2562,12 +2690,10 @@ public class Fits {
       schemes.put(TupleScheme.class, new investor_switchState_resultTupleSchemeFactory());
     }
 
-    public ResultInfoStruct success; // required
     public FitsException fe; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SUCCESS((short)0, "success"),
       FE((short)1, "fe");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
@@ -2583,8 +2709,6 @@ public class Fits {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 0: // SUCCESS
-            return SUCCESS;
           case 1: // FE
             return FE;
           default:
@@ -2630,8 +2754,6 @@ public class Fits {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ResultInfoStruct.class)));
       tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -2642,11 +2764,9 @@ public class Fits {
     }
 
     public investor_switchState_result(
-      ResultInfoStruct success,
       FitsException fe)
     {
       this();
-      this.success = success;
       this.fe = fe;
     }
 
@@ -2654,9 +2774,6 @@ public class Fits {
      * Performs a deep copy on <i>other</i>.
      */
     public investor_switchState_result(investor_switchState_result other) {
-      if (other.isSetSuccess()) {
-        this.success = new ResultInfoStruct(other.success);
-      }
       if (other.isSetFe()) {
         this.fe = new FitsException(other.fe);
       }
@@ -2668,32 +2785,7 @@ public class Fits {
 
     @Override
     public void clear() {
-      this.success = null;
       this.fe = null;
-    }
-
-    public ResultInfoStruct getSuccess() {
-      return this.success;
-    }
-
-    public investor_switchState_result setSuccess(ResultInfoStruct success) {
-      this.success = success;
-      return this;
-    }
-
-    public void unsetSuccess() {
-      this.success = null;
-    }
-
-    /** Returns true if field success is set (has been assigned a value) and false otherwise */
-    public boolean isSetSuccess() {
-      return this.success != null;
-    }
-
-    public void setSuccessIsSet(boolean value) {
-      if (!value) {
-        this.success = null;
-      }
     }
 
     public FitsException getFe() {
@@ -2722,14 +2814,6 @@ public class Fits {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case SUCCESS:
-        if (value == null) {
-          unsetSuccess();
-        } else {
-          setSuccess((ResultInfoStruct)value);
-        }
-        break;
-
       case FE:
         if (value == null) {
           unsetFe();
@@ -2743,9 +2827,6 @@ public class Fits {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case SUCCESS:
-        return getSuccess();
-
       case FE:
         return getFe();
 
@@ -2760,8 +2841,6 @@ public class Fits {
       }
 
       switch (field) {
-      case SUCCESS:
-        return isSetSuccess();
       case FE:
         return isSetFe();
       }
@@ -2780,15 +2859,6 @@ public class Fits {
     public boolean equals(investor_switchState_result that) {
       if (that == null)
         return false;
-
-      boolean this_present_success = true && this.isSetSuccess();
-      boolean that_present_success = true && that.isSetSuccess();
-      if (this_present_success || that_present_success) {
-        if (!(this_present_success && that_present_success))
-          return false;
-        if (!this.success.equals(that.success))
-          return false;
-      }
 
       boolean this_present_fe = true && this.isSetFe();
       boolean that_present_fe = true && that.isSetFe();
@@ -2815,16 +2885,6 @@ public class Fits {
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetSuccess()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
       lastComparison = Boolean.valueOf(isSetFe()).compareTo(other.isSetFe());
       if (lastComparison != 0) {
         return lastComparison;
@@ -2855,14 +2915,6 @@ public class Fits {
       StringBuilder sb = new StringBuilder("investor_switchState_result(");
       boolean first = true;
 
-      sb.append("success:");
-      if (this.success == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.success);
-      }
-      first = false;
-      if (!first) sb.append(", ");
       sb.append("fe:");
       if (this.fe == null) {
         sb.append("null");
@@ -2877,9 +2929,6 @@ public class Fits {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
-      if (success != null) {
-        success.validate();
-      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -2916,15 +2965,6 @@ public class Fits {
             break;
           }
           switch (schemeField.id) {
-            case 0: // SUCCESS
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new ResultInfoStruct();
-                struct.success.read(iprot);
-                struct.setSuccessIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
             case 1: // FE
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.fe = new FitsException();
@@ -2949,11 +2989,6 @@ public class Fits {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.success != null) {
-          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
-          struct.success.write(oprot);
-          oprot.writeFieldEnd();
-        }
         if (struct.fe != null) {
           oprot.writeFieldBegin(FE_FIELD_DESC);
           struct.fe.write(oprot);
@@ -2977,16 +3012,10 @@ public class Fits {
       public void write(org.apache.thrift.protocol.TProtocol prot, investor_switchState_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetSuccess()) {
+        if (struct.isSetFe()) {
           optionals.set(0);
         }
-        if (struct.isSetFe()) {
-          optionals.set(1);
-        }
-        oprot.writeBitSet(optionals, 2);
-        if (struct.isSetSuccess()) {
-          struct.success.write(oprot);
-        }
+        oprot.writeBitSet(optionals, 1);
         if (struct.isSetFe()) {
           struct.fe.write(oprot);
         }
@@ -2995,13 +3024,8 @@ public class Fits {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, investor_switchState_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(2);
+        BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new ResultInfoStruct();
-          struct.success.read(iprot);
-          struct.setSuccessIsSet(true);
-        }
-        if (incoming.get(1)) {
           struct.fe = new FitsException();
           struct.fe.read(iprot);
           struct.setFeIsSet(true);
@@ -3373,7 +3397,6 @@ public class Fits {
   public static class investor_updateRiskLevel_result implements org.apache.thrift.TBase<investor_updateRiskLevel_result, investor_updateRiskLevel_result._Fields>, java.io.Serializable, Cloneable, Comparable<investor_updateRiskLevel_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("investor_updateRiskLevel_result");
 
-    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
     private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
@@ -3382,12 +3405,10 @@ public class Fits {
       schemes.put(TupleScheme.class, new investor_updateRiskLevel_resultTupleSchemeFactory());
     }
 
-    public ResultInfoStruct success; // required
     public FitsException fe; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SUCCESS((short)0, "success"),
       FE((short)1, "fe");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
@@ -3403,8 +3424,6 @@ public class Fits {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 0: // SUCCESS
-            return SUCCESS;
           case 1: // FE
             return FE;
           default:
@@ -3450,8 +3469,6 @@ public class Fits {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ResultInfoStruct.class)));
       tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -3462,11 +3479,9 @@ public class Fits {
     }
 
     public investor_updateRiskLevel_result(
-      ResultInfoStruct success,
       FitsException fe)
     {
       this();
-      this.success = success;
       this.fe = fe;
     }
 
@@ -3474,9 +3489,6 @@ public class Fits {
      * Performs a deep copy on <i>other</i>.
      */
     public investor_updateRiskLevel_result(investor_updateRiskLevel_result other) {
-      if (other.isSetSuccess()) {
-        this.success = new ResultInfoStruct(other.success);
-      }
       if (other.isSetFe()) {
         this.fe = new FitsException(other.fe);
       }
@@ -3488,32 +3500,7 @@ public class Fits {
 
     @Override
     public void clear() {
-      this.success = null;
       this.fe = null;
-    }
-
-    public ResultInfoStruct getSuccess() {
-      return this.success;
-    }
-
-    public investor_updateRiskLevel_result setSuccess(ResultInfoStruct success) {
-      this.success = success;
-      return this;
-    }
-
-    public void unsetSuccess() {
-      this.success = null;
-    }
-
-    /** Returns true if field success is set (has been assigned a value) and false otherwise */
-    public boolean isSetSuccess() {
-      return this.success != null;
-    }
-
-    public void setSuccessIsSet(boolean value) {
-      if (!value) {
-        this.success = null;
-      }
     }
 
     public FitsException getFe() {
@@ -3542,14 +3529,6 @@ public class Fits {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case SUCCESS:
-        if (value == null) {
-          unsetSuccess();
-        } else {
-          setSuccess((ResultInfoStruct)value);
-        }
-        break;
-
       case FE:
         if (value == null) {
           unsetFe();
@@ -3563,9 +3542,6 @@ public class Fits {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case SUCCESS:
-        return getSuccess();
-
       case FE:
         return getFe();
 
@@ -3580,8 +3556,6 @@ public class Fits {
       }
 
       switch (field) {
-      case SUCCESS:
-        return isSetSuccess();
       case FE:
         return isSetFe();
       }
@@ -3600,15 +3574,6 @@ public class Fits {
     public boolean equals(investor_updateRiskLevel_result that) {
       if (that == null)
         return false;
-
-      boolean this_present_success = true && this.isSetSuccess();
-      boolean that_present_success = true && that.isSetSuccess();
-      if (this_present_success || that_present_success) {
-        if (!(this_present_success && that_present_success))
-          return false;
-        if (!this.success.equals(that.success))
-          return false;
-      }
 
       boolean this_present_fe = true && this.isSetFe();
       boolean that_present_fe = true && that.isSetFe();
@@ -3635,16 +3600,6 @@ public class Fits {
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetSuccess()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
       lastComparison = Boolean.valueOf(isSetFe()).compareTo(other.isSetFe());
       if (lastComparison != 0) {
         return lastComparison;
@@ -3675,14 +3630,6 @@ public class Fits {
       StringBuilder sb = new StringBuilder("investor_updateRiskLevel_result(");
       boolean first = true;
 
-      sb.append("success:");
-      if (this.success == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.success);
-      }
-      first = false;
-      if (!first) sb.append(", ");
       sb.append("fe:");
       if (this.fe == null) {
         sb.append("null");
@@ -3697,9 +3644,6 @@ public class Fits {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
-      if (success != null) {
-        success.validate();
-      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -3736,15 +3680,6 @@ public class Fits {
             break;
           }
           switch (schemeField.id) {
-            case 0: // SUCCESS
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new ResultInfoStruct();
-                struct.success.read(iprot);
-                struct.setSuccessIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
             case 1: // FE
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.fe = new FitsException();
@@ -3769,11 +3704,6 @@ public class Fits {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.success != null) {
-          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
-          struct.success.write(oprot);
-          oprot.writeFieldEnd();
-        }
         if (struct.fe != null) {
           oprot.writeFieldBegin(FE_FIELD_DESC);
           struct.fe.write(oprot);
@@ -3797,16 +3727,10 @@ public class Fits {
       public void write(org.apache.thrift.protocol.TProtocol prot, investor_updateRiskLevel_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetSuccess()) {
+        if (struct.isSetFe()) {
           optionals.set(0);
         }
-        if (struct.isSetFe()) {
-          optionals.set(1);
-        }
-        oprot.writeBitSet(optionals, 2);
-        if (struct.isSetSuccess()) {
-          struct.success.write(oprot);
-        }
+        oprot.writeBitSet(optionals, 1);
         if (struct.isSetFe()) {
           struct.fe.write(oprot);
         }
@@ -3815,13 +3739,8 @@ public class Fits {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, investor_updateRiskLevel_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(2);
+        BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new ResultInfoStruct();
-          struct.success.read(iprot);
-          struct.setSuccessIsSet(true);
-        }
-        if (incoming.get(1)) {
           struct.fe = new FitsException();
           struct.fe.read(iprot);
           struct.setFeIsSet(true);
@@ -5013,7 +4932,6 @@ public class Fits {
   public static class issubank_register_result implements org.apache.thrift.TBase<issubank_register_result, issubank_register_result._Fields>, java.io.Serializable, Cloneable, Comparable<issubank_register_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("issubank_register_result");
 
-    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
     private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
@@ -5022,7 +4940,723 @@ public class Fits {
       schemes.put(TupleScheme.class, new issubank_register_resultTupleSchemeFactory());
     }
 
-    public ResultInfoStruct success; // required
+    public FitsException fe; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      FE((short)1, "fe");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // FE
+            return FE;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(issubank_register_result.class, metaDataMap);
+    }
+
+    public issubank_register_result() {
+    }
+
+    public issubank_register_result(
+      FitsException fe)
+    {
+      this();
+      this.fe = fe;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public issubank_register_result(issubank_register_result other) {
+      if (other.isSetFe()) {
+        this.fe = new FitsException(other.fe);
+      }
+    }
+
+    public issubank_register_result deepCopy() {
+      return new issubank_register_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.fe = null;
+    }
+
+    public FitsException getFe() {
+      return this.fe;
+    }
+
+    public issubank_register_result setFe(FitsException fe) {
+      this.fe = fe;
+      return this;
+    }
+
+    public void unsetFe() {
+      this.fe = null;
+    }
+
+    /** Returns true if field fe is set (has been assigned a value) and false otherwise */
+    public boolean isSetFe() {
+      return this.fe != null;
+    }
+
+    public void setFeIsSet(boolean value) {
+      if (!value) {
+        this.fe = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case FE:
+        if (value == null) {
+          unsetFe();
+        } else {
+          setFe((FitsException)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case FE:
+        return getFe();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case FE:
+        return isSetFe();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof issubank_register_result)
+        return this.equals((issubank_register_result)that);
+      return false;
+    }
+
+    public boolean equals(issubank_register_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_fe = true && this.isSetFe();
+      boolean that_present_fe = true && that.isSetFe();
+      if (this_present_fe || that_present_fe) {
+        if (!(this_present_fe && that_present_fe))
+          return false;
+        if (!this.fe.equals(that.fe))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(issubank_register_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetFe()).compareTo(other.isSetFe());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFe()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fe, other.fe);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("issubank_register_result(");
+      boolean first = true;
+
+      sb.append("fe:");
+      if (this.fe == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.fe);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class issubank_register_resultStandardSchemeFactory implements SchemeFactory {
+      public issubank_register_resultStandardScheme getScheme() {
+        return new issubank_register_resultStandardScheme();
+      }
+    }
+
+    private static class issubank_register_resultStandardScheme extends StandardScheme<issubank_register_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, issubank_register_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // FE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.fe = new FitsException();
+                struct.fe.read(iprot);
+                struct.setFeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, issubank_register_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.fe != null) {
+          oprot.writeFieldBegin(FE_FIELD_DESC);
+          struct.fe.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class issubank_register_resultTupleSchemeFactory implements SchemeFactory {
+      public issubank_register_resultTupleScheme getScheme() {
+        return new issubank_register_resultTupleScheme();
+      }
+    }
+
+    private static class issubank_register_resultTupleScheme extends TupleScheme<issubank_register_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, issubank_register_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetFe()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetFe()) {
+          struct.fe.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, issubank_register_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.fe = new FitsException();
+          struct.fe.read(iprot);
+          struct.setFeIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class issubank_productregister_args implements org.apache.thrift.TBase<issubank_productregister_args, issubank_productregister_args._Fields>, java.io.Serializable, Cloneable, Comparable<issubank_productregister_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("issubank_productregister_args");
+
+    private static final org.apache.thrift.protocol.TField PRODUCT_INFO_FIELD_DESC = new org.apache.thrift.protocol.TField("productInfo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new issubank_productregister_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new issubank_productregister_argsTupleSchemeFactory());
+    }
+
+    public IssuBankProductInfoStruct productInfo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      PRODUCT_INFO((short)1, "productInfo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // PRODUCT_INFO
+            return PRODUCT_INFO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.PRODUCT_INFO, new org.apache.thrift.meta_data.FieldMetaData("productInfo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, IssuBankProductInfoStruct.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(issubank_productregister_args.class, metaDataMap);
+    }
+
+    public issubank_productregister_args() {
+    }
+
+    public issubank_productregister_args(
+      IssuBankProductInfoStruct productInfo)
+    {
+      this();
+      this.productInfo = productInfo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public issubank_productregister_args(issubank_productregister_args other) {
+      if (other.isSetProductInfo()) {
+        this.productInfo = new IssuBankProductInfoStruct(other.productInfo);
+      }
+    }
+
+    public issubank_productregister_args deepCopy() {
+      return new issubank_productregister_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.productInfo = null;
+    }
+
+    public IssuBankProductInfoStruct getProductInfo() {
+      return this.productInfo;
+    }
+
+    public issubank_productregister_args setProductInfo(IssuBankProductInfoStruct productInfo) {
+      this.productInfo = productInfo;
+      return this;
+    }
+
+    public void unsetProductInfo() {
+      this.productInfo = null;
+    }
+
+    /** Returns true if field productInfo is set (has been assigned a value) and false otherwise */
+    public boolean isSetProductInfo() {
+      return this.productInfo != null;
+    }
+
+    public void setProductInfoIsSet(boolean value) {
+      if (!value) {
+        this.productInfo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case PRODUCT_INFO:
+        if (value == null) {
+          unsetProductInfo();
+        } else {
+          setProductInfo((IssuBankProductInfoStruct)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case PRODUCT_INFO:
+        return getProductInfo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case PRODUCT_INFO:
+        return isSetProductInfo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof issubank_productregister_args)
+        return this.equals((issubank_productregister_args)that);
+      return false;
+    }
+
+    public boolean equals(issubank_productregister_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_productInfo = true && this.isSetProductInfo();
+      boolean that_present_productInfo = true && that.isSetProductInfo();
+      if (this_present_productInfo || that_present_productInfo) {
+        if (!(this_present_productInfo && that_present_productInfo))
+          return false;
+        if (!this.productInfo.equals(that.productInfo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(issubank_productregister_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetProductInfo()).compareTo(other.isSetProductInfo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetProductInfo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.productInfo, other.productInfo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("issubank_productregister_args(");
+      boolean first = true;
+
+      sb.append("productInfo:");
+      if (this.productInfo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.productInfo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (productInfo != null) {
+        productInfo.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class issubank_productregister_argsStandardSchemeFactory implements SchemeFactory {
+      public issubank_productregister_argsStandardScheme getScheme() {
+        return new issubank_productregister_argsStandardScheme();
+      }
+    }
+
+    private static class issubank_productregister_argsStandardScheme extends StandardScheme<issubank_productregister_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, issubank_productregister_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // PRODUCT_INFO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.productInfo = new IssuBankProductInfoStruct();
+                struct.productInfo.read(iprot);
+                struct.setProductInfoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, issubank_productregister_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.productInfo != null) {
+          oprot.writeFieldBegin(PRODUCT_INFO_FIELD_DESC);
+          struct.productInfo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class issubank_productregister_argsTupleSchemeFactory implements SchemeFactory {
+      public issubank_productregister_argsTupleScheme getScheme() {
+        return new issubank_productregister_argsTupleScheme();
+      }
+    }
+
+    private static class issubank_productregister_argsTupleScheme extends TupleScheme<issubank_productregister_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, issubank_productregister_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetProductInfo()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetProductInfo()) {
+          struct.productInfo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, issubank_productregister_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.productInfo = new IssuBankProductInfoStruct();
+          struct.productInfo.read(iprot);
+          struct.setProductInfoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class issubank_productregister_result implements org.apache.thrift.TBase<issubank_productregister_result, issubank_productregister_result._Fields>, java.io.Serializable, Cloneable, Comparable<issubank_productregister_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("issubank_productregister_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new issubank_productregister_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new issubank_productregister_resultTupleSchemeFactory());
+    }
+
+    public IssuBankProductInfoResultStruct success; // required
     public FitsException fe; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -5091,18 +5725,18 @@ public class Fits {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ResultInfoStruct.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, IssuBankProductInfoResultStruct.class)));
       tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(issubank_register_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(issubank_productregister_result.class, metaDataMap);
     }
 
-    public issubank_register_result() {
+    public issubank_productregister_result() {
     }
 
-    public issubank_register_result(
-      ResultInfoStruct success,
+    public issubank_productregister_result(
+      IssuBankProductInfoResultStruct success,
       FitsException fe)
     {
       this();
@@ -5113,17 +5747,17 @@ public class Fits {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public issubank_register_result(issubank_register_result other) {
+    public issubank_productregister_result(issubank_productregister_result other) {
       if (other.isSetSuccess()) {
-        this.success = new ResultInfoStruct(other.success);
+        this.success = new IssuBankProductInfoResultStruct(other.success);
       }
       if (other.isSetFe()) {
         this.fe = new FitsException(other.fe);
       }
     }
 
-    public issubank_register_result deepCopy() {
-      return new issubank_register_result(this);
+    public issubank_productregister_result deepCopy() {
+      return new issubank_productregister_result(this);
     }
 
     @Override
@@ -5132,11 +5766,11 @@ public class Fits {
       this.fe = null;
     }
 
-    public ResultInfoStruct getSuccess() {
+    public IssuBankProductInfoResultStruct getSuccess() {
       return this.success;
     }
 
-    public issubank_register_result setSuccess(ResultInfoStruct success) {
+    public issubank_productregister_result setSuccess(IssuBankProductInfoResultStruct success) {
       this.success = success;
       return this;
     }
@@ -5160,7 +5794,7 @@ public class Fits {
       return this.fe;
     }
 
-    public issubank_register_result setFe(FitsException fe) {
+    public issubank_productregister_result setFe(FitsException fe) {
       this.fe = fe;
       return this;
     }
@@ -5186,7 +5820,7 @@ public class Fits {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((ResultInfoStruct)value);
+          setSuccess((IssuBankProductInfoResultStruct)value);
         }
         break;
 
@@ -5232,12 +5866,12 @@ public class Fits {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof issubank_register_result)
-        return this.equals((issubank_register_result)that);
+      if (that instanceof issubank_productregister_result)
+        return this.equals((issubank_productregister_result)that);
       return false;
     }
 
-    public boolean equals(issubank_register_result that) {
+    public boolean equals(issubank_productregister_result that) {
       if (that == null)
         return false;
 
@@ -5268,7 +5902,7 @@ public class Fits {
     }
 
     @Override
-    public int compareTo(issubank_register_result other) {
+    public int compareTo(issubank_productregister_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -5312,7 +5946,7 @@ public class Fits {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("issubank_register_result(");
+      StringBuilder sb = new StringBuilder("issubank_productregister_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -5358,15 +5992,15 @@ public class Fits {
       }
     }
 
-    private static class issubank_register_resultStandardSchemeFactory implements SchemeFactory {
-      public issubank_register_resultStandardScheme getScheme() {
-        return new issubank_register_resultStandardScheme();
+    private static class issubank_productregister_resultStandardSchemeFactory implements SchemeFactory {
+      public issubank_productregister_resultStandardScheme getScheme() {
+        return new issubank_productregister_resultStandardScheme();
       }
     }
 
-    private static class issubank_register_resultStandardScheme extends StandardScheme<issubank_register_result> {
+    private static class issubank_productregister_resultStandardScheme extends StandardScheme<issubank_productregister_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, issubank_register_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, issubank_productregister_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -5378,7 +6012,7 @@ public class Fits {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new ResultInfoStruct();
+                struct.success = new IssuBankProductInfoResultStruct();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -5405,7 +6039,7 @@ public class Fits {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, issubank_register_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, issubank_productregister_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -5425,16 +6059,16 @@ public class Fits {
 
     }
 
-    private static class issubank_register_resultTupleSchemeFactory implements SchemeFactory {
-      public issubank_register_resultTupleScheme getScheme() {
-        return new issubank_register_resultTupleScheme();
+    private static class issubank_productregister_resultTupleSchemeFactory implements SchemeFactory {
+      public issubank_productregister_resultTupleScheme getScheme() {
+        return new issubank_productregister_resultTupleScheme();
       }
     }
 
-    private static class issubank_register_resultTupleScheme extends TupleScheme<issubank_register_result> {
+    private static class issubank_productregister_resultTupleScheme extends TupleScheme<issubank_productregister_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, issubank_register_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, issubank_productregister_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -5453,11 +6087,11 @@ public class Fits {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, issubank_register_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, issubank_productregister_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          struct.success = new ResultInfoStruct();
+          struct.success = new IssuBankProductInfoResultStruct();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
@@ -6648,7 +7282,6 @@ public class Fits {
   public static class proxybank_regist_result implements org.apache.thrift.TBase<proxybank_regist_result, proxybank_regist_result._Fields>, java.io.Serializable, Cloneable, Comparable<proxybank_regist_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("proxybank_regist_result");
 
-    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
     private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
@@ -6657,12 +7290,10 @@ public class Fits {
       schemes.put(TupleScheme.class, new proxybank_regist_resultTupleSchemeFactory());
     }
 
-    public ResultInfoStruct success; // required
     public FitsException fe; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SUCCESS((short)0, "success"),
       FE((short)1, "fe");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
@@ -6678,8 +7309,6 @@ public class Fits {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 0: // SUCCESS
-            return SUCCESS;
           case 1: // FE
             return FE;
           default:
@@ -6725,8 +7354,6 @@ public class Fits {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ResultInfoStruct.class)));
       tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -6737,11 +7364,9 @@ public class Fits {
     }
 
     public proxybank_regist_result(
-      ResultInfoStruct success,
       FitsException fe)
     {
       this();
-      this.success = success;
       this.fe = fe;
     }
 
@@ -6749,9 +7374,6 @@ public class Fits {
      * Performs a deep copy on <i>other</i>.
      */
     public proxybank_regist_result(proxybank_regist_result other) {
-      if (other.isSetSuccess()) {
-        this.success = new ResultInfoStruct(other.success);
-      }
       if (other.isSetFe()) {
         this.fe = new FitsException(other.fe);
       }
@@ -6763,32 +7385,7 @@ public class Fits {
 
     @Override
     public void clear() {
-      this.success = null;
       this.fe = null;
-    }
-
-    public ResultInfoStruct getSuccess() {
-      return this.success;
-    }
-
-    public proxybank_regist_result setSuccess(ResultInfoStruct success) {
-      this.success = success;
-      return this;
-    }
-
-    public void unsetSuccess() {
-      this.success = null;
-    }
-
-    /** Returns true if field success is set (has been assigned a value) and false otherwise */
-    public boolean isSetSuccess() {
-      return this.success != null;
-    }
-
-    public void setSuccessIsSet(boolean value) {
-      if (!value) {
-        this.success = null;
-      }
     }
 
     public FitsException getFe() {
@@ -6817,14 +7414,6 @@ public class Fits {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case SUCCESS:
-        if (value == null) {
-          unsetSuccess();
-        } else {
-          setSuccess((ResultInfoStruct)value);
-        }
-        break;
-
       case FE:
         if (value == null) {
           unsetFe();
@@ -6838,9 +7427,6 @@ public class Fits {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case SUCCESS:
-        return getSuccess();
-
       case FE:
         return getFe();
 
@@ -6855,8 +7441,6 @@ public class Fits {
       }
 
       switch (field) {
-      case SUCCESS:
-        return isSetSuccess();
       case FE:
         return isSetFe();
       }
@@ -6875,15 +7459,6 @@ public class Fits {
     public boolean equals(proxybank_regist_result that) {
       if (that == null)
         return false;
-
-      boolean this_present_success = true && this.isSetSuccess();
-      boolean that_present_success = true && that.isSetSuccess();
-      if (this_present_success || that_present_success) {
-        if (!(this_present_success && that_present_success))
-          return false;
-        if (!this.success.equals(that.success))
-          return false;
-      }
 
       boolean this_present_fe = true && this.isSetFe();
       boolean that_present_fe = true && that.isSetFe();
@@ -6910,16 +7485,6 @@ public class Fits {
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetSuccess()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
       lastComparison = Boolean.valueOf(isSetFe()).compareTo(other.isSetFe());
       if (lastComparison != 0) {
         return lastComparison;
@@ -6950,14 +7515,6 @@ public class Fits {
       StringBuilder sb = new StringBuilder("proxybank_regist_result(");
       boolean first = true;
 
-      sb.append("success:");
-      if (this.success == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.success);
-      }
-      first = false;
-      if (!first) sb.append(", ");
       sb.append("fe:");
       if (this.fe == null) {
         sb.append("null");
@@ -6972,9 +7529,6 @@ public class Fits {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
-      if (success != null) {
-        success.validate();
-      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -7011,15 +7565,6 @@ public class Fits {
             break;
           }
           switch (schemeField.id) {
-            case 0: // SUCCESS
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new ResultInfoStruct();
-                struct.success.read(iprot);
-                struct.setSuccessIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
             case 1: // FE
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.fe = new FitsException();
@@ -7044,11 +7589,6 @@ public class Fits {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.success != null) {
-          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
-          struct.success.write(oprot);
-          oprot.writeFieldEnd();
-        }
         if (struct.fe != null) {
           oprot.writeFieldBegin(FE_FIELD_DESC);
           struct.fe.write(oprot);
@@ -7072,16 +7612,10 @@ public class Fits {
       public void write(org.apache.thrift.protocol.TProtocol prot, proxybank_regist_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetSuccess()) {
+        if (struct.isSetFe()) {
           optionals.set(0);
         }
-        if (struct.isSetFe()) {
-          optionals.set(1);
-        }
-        oprot.writeBitSet(optionals, 2);
-        if (struct.isSetSuccess()) {
-          struct.success.write(oprot);
-        }
+        oprot.writeBitSet(optionals, 1);
         if (struct.isSetFe()) {
           struct.fe.write(oprot);
         }
@@ -7090,13 +7624,8 @@ public class Fits {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, proxybank_regist_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(2);
+        BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new ResultInfoStruct();
-          struct.success.read(iprot);
-          struct.setSuccessIsSet(true);
-        }
-        if (incoming.get(1)) {
           struct.fe = new FitsException();
           struct.fe.read(iprot);
           struct.setFeIsSet(true);

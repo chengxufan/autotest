@@ -9,7 +9,7 @@ public class AutoApi {
 		Config.init(Command.options.configPath + "autoapi.properties");
 		TaskCommand command = new TaskCommand();
 		try {
-			command.run("bank");
+			command.run("core");
 			Report.getInstance().print();
 		} catch (TestApiException e) {
 			e.printStackTrace();

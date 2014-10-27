@@ -32,22 +32,22 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignResultStruct, BankSignResultStruct._Fields>, java.io.Serializable, Cloneable, Comparable<BankSignResultStruct> {
-  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("BankSignResultStruct");
+public class IssuBankProductInfoResultStruct implements org.apache.thrift.TBase<IssuBankProductInfoResultStruct, IssuBankProductInfoResultStruct._Fields>, java.io.Serializable, Cloneable, Comparable<IssuBankProductInfoResultStruct> {
+  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("IssuBankProductInfoResultStruct");
 
-  private static final org.apache.thrift.protocol.TField INVEST_SPECIAL_ACCOUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("invest_special_account", org.apache.thrift.protocol.TType.STRING, (short)1);
+  private static final org.apache.thrift.protocol.TField PRODUCTID_FIELD_DESC = new org.apache.thrift.protocol.TField("productid", org.apache.thrift.protocol.TType.STRING, (short)1);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
-    schemes.put(StandardScheme.class, new BankSignResultStructStandardSchemeFactory());
-    schemes.put(TupleScheme.class, new BankSignResultStructTupleSchemeFactory());
+    schemes.put(StandardScheme.class, new IssuBankProductInfoResultStructStandardSchemeFactory());
+    schemes.put(TupleScheme.class, new IssuBankProductInfoResultStructTupleSchemeFactory());
   }
 
-  public String invest_special_account; // required
+  public String productid; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    INVEST_SPECIAL_ACCOUNT((short)1, "invest_special_account");
+    PRODUCTID((short)1, "productid");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -62,8 +62,8 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // INVEST_SPECIAL_ACCOUNT
-          return INVEST_SPECIAL_ACCOUNT;
+        case 1: // PRODUCTID
+          return PRODUCTID;
         default:
           return null;
       }
@@ -107,71 +107,71 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.INVEST_SPECIAL_ACCOUNT, new org.apache.thrift.meta_data.FieldMetaData("invest_special_account", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.PRODUCTID, new org.apache.thrift.meta_data.FieldMetaData("productid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
-    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(BankSignResultStruct.class, metaDataMap);
+    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(IssuBankProductInfoResultStruct.class, metaDataMap);
   }
 
-  public BankSignResultStruct() {
+  public IssuBankProductInfoResultStruct() {
   }
 
-  public BankSignResultStruct(
-    String invest_special_account)
+  public IssuBankProductInfoResultStruct(
+    String productid)
   {
     this();
-    this.invest_special_account = invest_special_account;
+    this.productid = productid;
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
-  public BankSignResultStruct(BankSignResultStruct other) {
-    if (other.isSetInvest_special_account()) {
-      this.invest_special_account = other.invest_special_account;
+  public IssuBankProductInfoResultStruct(IssuBankProductInfoResultStruct other) {
+    if (other.isSetProductid()) {
+      this.productid = other.productid;
     }
   }
 
-  public BankSignResultStruct deepCopy() {
-    return new BankSignResultStruct(this);
+  public IssuBankProductInfoResultStruct deepCopy() {
+    return new IssuBankProductInfoResultStruct(this);
   }
 
   @Override
   public void clear() {
-    this.invest_special_account = null;
+    this.productid = null;
   }
 
-  public String getInvest_special_account() {
-    return this.invest_special_account;
+  public String getProductid() {
+    return this.productid;
   }
 
-  public BankSignResultStruct setInvest_special_account(String invest_special_account) {
-    this.invest_special_account = invest_special_account;
+  public IssuBankProductInfoResultStruct setProductid(String productid) {
+    this.productid = productid;
     return this;
   }
 
-  public void unsetInvest_special_account() {
-    this.invest_special_account = null;
+  public void unsetProductid() {
+    this.productid = null;
   }
 
-  /** Returns true if field invest_special_account is set (has been assigned a value) and false otherwise */
-  public boolean isSetInvest_special_account() {
-    return this.invest_special_account != null;
+  /** Returns true if field productid is set (has been assigned a value) and false otherwise */
+  public boolean isSetProductid() {
+    return this.productid != null;
   }
 
-  public void setInvest_special_accountIsSet(boolean value) {
+  public void setProductidIsSet(boolean value) {
     if (!value) {
-      this.invest_special_account = null;
+      this.productid = null;
     }
   }
 
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
-    case INVEST_SPECIAL_ACCOUNT:
+    case PRODUCTID:
       if (value == null) {
-        unsetInvest_special_account();
+        unsetProductid();
       } else {
-        setInvest_special_account((String)value);
+        setProductid((String)value);
       }
       break;
 
@@ -180,8 +180,8 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
 
   public Object getFieldValue(_Fields field) {
     switch (field) {
-    case INVEST_SPECIAL_ACCOUNT:
-      return getInvest_special_account();
+    case PRODUCTID:
+      return getProductid();
 
     }
     throw new IllegalStateException();
@@ -194,8 +194,8 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
     }
 
     switch (field) {
-    case INVEST_SPECIAL_ACCOUNT:
-      return isSetInvest_special_account();
+    case PRODUCTID:
+      return isSetProductid();
     }
     throw new IllegalStateException();
   }
@@ -204,21 +204,21 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
   public boolean equals(Object that) {
     if (that == null)
       return false;
-    if (that instanceof BankSignResultStruct)
-      return this.equals((BankSignResultStruct)that);
+    if (that instanceof IssuBankProductInfoResultStruct)
+      return this.equals((IssuBankProductInfoResultStruct)that);
     return false;
   }
 
-  public boolean equals(BankSignResultStruct that) {
+  public boolean equals(IssuBankProductInfoResultStruct that) {
     if (that == null)
       return false;
 
-    boolean this_present_invest_special_account = true && this.isSetInvest_special_account();
-    boolean that_present_invest_special_account = true && that.isSetInvest_special_account();
-    if (this_present_invest_special_account || that_present_invest_special_account) {
-      if (!(this_present_invest_special_account && that_present_invest_special_account))
+    boolean this_present_productid = true && this.isSetProductid();
+    boolean that_present_productid = true && that.isSetProductid();
+    if (this_present_productid || that_present_productid) {
+      if (!(this_present_productid && that_present_productid))
         return false;
-      if (!this.invest_special_account.equals(that.invest_special_account))
+      if (!this.productid.equals(that.productid))
         return false;
     }
 
@@ -231,19 +231,19 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
   }
 
   @Override
-  public int compareTo(BankSignResultStruct other) {
+  public int compareTo(IssuBankProductInfoResultStruct other) {
     if (!getClass().equals(other.getClass())) {
       return getClass().getName().compareTo(other.getClass().getName());
     }
 
     int lastComparison = 0;
 
-    lastComparison = Boolean.valueOf(isSetInvest_special_account()).compareTo(other.isSetInvest_special_account());
+    lastComparison = Boolean.valueOf(isSetProductid()).compareTo(other.isSetProductid());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetInvest_special_account()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.invest_special_account, other.invest_special_account);
+    if (isSetProductid()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.productid, other.productid);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -265,14 +265,14 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("BankSignResultStruct(");
+    StringBuilder sb = new StringBuilder("IssuBankProductInfoResultStruct(");
     boolean first = true;
 
-    sb.append("invest_special_account:");
-    if (this.invest_special_account == null) {
+    sb.append("productid:");
+    if (this.productid == null) {
       sb.append("null");
     } else {
-      sb.append(this.invest_special_account);
+      sb.append(this.productid);
     }
     first = false;
     sb.append(")");
@@ -300,15 +300,15 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
     }
   }
 
-  private static class BankSignResultStructStandardSchemeFactory implements SchemeFactory {
-    public BankSignResultStructStandardScheme getScheme() {
-      return new BankSignResultStructStandardScheme();
+  private static class IssuBankProductInfoResultStructStandardSchemeFactory implements SchemeFactory {
+    public IssuBankProductInfoResultStructStandardScheme getScheme() {
+      return new IssuBankProductInfoResultStructStandardScheme();
     }
   }
 
-  private static class BankSignResultStructStandardScheme extends StandardScheme<BankSignResultStruct> {
+  private static class IssuBankProductInfoResultStructStandardScheme extends StandardScheme<IssuBankProductInfoResultStruct> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, BankSignResultStruct struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, IssuBankProductInfoResultStruct struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -318,10 +318,10 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
           break;
         }
         switch (schemeField.id) {
-          case 1: // INVEST_SPECIAL_ACCOUNT
+          case 1: // PRODUCTID
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.invest_special_account = iprot.readString();
-              struct.setInvest_special_accountIsSet(true);
+              struct.productid = iprot.readString();
+              struct.setProductidIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -337,13 +337,13 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, BankSignResultStruct struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, IssuBankProductInfoResultStruct struct) throws org.apache.thrift.TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.invest_special_account != null) {
-        oprot.writeFieldBegin(INVEST_SPECIAL_ACCOUNT_FIELD_DESC);
-        oprot.writeString(struct.invest_special_account);
+      if (struct.productid != null) {
+        oprot.writeFieldBegin(PRODUCTID_FIELD_DESC);
+        oprot.writeString(struct.productid);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -352,34 +352,34 @@ public class BankSignResultStruct implements org.apache.thrift.TBase<BankSignRes
 
   }
 
-  private static class BankSignResultStructTupleSchemeFactory implements SchemeFactory {
-    public BankSignResultStructTupleScheme getScheme() {
-      return new BankSignResultStructTupleScheme();
+  private static class IssuBankProductInfoResultStructTupleSchemeFactory implements SchemeFactory {
+    public IssuBankProductInfoResultStructTupleScheme getScheme() {
+      return new IssuBankProductInfoResultStructTupleScheme();
     }
   }
 
-  private static class BankSignResultStructTupleScheme extends TupleScheme<BankSignResultStruct> {
+  private static class IssuBankProductInfoResultStructTupleScheme extends TupleScheme<IssuBankProductInfoResultStruct> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, BankSignResultStruct struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, IssuBankProductInfoResultStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
-      if (struct.isSetInvest_special_account()) {
+      if (struct.isSetProductid()) {
         optionals.set(0);
       }
       oprot.writeBitSet(optionals, 1);
-      if (struct.isSetInvest_special_account()) {
-        oprot.writeString(struct.invest_special_account);
+      if (struct.isSetProductid()) {
+        oprot.writeString(struct.productid);
       }
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, BankSignResultStruct struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, IssuBankProductInfoResultStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
-        struct.invest_special_account = iprot.readString();
-        struct.setInvest_special_accountIsSet(true);
+        struct.productid = iprot.readString();
+        struct.setProductidIsSet(true);
       }
     }
   }

@@ -37,7 +37,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
 
   private static final org.apache.thrift.protocol.TField MOBILE_PHONE_NUMBER_FIELD_DESC = new org.apache.thrift.protocol.TField("mobilePhoneNumber", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField INVESTOR_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("investorID", org.apache.thrift.protocol.TType.STRING, (short)2);
-  private static final org.apache.thrift.protocol.TField RET_INFO_FIELD_DESC = new org.apache.thrift.protocol.TField("retInfo", org.apache.thrift.protocol.TType.STRUCT, (short)3);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -47,13 +46,11 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
 
   public String mobilePhoneNumber; // required
   public String investorID; // required
-  public ResultInfoStruct retInfo; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     MOBILE_PHONE_NUMBER((short)1, "mobilePhoneNumber"),
-    INVESTOR_ID((short)2, "investorID"),
-    RET_INFO((short)3, "retInfo");
+    INVESTOR_ID((short)2, "investorID");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -72,8 +69,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
           return MOBILE_PHONE_NUMBER;
         case 2: // INVESTOR_ID
           return INVESTOR_ID;
-        case 3: // RET_INFO
-          return RET_INFO;
         default:
           return null;
       }
@@ -119,10 +114,8 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.MOBILE_PHONE_NUMBER, new org.apache.thrift.meta_data.FieldMetaData("mobilePhoneNumber", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.INVESTOR_ID, new org.apache.thrift.meta_data.FieldMetaData("investorID", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.INVESTOR_ID, new org.apache.thrift.meta_data.FieldMetaData("investorID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.RET_INFO, new org.apache.thrift.meta_data.FieldMetaData("retInfo", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ResultInfoStruct.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(InvestorRegisterResultInfoStruct.class, metaDataMap);
   }
@@ -132,13 +125,11 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
 
   public InvestorRegisterResultInfoStruct(
     String mobilePhoneNumber,
-    String investorID,
-    ResultInfoStruct retInfo)
+    String investorID)
   {
     this();
     this.mobilePhoneNumber = mobilePhoneNumber;
     this.investorID = investorID;
-    this.retInfo = retInfo;
   }
 
   /**
@@ -151,9 +142,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
     if (other.isSetInvestorID()) {
       this.investorID = other.investorID;
     }
-    if (other.isSetRetInfo()) {
-      this.retInfo = new ResultInfoStruct(other.retInfo);
-    }
   }
 
   public InvestorRegisterResultInfoStruct deepCopy() {
@@ -164,7 +152,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
   public void clear() {
     this.mobilePhoneNumber = null;
     this.investorID = null;
-    this.retInfo = null;
   }
 
   public String getMobilePhoneNumber() {
@@ -215,30 +202,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
     }
   }
 
-  public ResultInfoStruct getRetInfo() {
-    return this.retInfo;
-  }
-
-  public InvestorRegisterResultInfoStruct setRetInfo(ResultInfoStruct retInfo) {
-    this.retInfo = retInfo;
-    return this;
-  }
-
-  public void unsetRetInfo() {
-    this.retInfo = null;
-  }
-
-  /** Returns true if field retInfo is set (has been assigned a value) and false otherwise */
-  public boolean isSetRetInfo() {
-    return this.retInfo != null;
-  }
-
-  public void setRetInfoIsSet(boolean value) {
-    if (!value) {
-      this.retInfo = null;
-    }
-  }
-
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case MOBILE_PHONE_NUMBER:
@@ -257,14 +220,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
       }
       break;
 
-    case RET_INFO:
-      if (value == null) {
-        unsetRetInfo();
-      } else {
-        setRetInfo((ResultInfoStruct)value);
-      }
-      break;
-
     }
   }
 
@@ -275,9 +230,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
 
     case INVESTOR_ID:
       return getInvestorID();
-
-    case RET_INFO:
-      return getRetInfo();
 
     }
     throw new IllegalStateException();
@@ -294,8 +246,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
       return isSetMobilePhoneNumber();
     case INVESTOR_ID:
       return isSetInvestorID();
-    case RET_INFO:
-      return isSetRetInfo();
     }
     throw new IllegalStateException();
   }
@@ -328,15 +278,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
       if (!(this_present_investorID && that_present_investorID))
         return false;
       if (!this.investorID.equals(that.investorID))
-        return false;
-    }
-
-    boolean this_present_retInfo = true && this.isSetRetInfo();
-    boolean that_present_retInfo = true && that.isSetRetInfo();
-    if (this_present_retInfo || that_present_retInfo) {
-      if (!(this_present_retInfo && that_present_retInfo))
-        return false;
-      if (!this.retInfo.equals(that.retInfo))
         return false;
     }
 
@@ -376,16 +317,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetRetInfo()).compareTo(other.isSetRetInfo());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetRetInfo()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.retInfo, other.retInfo);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
     return 0;
   }
 
@@ -421,14 +352,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
       sb.append(this.investorID);
     }
     first = false;
-    if (!first) sb.append(", ");
-    sb.append("retInfo:");
-    if (this.retInfo == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.retInfo);
-    }
-    first = false;
     sb.append(")");
     return sb.toString();
   }
@@ -438,16 +361,7 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
     if (mobilePhoneNumber == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'mobilePhoneNumber' was not present! Struct: " + toString());
     }
-    if (investorID == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'investorID' was not present! Struct: " + toString());
-    }
-    if (retInfo == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'retInfo' was not present! Struct: " + toString());
-    }
     // check for sub-struct validity
-    if (retInfo != null) {
-      retInfo.validate();
-    }
   }
 
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -500,15 +414,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // RET_INFO
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.retInfo = new ResultInfoStruct();
-              struct.retInfo.read(iprot);
-              struct.setRetInfoIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -534,11 +439,6 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
         oprot.writeString(struct.investorID);
         oprot.writeFieldEnd();
       }
-      if (struct.retInfo != null) {
-        oprot.writeFieldBegin(RET_INFO_FIELD_DESC);
-        struct.retInfo.write(oprot);
-        oprot.writeFieldEnd();
-      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -557,8 +457,14 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
     public void write(org.apache.thrift.protocol.TProtocol prot, InvestorRegisterResultInfoStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeString(struct.mobilePhoneNumber);
-      oprot.writeString(struct.investorID);
-      struct.retInfo.write(oprot);
+      BitSet optionals = new BitSet();
+      if (struct.isSetInvestorID()) {
+        optionals.set(0);
+      }
+      oprot.writeBitSet(optionals, 1);
+      if (struct.isSetInvestorID()) {
+        oprot.writeString(struct.investorID);
+      }
     }
 
     @Override
@@ -566,11 +472,11 @@ public class InvestorRegisterResultInfoStruct implements org.apache.thrift.TBase
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.mobilePhoneNumber = iprot.readString();
       struct.setMobilePhoneNumberIsSet(true);
-      struct.investorID = iprot.readString();
-      struct.setInvestorIDIsSet(true);
-      struct.retInfo = new ResultInfoStruct();
-      struct.retInfo.read(iprot);
-      struct.setRetInfoIsSet(true);
+      BitSet incoming = iprot.readBitSet(1);
+      if (incoming.get(0)) {
+        struct.investorID = iprot.readString();
+        struct.setInvestorIDIsSet(true);
+      }
     }
   }
 
