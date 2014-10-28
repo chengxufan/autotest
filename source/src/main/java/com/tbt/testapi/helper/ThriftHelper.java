@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.thrift.TApplicationException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
@@ -20,6 +21,7 @@ import com.google.gson.JsonObject;
 import com.tbt.testapi.BaseHelper;
 import com.tbt.testapi.EnvConfig;
 import com.tbt.testapi.TestApiException;
+import com.tbt.testapi.exception.HelperException;
 import com.tbt.testapi.utils.Utils;
 import com.tongbaotu.fits.thrift.idl.Fits;
 import com.tongbaotu.fits.thrift.idl.FitsException;
@@ -30,12 +32,21 @@ public class ThriftHelper extends BaseHelper {
 	private String packageName;
 
 	@Override
-	public void init() {
+	public void init() throws HelperException {
 		Element el = (Element) EnvConfig.getInstance().doc
 				.selectSingleNode("//environment/item[@name='thrift']");
+		if (el == null) {
+			throw new HelperException(
+					"ThriftHelper init environment config is null.");
+		}
 		host = el.element("host").getText();
 		port = Integer.parseInt(el.element("port").getText());
 		packageName = el.element("packageName").getText();
+
+		if (host == null || port == 0 || packageName == null) {
+			throw new HelperException(
+					"ThriftHelper init environment config parse error.");
+		}
 	}
 
 	@Override
@@ -45,18 +56,24 @@ public class ThriftHelper extends BaseHelper {
 
 	@Override
 	public JsonObject run(Document doc, HashMap<String, String> vars)
-			throws TestApiException {
+			throws TestApiException, HelperException {
 		JsonObject jo = new JsonObject();
 		try {
 			Element el = (Element) doc
 					.selectSingleNode("/root/item[@name='call']");
-			String function = el.attributeValue("function");
 
+			if (el == null) {
+				throw new HelperException(
+						"ThriftHelper run xml parse item element is null.");
+			}
+
+			String function = el.attributeValue("function");
 			TTransport transport;
 			Method method = null;
-			transport = new TSocket(host, port);
 
+			transport = new TSocket(host, port);
 			transport.open();
+
 			TProtocol protocol = new TBinaryProtocol(transport);
 			Fits.Client client = new Fits.Client(protocol);
 
@@ -88,10 +105,6 @@ public class ThriftHelper extends BaseHelper {
 									+ type)
 							.newInstance();
 				}
-
-				// Object object = Class.forName(
-				// packageName + "." + type)
-				// .newInstance();
 
 				for (Iterator<Element> varsIt = pel
 						.elementIterator("val"); varsIt
@@ -169,15 +182,12 @@ public class ThriftHelper extends BaseHelper {
 							new Object[] {});
 
 					String retVal = String.valueOf(retObj);
-					// vars.put(rel.attributeValue("name"),
-					// retVal);
 					jo.addProperty(rvel
 							.attributeValue("name"),
 							retVal);
 				}
 
 			}
-			// System.out.println("ret = " + ret);
 
 			transport.close();
 
@@ -186,16 +196,46 @@ public class ThriftHelper extends BaseHelper {
 				FitsException ee = (FitsException) e
 						.getTargetException();
 				jo.addProperty("exceptionCode", ee.getCode());
+				Utils.debugLog("FitsException: "
+						+ e.getCause().getMessage());
 				return jo;
 			} else if (e.getCause() instanceof TTransportException) {
-				return null;
-			}
-			e.printStackTrace();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new TestApiException("thrift server error:" + e);
+				return null;
+			} else if (e.getCause() instanceof TApplicationException) {
+				throw new HelperException("ThriftHelper "
+						+ e.getCause().getMessage());
+
+			}
+
+		} catch (TTransportException e) {
+			throw new HelperException(
+					String.format("ThriftHelper connect server %s:%d error.",
+							host, port));
+		} catch (ClassNotFoundException e) {
+			throw new HelperException("class not found "
+					+ e.getMessage());
 		}
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		catch (InstantiationException e) {
+			throw new HelperException("object not get instance "
+					+ e.getMessage());
+		} catch (IllegalAccessException e) {
+			throw new HelperException("object not get instance "
+					+ e.getMessage());
+		} catch (NoSuchFieldException e) {
+			throw new HelperException("field not found "
+					+ e.getMessage());
+		} catch (SecurityException e) {
+			throw new HelperException("field not found "
+					+ e.getMessage());
+		} catch (NoSuchMethodException e) {
+			throw new HelperException("method not found "
+					+ e.getMessage());
+		}
+
 		return jo;
 	}
 }

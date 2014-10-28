@@ -1,0 +1,78 @@
+<case id="langwan">
+	<context>
+		<item name="INVESTOR_ID">00000057</item>	<!--投资人ID -->
+		<item name="ID_TYPE">0</item>				<!--有效身份证件类型 0中国居民身份证、2港澳居民来往内地通行证、3台湾居民来往大陆通行证、4外国人永久居留证、5外国护照、6其他 -->
+		<item name="ID_NAME">gll</item>				<!-- 有效身份证件的姓名 -->
+		<item name="ID_NUMBER">131022497802042028</item>	<!--有效身份证件的号码 -->
+		<item name="ID_AUTHORITY">河北省廊坊市公安局</item>			<!-- 有效身份证件的发证单位 -->
+		<item name="ID_ADDRESS">河北省廊坊市</item>			<!-- 有效身份证件所记录的地址 -->
+		<item name="ID_CARD_VAILD_DATE">20141028</item>	<!-- 有效身份证件的有效期 -->
+		<item name="GENDER">1</item>				<!--性别 -->
+		<item name=""></item>				<!-- 普通结算户号码 -->
+	</context>
+	<step note="打桩-初始化状态-删除签约账户记录">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="INVESTOR_ID" statement="delete"><![CDATA[delete from INVEST_CAPITAL_ACCOUNT WHERE INVESTOR_ID='%s']]></item>
+		</helper>
+	</step>
+	<step note="打桩初始化状态-删除产品账户记录">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="INVESTOR_ID" statement="delete"><![CDATA[delete from PROD_REGISTER_ACCOUNT WHERE INVESTOR_ID='%s']]></item>
+		</helper>
+	</step>
+	<step note="打桩初始化状态-删除产品账户记录">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="INVESTOR_ID" statement="delete"><![CDATA[delete from INDIVIDUAL_INVESTOR_INFO WHERE INVESTOR_ID='%s']]></item>
+		</helper>
+	</step>
+	<step note="投资者银行签约">
+		<helper name="helper.thrift">
+			<item name="call" function="investor_bankSign">
+				<param type="BankSignInfoStruct">
+					<val name="investorID" format="INVESTOR_ID">%s</val>
+					<val name="id_type" format="ID_TYPE">%s</val>
+					<val name="id_name" format="ID_NAME">%s</val>
+					<val name="id_number" format="ID_NUMBER">%s</val>
+					<val name="id_authority" format="ID_AUTHORITY">%s</val>
+					<val name="id_address" format="ID_ADDRESS">%s</val>
+					<val name="id_card_vaild" format="ID_CARD_VAILD_DATE">%s</val>
+					<val name="gender" format="GENDER">%s</val>
+					<val name="bank_account" format="">%s</val>
+				</param>
+			</item>
+		</helper>
+	</step>
+	<step note="检查数据库-签约账户中有一条记录">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="INVESTOR_ID" statement="select"><![CDATA[SELECT COUNT(*) as c FROM INVEST_CAPITAL_ACCOUNT WHERE INVESTOR_ID ='%s']]></item>
+		</helper>
+		<return>
+			<item name="count">c</item>
+		</return>
+		<assert>
+			<item name="equals" var="count" param="1"></item>
+		</assert>
+	</step>
+	<step note="检查数据库-产品账户中有一条记录">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="INVESTOR_ID" statement="select"><![CDATA[SELECT COUNT(*) as c FROM PROD_REGISTER_ACCOUNT WHERE INVESTOR_ID ='%s']]></item>
+		</helper>
+		<return>
+			<item name="count">c</item>
+		</return>
+		<assert>
+			<item name="equals" var="count" param="1"></item>
+		</assert>
+	</step>
+	<step note="检查数据库-客户状态变化">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="INVESTOR_ID" statement="select"><![CDATA[SELECT INVESTOR_STATE as s FROM INVESTOR WHERE INVESTOR_ID ='%s']]></item>
+		</helper>
+		<return>
+			<item name="INVESTOR_STATE">s</item>
+		</return>
+		<assert>
+			<item name="equals" var="INVESTOR_STATE" param="4"></item>
+		</assert>
+	</step>
+</case>

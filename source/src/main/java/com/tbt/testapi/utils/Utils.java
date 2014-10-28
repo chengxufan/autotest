@@ -5,10 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tbt.testapi.main.Command;
 
 public class Utils {
+	private static final Logger logger = LoggerFactory
+			.getLogger(Utils.class);
+
 	public static Element formatElement(HashMap<String, String> vars,
 			Element item) {
 		String name = item.attributeValue("name");
@@ -51,6 +56,13 @@ public class Utils {
 		if (Command.options.debug == true) {
 			System.out.println(message);
 		}
+	}
+
+	public static boolean stringEmpty(String str) {
+		if (str == null || str.length() == 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

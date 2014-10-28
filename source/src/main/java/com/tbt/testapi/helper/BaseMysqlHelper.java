@@ -9,17 +9,23 @@ import org.dom4j.Element;
 import com.tbt.testapi.BaseHelper;
 import com.tbt.testapi.EnvConfig;
 import com.tbt.testapi.TestApiException;
+import com.tbt.testapi.exception.HelperException;
 
 abstract public class BaseMysqlHelper extends BaseHelper {
 
 	protected Connection conn;
 
 	@Override
-	public void init() throws TestApiException {
+	public void init() throws TestApiException, HelperException {
 		Element el = (Element) EnvConfig.getInstance().doc
 				.selectSingleNode("//environment/item[@name='mysql']");
-		String host = el.element("host").getText();
 
+		if (el == null) {
+			throw new HelperException(
+					"MysqlExecuteHelper init environment config is null.");
+		}
+
+		String host = el.element("host").getText();
 		String port = el.element("port").getText();
 		String user = el.element("user").getText();
 		String pass = el.element("pass").getText();
@@ -30,8 +36,9 @@ abstract public class BaseMysqlHelper extends BaseHelper {
 					+ host + "/" + db + "?" + "user="
 					+ user + "&password=" + pass);
 		} catch (SQLException e) {
-			throw new TestApiException(
-					"Unable to parse mysql config info");
+
+			throw new HelperException(
+					"MysqlExecuteHelper connect server error, check environment config.");
 		}
 	}
 

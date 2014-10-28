@@ -16,7 +16,7 @@ import com.tbt.testapi.main.Config;
 public class GroupCommand extends BaseCommand {
 
 	@Override
-	public void run(String id) throws TestApiException {
+	public void run(String id) throws TestApiException, DocumentException {
 		String filePath = Config.getInstance().caseDataPath + "group/"
 				+ id + ".xml";
 
@@ -25,22 +25,17 @@ public class GroupCommand extends BaseCommand {
 
 		SAXReader reader = new SAXReader();
 		Document doc;
-		try {
-			doc = reader.read(filePath);
-			List list = doc.selectNodes("//group/case");
-			for (Iterator<Element> it = list.iterator(); it
-					.hasNext();) {
-				Element el = it.next();
-				String caseId = el.attributeValue("id");
-				BaseCommand command = new CaseCommand();
-				try {
-					command.run(caseId);
-				} catch (TestApiException e) {
-					e.printStackTrace();
-				}
-			}
-		} catch (DocumentException e) {
-			throw new TestApiException("Unable to parse group xml");
+
+		doc = reader.read(filePath);
+		List list = doc.selectNodes("//group/case");
+		for (Iterator<Element> it = list.iterator(); it.hasNext();) {
+			Element el = it.next();
+			String caseId = el.attributeValue("id");
+			BaseCommand command = new CaseCommand();
+
+			command.run(caseId);
+
 		}
+
 	}
 }

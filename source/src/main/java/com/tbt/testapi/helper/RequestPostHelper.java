@@ -23,16 +23,29 @@ import com.google.gson.JsonParser;
 import com.tbt.testapi.BaseHelper;
 import com.tbt.testapi.EnvConfig;
 import com.tbt.testapi.TestApiException;
+import com.tbt.testapi.exception.HelperException;
 import com.tbt.testapi.main.Config;
+import com.tbt.testapi.utils.Utils;
 
 public class RequestPostHelper extends BaseHelper {
 	public String rootUrl;
 
 	@Override
-	public void init() {
+	public void init() throws HelperException {
 		Element el = (Element) EnvConfig.getInstance().doc
 				.selectSingleNode("//environment/item[@name='request']");
+
+		if (el == null) {
+			throw new HelperException(
+					"RequestPostHelper init environment config is null.");
+		}
+
 		rootUrl = el.element("url").getText();
+
+		if (Utils.stringEmpty(rootUrl)) {
+			throw new HelperException(
+					"RequestPostHelper init environment config parse error.");
+		}
 	}
 
 	@Override

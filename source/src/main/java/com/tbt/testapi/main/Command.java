@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.tbt.testapi.TestApiException;
+import com.tbt.testapi.utils.Utils;
 
 public class Command {
 	public static Options options = new Options();
@@ -19,12 +20,25 @@ public class Command {
 			String opt = it.next();
 			if (opt.equals("-type")) {
 				options.type = it.next();
+				if (Utils.stringEmpty(options.type)) {
+					throw new TestApiException(
+							"args -type is null.");
+				}
 			} else if (opt.equals("-name")) {
 				options.name = it.next();
+				if (Utils.stringEmpty(options.type)) {
+					throw new TestApiException(
+							"args -name is null.");
+				}
 			} else if (opt.equals("-configPath")) {
 				options.configPath = it.next();
+				if (Utils.stringEmpty(options.type)) {
+					throw new TestApiException(
+							"args -configPath is null.");
+				}
 			} else if (opt.equals("-debug")) {
-				options.debug = Boolean.parseBoolean(it.next());
+				options.debug = true;
+				it.next();
 			}
 		}
 		return true;

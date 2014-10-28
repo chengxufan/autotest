@@ -15,7 +15,7 @@ import com.tbt.testapi.main.Config;
 
 public class TaskCommand extends BaseCommand {
 	@Override
-	public void run(String id) throws TestApiException {
+	public void run(String id) throws TestApiException, DocumentException {
 		String filePath = Config.getInstance().caseDataPath + "task/"
 				+ id + ".xml";
 		if (!new File(filePath).exists())
@@ -23,23 +23,16 @@ public class TaskCommand extends BaseCommand {
 
 		SAXReader reader = new SAXReader();
 		Document doc;
-		try {
-			doc = reader.read(filePath);
-			List list = doc.selectNodes("//task/group");
-			for (Iterator<Element> it = list.iterator(); it
-					.hasNext();) {
-				Element el = it.next();
-				String groupId = el.attributeValue("id");
-				BaseCommand command = new GroupCommand();
-				try {
-					command.run(groupId);
-				} catch (TestApiException e) {
-					e.printStackTrace();
-				}
-			}
-		} catch (DocumentException e) {
-			throw new TestApiException("Unable to parse task xml");
+
+		doc = reader.read(filePath);
+		List list = doc.selectNodes("//task/group");
+		for (Iterator<Element> it = list.iterator(); it.hasNext();) {
+			Element el = it.next();
+			String groupId = el.attributeValue("id");
+			BaseCommand command = new GroupCommand();
+			command.run(groupId);
 		}
+
 	}
 
 }

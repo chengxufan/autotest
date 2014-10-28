@@ -10,17 +10,25 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.tbt.testapi.Assert;
 import com.tbt.testapi.BaseCommand;
 import com.tbt.testapi.BaseHelper;
 import com.tbt.testapi.Report;
 import com.tbt.testapi.TestApiException;
+import com.tbt.testapi.exception.HelperException;
+import com.tbt.testapi.exception.StepException;
 import com.tbt.testapi.main.Config;
 import com.tbt.testapi.utils.Utils;
 
 public class CaseCommand extends BaseCommand {
+	private static final Logger logger = LoggerFactory
+			.getLogger(CaseCommand.class);
+
 	HashMap<String, String> vars;
 	public String caseId = null;
 
@@ -40,36 +48,46 @@ public class CaseCommand extends BaseCommand {
 			Document doc = reader.read(filePath);
 
 			List list = doc.selectNodes("//case/context/item");
-			for (Iterator<Element> it = list.iterator(); it
-					.hasNext();) {
-				Element el = it.next();
-				String name = el.attributeValue("name");
-				String value = el.getText();
-				vars.put(name, value);
+			if (list != null) {
+				for (Iterator<Element> it = list.iterator(); it
+						.hasNext();) {
+					Element el = it.next();
+					String name = el.attributeValue("name");
+					String value = el.getText();
+					vars.put(name, value);
+				}
 			}
 
 			list = doc.selectNodes("//case/step");
-			for (Iterator<Element> it = list.iterator(); it
-					.hasNext();) {
-				Element el = it.next();
-				String note = el.attributeValue("note");
-				ret = step(el);
-				if (ret == false)
-					break;
+			if (list != null) {
+				for (Iterator<Element> it = list.iterator(); it
+						.hasNext();) {
+					Element el = it.next();
+					String note = el.attributeValue("note");
+					ret = step(el);
+					if (ret == false)
+						break;
+				}
+			} else {
+				throw new TestApiException(String.format(
+						"case %s step is null", id));
 			}
-
+		} catch (HelperException e) {
+			ret = false;
+			logger.debug("helper exception\n" + e.getMessage());
 		} catch (DocumentException e) {
 			Utils.debugLog("case parse error, " + e.getMessage());
 			ret = false;
 		} catch (TestApiException e) {
-			Utils.debugLog("case error, " + e.getMessage());
+			logger.debug("Case Exception", e);
 			ret = false;
 		} finally {
 			Report.getInstance().add(caseId, ret);
 		}
 	}
 
-	public boolean step(Element step) throws TestApiException {
+	public boolean step(Element step) throws TestApiException,
+			HelperException {
 		Element el;
 		Element hel = step.element("helper");
 		String helperNamespace = hel.attributeValue("name");
@@ -112,26 +130,33 @@ public class CaseCommand extends BaseCommand {
 					String jName = item.getText();
 					String[] jNameArray = jName
 							.split("\\.");
-					JsonObject data = new JsonObject();
-					for (int i = 0; i < jNameArray.length; i++) {
-						if (i == 0) {
-
-							if (jNameArray.length == 1)
-								vars.put(key,
-										jo.get(jName)
-												.getAsString());
-							else if (jNameArray.length == 2) {
-								data = (JsonObject) jo
-										.get(jNameArray[i]);
-							}
-						} else if (i == 1) {
-							vars.put(key,
-									data.get(jNameArray[i])
-											.getAsString());
+					JsonObject data = jo;
+					JsonElement jel = null;
+					if (jNameArray.length == 1) {
+						jel = data.get(jName);
+						if (jel == null) {
+							throw new StepException(
+									"return json field '"
+											+ jName
+											+ "' not found.");
 						}
+					} else {
+						for (int i = 0; i < jNameArray.length; i++) {
+							data = (JsonObject) data
+									.get(jNameArray[i]);
+							if (data == null) {
+								throw new StepException(
+										"return json field '"
+												+ jName
+												+ "' not found.");
+							}
+						}
+						jel = data;
 					}
+					vars.put(key, jel.getAsString());
 				}
 			}
+
 			el = step.element("assert");
 			if (el != null) {
 				for (Iterator<Element> it = el
@@ -152,11 +177,9 @@ public class CaseCommand extends BaseCommand {
 					}
 				}
 			}
-		} catch (ClassCastException e) {
-			throw new TestApiException(
-					"json response parse error, "
-							+ e.getMessage()
-							+ "json:" + jo);
+		} catch (StepException e) {
+			logger.debug("step exception\n" + e.getMessage());
+			return false;
 		}
 		return true;
 	}
