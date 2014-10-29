@@ -12,19 +12,26 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mysql.jdbc.ResultSetMetaData;
 import com.tbt.testapi.TestApiException;
+import com.tbt.testapi.exception.HelperException;
 
 public class MysqlExecuteHelper extends BaseMysqlHelper {
 	ResultSet rs;
 
 	@Override
 	public JsonObject run(Document doc, HashMap<String, String> vars)
-			throws TestApiException {
+			throws TestApiException, HelperException {
 		JsonObject jo = new JsonObject();
 		try {
 
 			Statement stmt = conn.createStatement();
 			Element sql = (Element) doc
 					.selectSingleNode("/root/item[@name='sql']");
+
+			if (sql == null) {
+				throw new HelperException(
+						"MysqlExecuteHelper sql is null.");
+			}
+
 			String statement = sql.attributeValue("statement");
 
 			if (statement == null
@@ -77,8 +84,9 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 			}
 
 		} catch (SQLException e) {
-			throw new TestApiException("db error:" + e.getMessage());
+			throw new HelperException("db error:" + e.getMessage());
 		}
+
 		if (rs != null) {
 			try {
 				rs.close();
@@ -86,6 +94,7 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 				rs = null;
 			}
 		}
+
 		return jo;
 	}
 

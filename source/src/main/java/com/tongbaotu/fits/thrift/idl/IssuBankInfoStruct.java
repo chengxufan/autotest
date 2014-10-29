@@ -152,7 +152,7 @@ public class IssuBankInfoStruct implements org.apache.thrift.TBase<IssuBankInfoS
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.ISSU_BANK_ID, new org.apache.thrift.meta_data.FieldMetaData("issu_bank_id", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.ISSU_BANK_ID, new org.apache.thrift.meta_data.FieldMetaData("issu_bank_id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.SETTLE_ACCOUNT_ID, new org.apache.thrift.meta_data.FieldMetaData("settle_account_id", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
@@ -974,9 +974,6 @@ public class IssuBankInfoStruct implements org.apache.thrift.TBase<IssuBankInfoS
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (issu_bank_id == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'issu_bank_id' was not present! Struct: " + toString());
-    }
     if (settle_account_id == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'settle_account_id' was not present! Struct: " + toString());
     }
@@ -1200,7 +1197,6 @@ public class IssuBankInfoStruct implements org.apache.thrift.TBase<IssuBankInfoS
     @Override
     public void write(org.apache.thrift.protocol.TProtocol prot, IssuBankInfoStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
-      oprot.writeString(struct.issu_bank_id);
       oprot.writeString(struct.settle_account_id);
       oprot.writeString(struct.issu_bank_name);
       oprot.writeString(struct.orga_number);
@@ -1210,10 +1206,16 @@ public class IssuBankInfoStruct implements org.apache.thrift.TBase<IssuBankInfoS
       oprot.writeString(struct.fixed_telephone);
       oprot.writeString(struct.mobile_phone);
       BitSet optionals = new BitSet();
-      if (struct.isSetCur_state()) {
+      if (struct.isSetIssu_bank_id()) {
         optionals.set(0);
       }
-      oprot.writeBitSet(optionals, 1);
+      if (struct.isSetCur_state()) {
+        optionals.set(1);
+      }
+      oprot.writeBitSet(optionals, 2);
+      if (struct.isSetIssu_bank_id()) {
+        oprot.writeString(struct.issu_bank_id);
+      }
       if (struct.isSetCur_state()) {
         oprot.writeString(struct.cur_state);
       }
@@ -1222,8 +1224,6 @@ public class IssuBankInfoStruct implements org.apache.thrift.TBase<IssuBankInfoS
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, IssuBankInfoStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      struct.issu_bank_id = iprot.readString();
-      struct.setIssu_bank_idIsSet(true);
       struct.settle_account_id = iprot.readString();
       struct.setSettle_account_idIsSet(true);
       struct.issu_bank_name = iprot.readString();
@@ -1240,8 +1240,12 @@ public class IssuBankInfoStruct implements org.apache.thrift.TBase<IssuBankInfoS
       struct.setFixed_telephoneIsSet(true);
       struct.mobile_phone = iprot.readString();
       struct.setMobile_phoneIsSet(true);
-      BitSet incoming = iprot.readBitSet(1);
+      BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
+        struct.issu_bank_id = iprot.readString();
+        struct.setIssu_bank_idIsSet(true);
+      }
+      if (incoming.get(1)) {
         struct.cur_state = iprot.readString();
         struct.setCur_stateIsSet(true);
       }

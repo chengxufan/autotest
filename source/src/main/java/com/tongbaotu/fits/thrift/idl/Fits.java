@@ -44,6 +44,10 @@ public class Fits {
 
     public BankSignResultStruct investor_bankSign(BankSignInfoStruct bankSignInfo) throws FitsException, org.apache.thrift.TException;
 
+    public TransferResultStruct silverInvestTransfer(TransferInfoStruct transferInfo) throws FitsException, org.apache.thrift.TException;
+
+    public PurchaseResultStruct purchaseProduct(PurchaseInfoStruct purchaseInfo) throws FitsException, org.apache.thrift.TException;
+
     public void issubank_register(IssuBankInfoStruct bInfo) throws FitsException, org.apache.thrift.TException;
 
     public IssuBankProductInfoResultStruct issubank_productregister(IssuBankProductInfoStruct productInfo) throws FitsException, org.apache.thrift.TException;
@@ -65,6 +69,10 @@ public class Fits {
     public void investor_updateRiskLevel(RiskLevelStruct riskLevel, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void investor_bankSign(BankSignInfoStruct bankSignInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void silverInvestTransfer(TransferInfoStruct transferInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void purchaseProduct(PurchaseInfoStruct purchaseInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void issubank_register(IssuBankInfoStruct bInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -195,6 +203,58 @@ public class Fits {
         throw result.fe;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "investor_bankSign failed: unknown result");
+    }
+
+    public TransferResultStruct silverInvestTransfer(TransferInfoStruct transferInfo) throws FitsException, org.apache.thrift.TException
+    {
+      send_silverInvestTransfer(transferInfo);
+      return recv_silverInvestTransfer();
+    }
+
+    public void send_silverInvestTransfer(TransferInfoStruct transferInfo) throws org.apache.thrift.TException
+    {
+      silverInvestTransfer_args args = new silverInvestTransfer_args();
+      args.setTransferInfo(transferInfo);
+      sendBase("silverInvestTransfer", args);
+    }
+
+    public TransferResultStruct recv_silverInvestTransfer() throws FitsException, org.apache.thrift.TException
+    {
+      silverInvestTransfer_result result = new silverInvestTransfer_result();
+      receiveBase(result, "silverInvestTransfer");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.fe != null) {
+        throw result.fe;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "silverInvestTransfer failed: unknown result");
+    }
+
+    public PurchaseResultStruct purchaseProduct(PurchaseInfoStruct purchaseInfo) throws FitsException, org.apache.thrift.TException
+    {
+      send_purchaseProduct(purchaseInfo);
+      return recv_purchaseProduct();
+    }
+
+    public void send_purchaseProduct(PurchaseInfoStruct purchaseInfo) throws org.apache.thrift.TException
+    {
+      purchaseProduct_args args = new purchaseProduct_args();
+      args.setPurchaseInfo(purchaseInfo);
+      sendBase("purchaseProduct", args);
+    }
+
+    public PurchaseResultStruct recv_purchaseProduct() throws FitsException, org.apache.thrift.TException
+    {
+      purchaseProduct_result result = new purchaseProduct_result();
+      receiveBase(result, "purchaseProduct");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.fe != null) {
+        throw result.fe;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "purchaseProduct failed: unknown result");
     }
 
     public void issubank_register(IssuBankInfoStruct bInfo) throws FitsException, org.apache.thrift.TException
@@ -470,6 +530,70 @@ public class Fits {
       }
     }
 
+    public void silverInvestTransfer(TransferInfoStruct transferInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      silverInvestTransfer_call method_call = new silverInvestTransfer_call(transferInfo, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class silverInvestTransfer_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private TransferInfoStruct transferInfo;
+      public silverInvestTransfer_call(TransferInfoStruct transferInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.transferInfo = transferInfo;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("silverInvestTransfer", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        silverInvestTransfer_args args = new silverInvestTransfer_args();
+        args.setTransferInfo(transferInfo);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public TransferResultStruct getResult() throws FitsException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_silverInvestTransfer();
+      }
+    }
+
+    public void purchaseProduct(PurchaseInfoStruct purchaseInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      purchaseProduct_call method_call = new purchaseProduct_call(purchaseInfo, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class purchaseProduct_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private PurchaseInfoStruct purchaseInfo;
+      public purchaseProduct_call(PurchaseInfoStruct purchaseInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.purchaseInfo = purchaseInfo;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("purchaseProduct", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        purchaseProduct_args args = new purchaseProduct_args();
+        args.setPurchaseInfo(purchaseInfo);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public PurchaseResultStruct getResult() throws FitsException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_purchaseProduct();
+      }
+    }
+
     public void issubank_register(IssuBankInfoStruct bInfo, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       issubank_register_call method_call = new issubank_register_call(bInfo, resultHandler, this, ___protocolFactory, ___transport);
@@ -647,6 +771,8 @@ public class Fits {
       processMap.put("investor_switchState", new investor_switchState());
       processMap.put("investor_updateRiskLevel", new investor_updateRiskLevel());
       processMap.put("investor_bankSign", new investor_bankSign());
+      processMap.put("silverInvestTransfer", new silverInvestTransfer());
+      processMap.put("purchaseProduct", new purchaseProduct());
       processMap.put("issubank_register", new issubank_register());
       processMap.put("issubank_productregister", new issubank_productregister());
       processMap.put("issubank_getBankInfo", new issubank_getBankInfo());
@@ -744,6 +870,54 @@ public class Fits {
         investor_bankSign_result result = new investor_bankSign_result();
         try {
           result.success = iface.investor_bankSign(args.bankSignInfo);
+        } catch (FitsException fe) {
+          result.fe = fe;
+        }
+        return result;
+      }
+    }
+
+    public static class silverInvestTransfer<I extends Iface> extends org.apache.thrift.ProcessFunction<I, silverInvestTransfer_args> {
+      public silverInvestTransfer() {
+        super("silverInvestTransfer");
+      }
+
+      public silverInvestTransfer_args getEmptyArgsInstance() {
+        return new silverInvestTransfer_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public silverInvestTransfer_result getResult(I iface, silverInvestTransfer_args args) throws org.apache.thrift.TException {
+        silverInvestTransfer_result result = new silverInvestTransfer_result();
+        try {
+          result.success = iface.silverInvestTransfer(args.transferInfo);
+        } catch (FitsException fe) {
+          result.fe = fe;
+        }
+        return result;
+      }
+    }
+
+    public static class purchaseProduct<I extends Iface> extends org.apache.thrift.ProcessFunction<I, purchaseProduct_args> {
+      public purchaseProduct() {
+        super("purchaseProduct");
+      }
+
+      public purchaseProduct_args getEmptyArgsInstance() {
+        return new purchaseProduct_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public purchaseProduct_result getResult(I iface, purchaseProduct_args args) throws org.apache.thrift.TException {
+        purchaseProduct_result result = new purchaseProduct_result();
+        try {
+          result.success = iface.purchaseProduct(args.purchaseInfo);
         } catch (FitsException fe) {
           result.fe = fe;
         }
@@ -888,6 +1062,8 @@ public class Fits {
       processMap.put("investor_switchState", new investor_switchState());
       processMap.put("investor_updateRiskLevel", new investor_updateRiskLevel());
       processMap.put("investor_bankSign", new investor_bankSign());
+      processMap.put("silverInvestTransfer", new silverInvestTransfer());
+      processMap.put("purchaseProduct", new purchaseProduct());
       processMap.put("issubank_register", new issubank_register());
       processMap.put("issubank_productregister", new issubank_productregister());
       processMap.put("issubank_getBankInfo", new issubank_getBankInfo());
@@ -1119,6 +1295,120 @@ public class Fits {
 
       public void start(I iface, investor_bankSign_args args, org.apache.thrift.async.AsyncMethodCallback<BankSignResultStruct> resultHandler) throws TException {
         iface.investor_bankSign(args.bankSignInfo,resultHandler);
+      }
+    }
+
+    public static class silverInvestTransfer<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, silverInvestTransfer_args, TransferResultStruct> {
+      public silverInvestTransfer() {
+        super("silverInvestTransfer");
+      }
+
+      public silverInvestTransfer_args getEmptyArgsInstance() {
+        return new silverInvestTransfer_args();
+      }
+
+      public AsyncMethodCallback<TransferResultStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<TransferResultStruct>() { 
+          public void onComplete(TransferResultStruct o) {
+            silverInvestTransfer_result result = new silverInvestTransfer_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            silverInvestTransfer_result result = new silverInvestTransfer_result();
+            if (e instanceof FitsException) {
+                        result.fe = (FitsException) e;
+                        result.setFeIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, silverInvestTransfer_args args, org.apache.thrift.async.AsyncMethodCallback<TransferResultStruct> resultHandler) throws TException {
+        iface.silverInvestTransfer(args.transferInfo,resultHandler);
+      }
+    }
+
+    public static class purchaseProduct<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, purchaseProduct_args, PurchaseResultStruct> {
+      public purchaseProduct() {
+        super("purchaseProduct");
+      }
+
+      public purchaseProduct_args getEmptyArgsInstance() {
+        return new purchaseProduct_args();
+      }
+
+      public AsyncMethodCallback<PurchaseResultStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<PurchaseResultStruct>() { 
+          public void onComplete(PurchaseResultStruct o) {
+            purchaseProduct_result result = new purchaseProduct_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            purchaseProduct_result result = new purchaseProduct_result();
+            if (e instanceof FitsException) {
+                        result.fe = (FitsException) e;
+                        result.setFeIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, purchaseProduct_args args, org.apache.thrift.async.AsyncMethodCallback<PurchaseResultStruct> resultHandler) throws TException {
+        iface.purchaseProduct(args.purchaseInfo,resultHandler);
       }
     }
 
@@ -4557,6 +4847,1646 @@ public class Fits {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           struct.success = new BankSignResultStruct();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.fe = new FitsException();
+          struct.fe.read(iprot);
+          struct.setFeIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class silverInvestTransfer_args implements org.apache.thrift.TBase<silverInvestTransfer_args, silverInvestTransfer_args._Fields>, java.io.Serializable, Cloneable, Comparable<silverInvestTransfer_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("silverInvestTransfer_args");
+
+    private static final org.apache.thrift.protocol.TField TRANSFER_INFO_FIELD_DESC = new org.apache.thrift.protocol.TField("transferInfo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new silverInvestTransfer_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new silverInvestTransfer_argsTupleSchemeFactory());
+    }
+
+    public TransferInfoStruct transferInfo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      TRANSFER_INFO((short)1, "transferInfo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // TRANSFER_INFO
+            return TRANSFER_INFO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.TRANSFER_INFO, new org.apache.thrift.meta_data.FieldMetaData("transferInfo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferInfoStruct.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(silverInvestTransfer_args.class, metaDataMap);
+    }
+
+    public silverInvestTransfer_args() {
+    }
+
+    public silverInvestTransfer_args(
+      TransferInfoStruct transferInfo)
+    {
+      this();
+      this.transferInfo = transferInfo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public silverInvestTransfer_args(silverInvestTransfer_args other) {
+      if (other.isSetTransferInfo()) {
+        this.transferInfo = new TransferInfoStruct(other.transferInfo);
+      }
+    }
+
+    public silverInvestTransfer_args deepCopy() {
+      return new silverInvestTransfer_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.transferInfo = null;
+    }
+
+    public TransferInfoStruct getTransferInfo() {
+      return this.transferInfo;
+    }
+
+    public silverInvestTransfer_args setTransferInfo(TransferInfoStruct transferInfo) {
+      this.transferInfo = transferInfo;
+      return this;
+    }
+
+    public void unsetTransferInfo() {
+      this.transferInfo = null;
+    }
+
+    /** Returns true if field transferInfo is set (has been assigned a value) and false otherwise */
+    public boolean isSetTransferInfo() {
+      return this.transferInfo != null;
+    }
+
+    public void setTransferInfoIsSet(boolean value) {
+      if (!value) {
+        this.transferInfo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case TRANSFER_INFO:
+        if (value == null) {
+          unsetTransferInfo();
+        } else {
+          setTransferInfo((TransferInfoStruct)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case TRANSFER_INFO:
+        return getTransferInfo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case TRANSFER_INFO:
+        return isSetTransferInfo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof silverInvestTransfer_args)
+        return this.equals((silverInvestTransfer_args)that);
+      return false;
+    }
+
+    public boolean equals(silverInvestTransfer_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_transferInfo = true && this.isSetTransferInfo();
+      boolean that_present_transferInfo = true && that.isSetTransferInfo();
+      if (this_present_transferInfo || that_present_transferInfo) {
+        if (!(this_present_transferInfo && that_present_transferInfo))
+          return false;
+        if (!this.transferInfo.equals(that.transferInfo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(silverInvestTransfer_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetTransferInfo()).compareTo(other.isSetTransferInfo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetTransferInfo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.transferInfo, other.transferInfo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("silverInvestTransfer_args(");
+      boolean first = true;
+
+      sb.append("transferInfo:");
+      if (this.transferInfo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.transferInfo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (transferInfo != null) {
+        transferInfo.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class silverInvestTransfer_argsStandardSchemeFactory implements SchemeFactory {
+      public silverInvestTransfer_argsStandardScheme getScheme() {
+        return new silverInvestTransfer_argsStandardScheme();
+      }
+    }
+
+    private static class silverInvestTransfer_argsStandardScheme extends StandardScheme<silverInvestTransfer_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, silverInvestTransfer_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // TRANSFER_INFO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.transferInfo = new TransferInfoStruct();
+                struct.transferInfo.read(iprot);
+                struct.setTransferInfoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, silverInvestTransfer_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.transferInfo != null) {
+          oprot.writeFieldBegin(TRANSFER_INFO_FIELD_DESC);
+          struct.transferInfo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class silverInvestTransfer_argsTupleSchemeFactory implements SchemeFactory {
+      public silverInvestTransfer_argsTupleScheme getScheme() {
+        return new silverInvestTransfer_argsTupleScheme();
+      }
+    }
+
+    private static class silverInvestTransfer_argsTupleScheme extends TupleScheme<silverInvestTransfer_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, silverInvestTransfer_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetTransferInfo()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetTransferInfo()) {
+          struct.transferInfo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, silverInvestTransfer_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.transferInfo = new TransferInfoStruct();
+          struct.transferInfo.read(iprot);
+          struct.setTransferInfoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class silverInvestTransfer_result implements org.apache.thrift.TBase<silverInvestTransfer_result, silverInvestTransfer_result._Fields>, java.io.Serializable, Cloneable, Comparable<silverInvestTransfer_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("silverInvestTransfer_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new silverInvestTransfer_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new silverInvestTransfer_resultTupleSchemeFactory());
+    }
+
+    public TransferResultStruct success; // required
+    public FitsException fe; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      FE((short)1, "fe");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // FE
+            return FE;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferResultStruct.class)));
+      tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(silverInvestTransfer_result.class, metaDataMap);
+    }
+
+    public silverInvestTransfer_result() {
+    }
+
+    public silverInvestTransfer_result(
+      TransferResultStruct success,
+      FitsException fe)
+    {
+      this();
+      this.success = success;
+      this.fe = fe;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public silverInvestTransfer_result(silverInvestTransfer_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new TransferResultStruct(other.success);
+      }
+      if (other.isSetFe()) {
+        this.fe = new FitsException(other.fe);
+      }
+    }
+
+    public silverInvestTransfer_result deepCopy() {
+      return new silverInvestTransfer_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.fe = null;
+    }
+
+    public TransferResultStruct getSuccess() {
+      return this.success;
+    }
+
+    public silverInvestTransfer_result setSuccess(TransferResultStruct success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public FitsException getFe() {
+      return this.fe;
+    }
+
+    public silverInvestTransfer_result setFe(FitsException fe) {
+      this.fe = fe;
+      return this;
+    }
+
+    public void unsetFe() {
+      this.fe = null;
+    }
+
+    /** Returns true if field fe is set (has been assigned a value) and false otherwise */
+    public boolean isSetFe() {
+      return this.fe != null;
+    }
+
+    public void setFeIsSet(boolean value) {
+      if (!value) {
+        this.fe = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((TransferResultStruct)value);
+        }
+        break;
+
+      case FE:
+        if (value == null) {
+          unsetFe();
+        } else {
+          setFe((FitsException)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case FE:
+        return getFe();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case FE:
+        return isSetFe();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof silverInvestTransfer_result)
+        return this.equals((silverInvestTransfer_result)that);
+      return false;
+    }
+
+    public boolean equals(silverInvestTransfer_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_fe = true && this.isSetFe();
+      boolean that_present_fe = true && that.isSetFe();
+      if (this_present_fe || that_present_fe) {
+        if (!(this_present_fe && that_present_fe))
+          return false;
+        if (!this.fe.equals(that.fe))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(silverInvestTransfer_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetFe()).compareTo(other.isSetFe());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFe()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fe, other.fe);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("silverInvestTransfer_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("fe:");
+      if (this.fe == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.fe);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class silverInvestTransfer_resultStandardSchemeFactory implements SchemeFactory {
+      public silverInvestTransfer_resultStandardScheme getScheme() {
+        return new silverInvestTransfer_resultStandardScheme();
+      }
+    }
+
+    private static class silverInvestTransfer_resultStandardScheme extends StandardScheme<silverInvestTransfer_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, silverInvestTransfer_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new TransferResultStruct();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // FE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.fe = new FitsException();
+                struct.fe.read(iprot);
+                struct.setFeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, silverInvestTransfer_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.fe != null) {
+          oprot.writeFieldBegin(FE_FIELD_DESC);
+          struct.fe.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class silverInvestTransfer_resultTupleSchemeFactory implements SchemeFactory {
+      public silverInvestTransfer_resultTupleScheme getScheme() {
+        return new silverInvestTransfer_resultTupleScheme();
+      }
+    }
+
+    private static class silverInvestTransfer_resultTupleScheme extends TupleScheme<silverInvestTransfer_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, silverInvestTransfer_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetFe()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetFe()) {
+          struct.fe.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, silverInvestTransfer_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new TransferResultStruct();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.fe = new FitsException();
+          struct.fe.read(iprot);
+          struct.setFeIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class purchaseProduct_args implements org.apache.thrift.TBase<purchaseProduct_args, purchaseProduct_args._Fields>, java.io.Serializable, Cloneable, Comparable<purchaseProduct_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("purchaseProduct_args");
+
+    private static final org.apache.thrift.protocol.TField PURCHASE_INFO_FIELD_DESC = new org.apache.thrift.protocol.TField("purchaseInfo", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new purchaseProduct_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new purchaseProduct_argsTupleSchemeFactory());
+    }
+
+    public PurchaseInfoStruct purchaseInfo; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      PURCHASE_INFO((short)1, "purchaseInfo");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // PURCHASE_INFO
+            return PURCHASE_INFO;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.PURCHASE_INFO, new org.apache.thrift.meta_data.FieldMetaData("purchaseInfo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, PurchaseInfoStruct.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(purchaseProduct_args.class, metaDataMap);
+    }
+
+    public purchaseProduct_args() {
+    }
+
+    public purchaseProduct_args(
+      PurchaseInfoStruct purchaseInfo)
+    {
+      this();
+      this.purchaseInfo = purchaseInfo;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public purchaseProduct_args(purchaseProduct_args other) {
+      if (other.isSetPurchaseInfo()) {
+        this.purchaseInfo = new PurchaseInfoStruct(other.purchaseInfo);
+      }
+    }
+
+    public purchaseProduct_args deepCopy() {
+      return new purchaseProduct_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.purchaseInfo = null;
+    }
+
+    public PurchaseInfoStruct getPurchaseInfo() {
+      return this.purchaseInfo;
+    }
+
+    public purchaseProduct_args setPurchaseInfo(PurchaseInfoStruct purchaseInfo) {
+      this.purchaseInfo = purchaseInfo;
+      return this;
+    }
+
+    public void unsetPurchaseInfo() {
+      this.purchaseInfo = null;
+    }
+
+    /** Returns true if field purchaseInfo is set (has been assigned a value) and false otherwise */
+    public boolean isSetPurchaseInfo() {
+      return this.purchaseInfo != null;
+    }
+
+    public void setPurchaseInfoIsSet(boolean value) {
+      if (!value) {
+        this.purchaseInfo = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case PURCHASE_INFO:
+        if (value == null) {
+          unsetPurchaseInfo();
+        } else {
+          setPurchaseInfo((PurchaseInfoStruct)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case PURCHASE_INFO:
+        return getPurchaseInfo();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case PURCHASE_INFO:
+        return isSetPurchaseInfo();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof purchaseProduct_args)
+        return this.equals((purchaseProduct_args)that);
+      return false;
+    }
+
+    public boolean equals(purchaseProduct_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_purchaseInfo = true && this.isSetPurchaseInfo();
+      boolean that_present_purchaseInfo = true && that.isSetPurchaseInfo();
+      if (this_present_purchaseInfo || that_present_purchaseInfo) {
+        if (!(this_present_purchaseInfo && that_present_purchaseInfo))
+          return false;
+        if (!this.purchaseInfo.equals(that.purchaseInfo))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(purchaseProduct_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetPurchaseInfo()).compareTo(other.isSetPurchaseInfo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetPurchaseInfo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.purchaseInfo, other.purchaseInfo);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("purchaseProduct_args(");
+      boolean first = true;
+
+      sb.append("purchaseInfo:");
+      if (this.purchaseInfo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.purchaseInfo);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (purchaseInfo != null) {
+        purchaseInfo.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class purchaseProduct_argsStandardSchemeFactory implements SchemeFactory {
+      public purchaseProduct_argsStandardScheme getScheme() {
+        return new purchaseProduct_argsStandardScheme();
+      }
+    }
+
+    private static class purchaseProduct_argsStandardScheme extends StandardScheme<purchaseProduct_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, purchaseProduct_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // PURCHASE_INFO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.purchaseInfo = new PurchaseInfoStruct();
+                struct.purchaseInfo.read(iprot);
+                struct.setPurchaseInfoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, purchaseProduct_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.purchaseInfo != null) {
+          oprot.writeFieldBegin(PURCHASE_INFO_FIELD_DESC);
+          struct.purchaseInfo.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class purchaseProduct_argsTupleSchemeFactory implements SchemeFactory {
+      public purchaseProduct_argsTupleScheme getScheme() {
+        return new purchaseProduct_argsTupleScheme();
+      }
+    }
+
+    private static class purchaseProduct_argsTupleScheme extends TupleScheme<purchaseProduct_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, purchaseProduct_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetPurchaseInfo()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetPurchaseInfo()) {
+          struct.purchaseInfo.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, purchaseProduct_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.purchaseInfo = new PurchaseInfoStruct();
+          struct.purchaseInfo.read(iprot);
+          struct.setPurchaseInfoIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class purchaseProduct_result implements org.apache.thrift.TBase<purchaseProduct_result, purchaseProduct_result._Fields>, java.io.Serializable, Cloneable, Comparable<purchaseProduct_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("purchaseProduct_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new purchaseProduct_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new purchaseProduct_resultTupleSchemeFactory());
+    }
+
+    public PurchaseResultStruct success; // required
+    public FitsException fe; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      FE((short)1, "fe");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // FE
+            return FE;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, PurchaseResultStruct.class)));
+      tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(purchaseProduct_result.class, metaDataMap);
+    }
+
+    public purchaseProduct_result() {
+    }
+
+    public purchaseProduct_result(
+      PurchaseResultStruct success,
+      FitsException fe)
+    {
+      this();
+      this.success = success;
+      this.fe = fe;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public purchaseProduct_result(purchaseProduct_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new PurchaseResultStruct(other.success);
+      }
+      if (other.isSetFe()) {
+        this.fe = new FitsException(other.fe);
+      }
+    }
+
+    public purchaseProduct_result deepCopy() {
+      return new purchaseProduct_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.fe = null;
+    }
+
+    public PurchaseResultStruct getSuccess() {
+      return this.success;
+    }
+
+    public purchaseProduct_result setSuccess(PurchaseResultStruct success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public FitsException getFe() {
+      return this.fe;
+    }
+
+    public purchaseProduct_result setFe(FitsException fe) {
+      this.fe = fe;
+      return this;
+    }
+
+    public void unsetFe() {
+      this.fe = null;
+    }
+
+    /** Returns true if field fe is set (has been assigned a value) and false otherwise */
+    public boolean isSetFe() {
+      return this.fe != null;
+    }
+
+    public void setFeIsSet(boolean value) {
+      if (!value) {
+        this.fe = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((PurchaseResultStruct)value);
+        }
+        break;
+
+      case FE:
+        if (value == null) {
+          unsetFe();
+        } else {
+          setFe((FitsException)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case FE:
+        return getFe();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case FE:
+        return isSetFe();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof purchaseProduct_result)
+        return this.equals((purchaseProduct_result)that);
+      return false;
+    }
+
+    public boolean equals(purchaseProduct_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_fe = true && this.isSetFe();
+      boolean that_present_fe = true && that.isSetFe();
+      if (this_present_fe || that_present_fe) {
+        if (!(this_present_fe && that_present_fe))
+          return false;
+        if (!this.fe.equals(that.fe))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(purchaseProduct_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetFe()).compareTo(other.isSetFe());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFe()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fe, other.fe);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("purchaseProduct_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("fe:");
+      if (this.fe == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.fe);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class purchaseProduct_resultStandardSchemeFactory implements SchemeFactory {
+      public purchaseProduct_resultStandardScheme getScheme() {
+        return new purchaseProduct_resultStandardScheme();
+      }
+    }
+
+    private static class purchaseProduct_resultStandardScheme extends StandardScheme<purchaseProduct_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, purchaseProduct_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new PurchaseResultStruct();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // FE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.fe = new FitsException();
+                struct.fe.read(iprot);
+                struct.setFeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, purchaseProduct_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.fe != null) {
+          oprot.writeFieldBegin(FE_FIELD_DESC);
+          struct.fe.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class purchaseProduct_resultTupleSchemeFactory implements SchemeFactory {
+      public purchaseProduct_resultTupleScheme getScheme() {
+        return new purchaseProduct_resultTupleScheme();
+      }
+    }
+
+    private static class purchaseProduct_resultTupleScheme extends TupleScheme<purchaseProduct_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, purchaseProduct_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetFe()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetFe()) {
+          struct.fe.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, purchaseProduct_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new PurchaseResultStruct();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }

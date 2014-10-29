@@ -71,8 +71,11 @@ struct BankSignInfoStruct
   //性别 1男 2女 3其他
   8: required i32 gender
   
+  //结算行ID
+  9: required string proxyBankID
+  
   //普通结算户号码
-  9: required string bank_account
+  10: required string bank_account
 }
 
 //银行签约处理结果
@@ -135,7 +138,7 @@ struct ProxyBankInfoStruct
 struct IssuBankInfoStruct
 {
   //发行行ID
-  1: required string issu_bank_id
+  1: string issu_bank_id
 
   //通报图资金结算账户
 	2: required string settle_account_id
@@ -171,7 +174,7 @@ struct IssuBankProductInfoStruct
    //产品name
    1: required string name
    
-   //产品类型  1 债权型; 2 准基金型; 3 特定资产型; 4指数挂钩型
+   //产品类型  0 债权型; 1 特定资产型; 2 准基金型; 3指数挂钩型
    2: required i32 type
    
    //收益计算方式 1 一次性；2 按月；3 按季；4 按年
@@ -246,6 +249,68 @@ struct IssuBankProductInfoResultStruct
    1: string productid
 }
 
+//银投/投银转账信息
+struct TransferInfoStruct
+{
+  //投资人ID
+  1: required string investorID
+  
+  //转账数量
+  2: required double amount
+  
+   //币种 0 人民币；1 港币；2 美元；3 其他
+  3: required i32 currency
+  
+  //转账类型 1 银投转账；2 投银转账
+  4: required i32 transferType
+  
+  //投资专用资金账户
+  5: required string invest_special_account
+}
+
+//银投/投银转账信息
+struct TransferResultStruct
+{
+  //投资人ID
+  1: required string investorID
+  
+  //投资专用资金账户
+  2: required string invest_special_account
+  
+  //转账数量
+  3: required double amount
+  
+  //投资账户当前余额
+  4: required  double currentbalance
+}
+
+struct PurchaseInfoStruct
+{
+  //投资人ID
+  1: required string investorID
+  
+  //投资专用资金账户
+  2: required string invest_special_account
+  
+  //产品ID
+  3: required string productid
+  
+  //购买金额
+  4: required string amount
+}
+
+struct PurchaseResultStruct
+{
+  //投资人ID
+  1: required string investorID
+  
+  //产品ID
+  2: required string productid
+  
+  //购买金额
+  3: required string amount
+}
+
 service  Fits {
 	
   //投资者注册
@@ -265,6 +330,12 @@ service  Fits {
 
   //投资者银行签约
   BankSignResultStruct investor_bankSign(1:BankSignInfoStruct bankSignInfo)  throws (1: FitsException fe),
+  
+  //银投/投银转账
+  TransferResultStruct silverInvestTransfer(1:TransferInfoStruct transferInfo)  throws (1: FitsException fe),
+  
+  //产品购买
+  PurchaseResultStruct purchaseProduct(1:PurchaseInfoStruct purchaseInfo)  throws (1: FitsException fe),
   
   //发行行注册
   void issubank_register(1:IssuBankInfoStruct bInfo)  throws (1: FitsException fe),

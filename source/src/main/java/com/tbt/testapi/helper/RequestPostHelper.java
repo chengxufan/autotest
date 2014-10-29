@@ -74,7 +74,7 @@ public class RequestPostHelper extends BaseHelper {
 
 	@Override
 	public JsonObject run(Document doc, HashMap<String, String> vars)
-			throws TestApiException {
+			throws TestApiException, HelperException {
 		Element uri = (Element) doc
 				.selectSingleNode("/root/item[@name='uri']");
 		Element params = (Element) doc
@@ -85,33 +85,34 @@ public class RequestPostHelper extends BaseHelper {
 		StringBuffer sb = new StringBuffer();
 		String comma = "";
 
-		for (Iterator<Element> it = params.elementIterator(); it
-				.hasNext();) {
-			Element item = it.next();
-			sb.append(comma);
-			comma = "&";
-			try {
-				sb.append(URLEncoder.encode(
-						item.attributeValue("name"),
-						"UTF-8"));
-			} catch (UnsupportedEncodingException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			sb.append("=");
-			try {
-				sb.append(URLEncoder.encode(item.getText(),
-						"UTF-8"));
+		if (params != null) {
+			for (Iterator<Element> it = params.elementIterator(); it
+					.hasNext();) {
+				Element item = it.next();
+				sb.append(comma);
+				comma = "&";
+				try {
+					sb.append(URLEncoder.encode(
+							item.attributeValue("name"),
+							"UTF-8"));
+				} catch (UnsupportedEncodingException e1) {
+					e1.printStackTrace();
+				}
+				sb.append("=");
+				try {
+					sb.append(URLEncoder.encode(
+							item.getText(), "UTF-8"));
 
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
 			}
+			sb.append("&");
 		}
 
 		String paramsString = sb.toString();
 
-		sb.append("&sign=");
+		sb.append("sign=");
 		sb.append(makeToken(paramsString));
 		paramsString = sb.toString();
 
@@ -161,10 +162,10 @@ public class RequestPostHelper extends BaseHelper {
 			}
 			return jo;
 		} catch (MalformedURLException e) {
-			throw new TestApiException(
+			throw new HelperException(
 					"Unable to request api server");
 		} catch (IOException e) {
-			throw new TestApiException(
+			throw new HelperException(
 					"Unable to request read or write");
 		}
 

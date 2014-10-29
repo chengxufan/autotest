@@ -43,7 +43,8 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
   private static final org.apache.thrift.protocol.TField ID_ADDRESS_FIELD_DESC = new org.apache.thrift.protocol.TField("id_address", org.apache.thrift.protocol.TType.STRING, (short)6);
   private static final org.apache.thrift.protocol.TField ID_CARD_VAILD_FIELD_DESC = new org.apache.thrift.protocol.TField("id_card_vaild", org.apache.thrift.protocol.TType.STRING, (short)7);
   private static final org.apache.thrift.protocol.TField GENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("gender", org.apache.thrift.protocol.TType.I32, (short)8);
-  private static final org.apache.thrift.protocol.TField BANK_ACCOUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("bank_account", org.apache.thrift.protocol.TType.STRING, (short)9);
+  private static final org.apache.thrift.protocol.TField PROXY_BANK_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("proxyBankID", org.apache.thrift.protocol.TType.STRING, (short)9);
+  private static final org.apache.thrift.protocol.TField BANK_ACCOUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("bank_account", org.apache.thrift.protocol.TType.STRING, (short)10);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -59,6 +60,7 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
   public String id_address; // required
   public String id_card_vaild; // required
   public int gender; // required
+  public String proxyBankID; // required
   public String bank_account; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -71,7 +73,8 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
     ID_ADDRESS((short)6, "id_address"),
     ID_CARD_VAILD((short)7, "id_card_vaild"),
     GENDER((short)8, "gender"),
-    BANK_ACCOUNT((short)9, "bank_account");
+    PROXY_BANK_ID((short)9, "proxyBankID"),
+    BANK_ACCOUNT((short)10, "bank_account");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -102,7 +105,9 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
           return ID_CARD_VAILD;
         case 8: // GENDER
           return GENDER;
-        case 9: // BANK_ACCOUNT
+        case 9: // PROXY_BANK_ID
+          return PROXY_BANK_ID;
+        case 10: // BANK_ACCOUNT
           return BANK_ACCOUNT;
         default:
           return null;
@@ -165,6 +170,8 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.GENDER, new org.apache.thrift.meta_data.FieldMetaData("gender", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+    tmpMap.put(_Fields.PROXY_BANK_ID, new org.apache.thrift.meta_data.FieldMetaData("proxyBankID", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.BANK_ACCOUNT, new org.apache.thrift.meta_data.FieldMetaData("bank_account", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -183,6 +190,7 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
     String id_address,
     String id_card_vaild,
     int gender,
+    String proxyBankID,
     String bank_account)
   {
     this();
@@ -195,6 +203,7 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
     this.id_card_vaild = id_card_vaild;
     this.gender = gender;
     setGenderIsSet(true);
+    this.proxyBankID = proxyBankID;
     this.bank_account = bank_account;
   }
 
@@ -225,6 +234,9 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
       this.id_card_vaild = other.id_card_vaild;
     }
     this.gender = other.gender;
+    if (other.isSetProxyBankID()) {
+      this.proxyBankID = other.proxyBankID;
+    }
     if (other.isSetBank_account()) {
       this.bank_account = other.bank_account;
     }
@@ -245,6 +257,7 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
     this.id_card_vaild = null;
     setGenderIsSet(false);
     this.gender = 0;
+    this.proxyBankID = null;
     this.bank_account = null;
   }
 
@@ -439,6 +452,30 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __GENDER_ISSET_ID, value);
   }
 
+  public String getProxyBankID() {
+    return this.proxyBankID;
+  }
+
+  public BankSignInfoStruct setProxyBankID(String proxyBankID) {
+    this.proxyBankID = proxyBankID;
+    return this;
+  }
+
+  public void unsetProxyBankID() {
+    this.proxyBankID = null;
+  }
+
+  /** Returns true if field proxyBankID is set (has been assigned a value) and false otherwise */
+  public boolean isSetProxyBankID() {
+    return this.proxyBankID != null;
+  }
+
+  public void setProxyBankIDIsSet(boolean value) {
+    if (!value) {
+      this.proxyBankID = null;
+    }
+  }
+
   public String getBank_account() {
     return this.bank_account;
   }
@@ -529,6 +566,14 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
       }
       break;
 
+    case PROXY_BANK_ID:
+      if (value == null) {
+        unsetProxyBankID();
+      } else {
+        setProxyBankID((String)value);
+      }
+      break;
+
     case BANK_ACCOUNT:
       if (value == null) {
         unsetBank_account();
@@ -566,6 +611,9 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
     case GENDER:
       return Integer.valueOf(getGender());
 
+    case PROXY_BANK_ID:
+      return getProxyBankID();
+
     case BANK_ACCOUNT:
       return getBank_account();
 
@@ -596,6 +644,8 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
       return isSetId_card_vaild();
     case GENDER:
       return isSetGender();
+    case PROXY_BANK_ID:
+      return isSetProxyBankID();
     case BANK_ACCOUNT:
       return isSetBank_account();
     }
@@ -684,6 +734,15 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
       if (!(this_present_gender && that_present_gender))
         return false;
       if (this.gender != that.gender)
+        return false;
+    }
+
+    boolean this_present_proxyBankID = true && this.isSetProxyBankID();
+    boolean that_present_proxyBankID = true && that.isSetProxyBankID();
+    if (this_present_proxyBankID || that_present_proxyBankID) {
+      if (!(this_present_proxyBankID && that_present_proxyBankID))
+        return false;
+      if (!this.proxyBankID.equals(that.proxyBankID))
         return false;
     }
 
@@ -792,6 +851,16 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetProxyBankID()).compareTo(other.isSetProxyBankID());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetProxyBankID()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.proxyBankID, other.proxyBankID);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = Boolean.valueOf(isSetBank_account()).compareTo(other.isSetBank_account());
     if (lastComparison != 0) {
       return lastComparison;
@@ -882,6 +951,14 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
     sb.append(this.gender);
     first = false;
     if (!first) sb.append(", ");
+    sb.append("proxyBankID:");
+    if (this.proxyBankID == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.proxyBankID);
+    }
+    first = false;
+    if (!first) sb.append(", ");
     sb.append("bank_account:");
     if (this.bank_account == null) {
       sb.append("null");
@@ -917,6 +994,9 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'id_card_vaild' was not present! Struct: " + toString());
     }
     // alas, we cannot check 'gender' because it's a primitive and you chose the non-beans generator.
+    if (proxyBankID == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'proxyBankID' was not present! Struct: " + toString());
+    }
     if (bank_account == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'bank_account' was not present! Struct: " + toString());
     }
@@ -1023,7 +1103,15 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 9: // BANK_ACCOUNT
+          case 9: // PROXY_BANK_ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.proxyBankID = iprot.readString();
+              struct.setProxyBankIDIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 10: // BANK_ACCOUNT
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.bank_account = iprot.readString();
               struct.setBank_accountIsSet(true);
@@ -1087,6 +1175,11 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
       oprot.writeFieldBegin(GENDER_FIELD_DESC);
       oprot.writeI32(struct.gender);
       oprot.writeFieldEnd();
+      if (struct.proxyBankID != null) {
+        oprot.writeFieldBegin(PROXY_BANK_ID_FIELD_DESC);
+        oprot.writeString(struct.proxyBankID);
+        oprot.writeFieldEnd();
+      }
       if (struct.bank_account != null) {
         oprot.writeFieldBegin(BANK_ACCOUNT_FIELD_DESC);
         oprot.writeString(struct.bank_account);
@@ -1117,6 +1210,7 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
       oprot.writeString(struct.id_address);
       oprot.writeString(struct.id_card_vaild);
       oprot.writeI32(struct.gender);
+      oprot.writeString(struct.proxyBankID);
       oprot.writeString(struct.bank_account);
     }
 
@@ -1139,6 +1233,8 @@ public class BankSignInfoStruct implements org.apache.thrift.TBase<BankSignInfoS
       struct.setId_card_vaildIsSet(true);
       struct.gender = iprot.readI32();
       struct.setGenderIsSet(true);
+      struct.proxyBankID = iprot.readString();
+      struct.setProxyBankIDIsSet(true);
       struct.bank_account = iprot.readString();
       struct.setBank_accountIsSet(true);
     }
