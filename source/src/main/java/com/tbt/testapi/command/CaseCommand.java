@@ -88,33 +88,34 @@ public class CaseCommand extends BaseCommand {
 
 	public boolean step(Element step) throws TestApiException,
 			HelperException {
-		Element el;
-		Element hel = step.element("helper");
-		String helperNamespace = hel.attributeValue("name");
-		HashMap<String, String> helperParams = new HashMap<String, String>();
-
-		Document caseXml = DocumentHelper.createDocument();
-		Element root = caseXml.addElement("root");
-
-		for (Iterator<Element> it = hel.elementIterator("item"); it
-				.hasNext();) {
-			Element item = it.next();
-			if (item.elements().size() != 0) {
-				for (Iterator<Element> itt = item
-						.elementIterator(); itt
-						.hasNext();) {
-					Element iit = itt.next();
-					Utils.formatElement(vars, iit);
-				}
-			} else {
-				Utils.formatElement(vars, item);
-			}
-			root.add((Element) item.clone());
-		}
-
-		JsonObject jo = BaseHelper.execute(helperNamespace, caseXml,
-				vars);
 		try {
+			Element el;
+			Element hel = step.element("helper");
+			String helperNamespace = hel.attributeValue("name");
+			HashMap<String, String> helperParams = new HashMap<String, String>();
+
+			Document caseXml = DocumentHelper.createDocument();
+			Element root = caseXml.addElement("root");
+
+			for (Iterator<Element> it = hel.elementIterator("item"); it
+					.hasNext();) {
+				Element item = it.next();
+				if (item.elements().size() != 0) {
+					for (Iterator<Element> itt = item
+							.elementIterator(); itt
+							.hasNext();) {
+						Element iit = itt.next();
+						Utils.formatElement(vars, iit);
+					}
+				} else {
+					Utils.formatElement(vars, item);
+				}
+				root.add((Element) item.clone());
+			}
+
+			JsonObject jo = BaseHelper.execute(helperNamespace,
+					caseXml, vars);
+
 			if (jo == null)
 				return false;
 			if (jo.toString().equals("{}"))

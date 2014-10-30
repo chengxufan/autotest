@@ -24,6 +24,7 @@ import com.tbt.testapi.BaseHelper;
 import com.tbt.testapi.EnvConfig;
 import com.tbt.testapi.TestApiException;
 import com.tbt.testapi.exception.HelperException;
+import com.tbt.testapi.exception.StepException;
 import com.tbt.testapi.utils.Utils;
 import com.tongbaotu.fits.thrift.idl.Fits;
 import com.tongbaotu.fits.thrift.idl.FitsException;
@@ -54,7 +55,8 @@ public class ThriftHelper extends BaseHelper {
 			throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException, NoSuchFieldException,
 			SecurityException, NoSuchMethodException,
-			IllegalArgumentException, InvocationTargetException {
+			IllegalArgumentException, InvocationTargetException,
+			StepException {
 		if (namespace.equals("String")
 				|| namespace.equals("java.lang.String")) {
 			Utils.formatElement(vars, el);
@@ -79,7 +81,8 @@ public class ThriftHelper extends BaseHelper {
 			throws NoSuchFieldException, SecurityException,
 			ClassNotFoundException, NoSuchMethodException,
 			IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, InstantiationException {
+			InvocationTargetException, InstantiationException,
+			StepException {
 
 		for (Iterator<Element> varsIt = root.elementIterator("val"); varsIt
 				.hasNext();) {
@@ -130,7 +133,8 @@ public class ThriftHelper extends BaseHelper {
 
 	@Override
 	public JsonObject run(Document doc, HashMap<String, String> vars)
-			throws TestApiException, HelperException {
+			throws TestApiException, HelperException,
+			IllegalArgumentException, StepException {
 		JsonObject jo = new JsonObject();
 		try {
 			Element el = (Element) doc

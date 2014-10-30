@@ -8,6 +8,7 @@ import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.tbt.testapi.exception.StepException;
 import com.tbt.testapi.main.Command;
 
 public class Utils {
@@ -15,7 +16,7 @@ public class Utils {
 			.getLogger(Utils.class);
 
 	public static Element formatElement(HashMap<String, String> vars,
-			Element item) {
+			Element item) throws StepException {
 		String name = item.attributeValue("name");
 		String value = item.getText();
 		String format = item.attributeValue("format");
@@ -25,9 +26,11 @@ public class Utils {
 			for (int i = 0; i < split.length; i++) {
 				String key = split[i];
 				String val = vars.get(key);
-				if (val != null) {
-					values.add(val);
+				if (val == null) {
+					throw new StepException("Global var "
+							+ key + " undefined.");
 				}
+				values.add(val);
 			}
 			value = String.format(value, values.toArray());
 			item.setText(value);

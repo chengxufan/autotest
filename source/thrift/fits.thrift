@@ -85,7 +85,7 @@ struct BankSignResultStruct
    1: string invest_special_account
 }
 
-//代销行注册信息
+//机构注册信息
 struct InstitutionInfoStruct
 {
   //机构ID
@@ -275,7 +275,7 @@ struct PurchaseInfoStruct
   3: required string productid
   
   //购买金额
-  4: required string amount
+  4: required double amount
 }
 
 struct PurchaseResultStruct
@@ -287,7 +287,10 @@ struct PurchaseResultStruct
   2: required string productid
   
   //购买金额
-  3: required string amount
+  3: required double amount
+  
+  //订单号
+  4: required string orderno
 }
 
 service  Fits {

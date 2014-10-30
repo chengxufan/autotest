@@ -6,6 +6,7 @@ import org.dom4j.Document;
 
 import com.google.gson.JsonObject;
 import com.tbt.testapi.exception.HelperException;
+import com.tbt.testapi.exception.StepException;
 
 abstract public class BaseHelper {
 	abstract public void init() throws TestApiException, HelperException;
@@ -14,7 +15,8 @@ abstract public class BaseHelper {
 
 	static public JsonObject execute(String namespace, Document doc,
 			HashMap<String, String> vars) throws TestApiException,
-			HelperException {
+			HelperException, IllegalArgumentException,
+			StepException {
 		BaseHelper base = createHelper(namespace);
 		base.init();
 		JsonObject jo = base.run(doc, vars);
@@ -24,7 +26,8 @@ abstract public class BaseHelper {
 
 	abstract public JsonObject run(Document doc,
 			HashMap<String, String> vars) throws TestApiException,
-			HelperException;
+			HelperException, IllegalArgumentException,
+			StepException;
 
 	static public BaseHelper createHelper(String namespace) {
 		String helperNamespace = namespace.substring(7);

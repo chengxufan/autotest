@@ -37,7 +37,8 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
 
   private static final org.apache.thrift.protocol.TField INVESTOR_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("investorID", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField PRODUCTID_FIELD_DESC = new org.apache.thrift.protocol.TField("productid", org.apache.thrift.protocol.TType.STRING, (short)2);
-  private static final org.apache.thrift.protocol.TField AMOUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("amount", org.apache.thrift.protocol.TType.STRING, (short)3);
+  private static final org.apache.thrift.protocol.TField AMOUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("amount", org.apache.thrift.protocol.TType.DOUBLE, (short)3);
+  private static final org.apache.thrift.protocol.TField ORDERNO_FIELD_DESC = new org.apache.thrift.protocol.TField("orderno", org.apache.thrift.protocol.TType.STRING, (short)4);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -47,13 +48,15 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
 
   public String investorID; // required
   public String productid; // required
-  public String amount; // required
+  public double amount; // required
+  public String orderno; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     INVESTOR_ID((short)1, "investorID"),
     PRODUCTID((short)2, "productid"),
-    AMOUNT((short)3, "amount");
+    AMOUNT((short)3, "amount"),
+    ORDERNO((short)4, "orderno");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -74,6 +77,8 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
           return PRODUCTID;
         case 3: // AMOUNT
           return AMOUNT;
+        case 4: // ORDERNO
+          return ORDERNO;
         default:
           return null;
       }
@@ -114,6 +119,8 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
   }
 
   // isset id assignments
+  private static final int __AMOUNT_ISSET_ID = 0;
+  private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -122,6 +129,8 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
     tmpMap.put(_Fields.PRODUCTID, new org.apache.thrift.meta_data.FieldMetaData("productid", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.AMOUNT, new org.apache.thrift.meta_data.FieldMetaData("amount", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
+    tmpMap.put(_Fields.ORDERNO, new org.apache.thrift.meta_data.FieldMetaData("orderno", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(PurchaseResultStruct.class, metaDataMap);
@@ -133,26 +142,31 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
   public PurchaseResultStruct(
     String investorID,
     String productid,
-    String amount)
+    double amount,
+    String orderno)
   {
     this();
     this.investorID = investorID;
     this.productid = productid;
     this.amount = amount;
+    setAmountIsSet(true);
+    this.orderno = orderno;
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
   public PurchaseResultStruct(PurchaseResultStruct other) {
+    __isset_bitfield = other.__isset_bitfield;
     if (other.isSetInvestorID()) {
       this.investorID = other.investorID;
     }
     if (other.isSetProductid()) {
       this.productid = other.productid;
     }
-    if (other.isSetAmount()) {
-      this.amount = other.amount;
+    this.amount = other.amount;
+    if (other.isSetOrderno()) {
+      this.orderno = other.orderno;
     }
   }
 
@@ -164,7 +178,9 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
   public void clear() {
     this.investorID = null;
     this.productid = null;
-    this.amount = null;
+    setAmountIsSet(false);
+    this.amount = 0.0;
+    this.orderno = null;
   }
 
   public String getInvestorID() {
@@ -215,27 +231,50 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
     }
   }
 
-  public String getAmount() {
+  public double getAmount() {
     return this.amount;
   }
 
-  public PurchaseResultStruct setAmount(String amount) {
+  public PurchaseResultStruct setAmount(double amount) {
     this.amount = amount;
+    setAmountIsSet(true);
     return this;
   }
 
   public void unsetAmount() {
-    this.amount = null;
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __AMOUNT_ISSET_ID);
   }
 
   /** Returns true if field amount is set (has been assigned a value) and false otherwise */
   public boolean isSetAmount() {
-    return this.amount != null;
+    return EncodingUtils.testBit(__isset_bitfield, __AMOUNT_ISSET_ID);
   }
 
   public void setAmountIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __AMOUNT_ISSET_ID, value);
+  }
+
+  public String getOrderno() {
+    return this.orderno;
+  }
+
+  public PurchaseResultStruct setOrderno(String orderno) {
+    this.orderno = orderno;
+    return this;
+  }
+
+  public void unsetOrderno() {
+    this.orderno = null;
+  }
+
+  /** Returns true if field orderno is set (has been assigned a value) and false otherwise */
+  public boolean isSetOrderno() {
+    return this.orderno != null;
+  }
+
+  public void setOrdernoIsSet(boolean value) {
     if (!value) {
-      this.amount = null;
+      this.orderno = null;
     }
   }
 
@@ -261,7 +300,15 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
       if (value == null) {
         unsetAmount();
       } else {
-        setAmount((String)value);
+        setAmount((Double)value);
+      }
+      break;
+
+    case ORDERNO:
+      if (value == null) {
+        unsetOrderno();
+      } else {
+        setOrderno((String)value);
       }
       break;
 
@@ -277,7 +324,10 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
       return getProductid();
 
     case AMOUNT:
-      return getAmount();
+      return Double.valueOf(getAmount());
+
+    case ORDERNO:
+      return getOrderno();
 
     }
     throw new IllegalStateException();
@@ -296,6 +346,8 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
       return isSetProductid();
     case AMOUNT:
       return isSetAmount();
+    case ORDERNO:
+      return isSetOrderno();
     }
     throw new IllegalStateException();
   }
@@ -331,12 +383,21 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
         return false;
     }
 
-    boolean this_present_amount = true && this.isSetAmount();
-    boolean that_present_amount = true && that.isSetAmount();
+    boolean this_present_amount = true;
+    boolean that_present_amount = true;
     if (this_present_amount || that_present_amount) {
       if (!(this_present_amount && that_present_amount))
         return false;
-      if (!this.amount.equals(that.amount))
+      if (this.amount != that.amount)
+        return false;
+    }
+
+    boolean this_present_orderno = true && this.isSetOrderno();
+    boolean that_present_orderno = true && that.isSetOrderno();
+    if (this_present_orderno || that_present_orderno) {
+      if (!(this_present_orderno && that_present_orderno))
+        return false;
+      if (!this.orderno.equals(that.orderno))
         return false;
     }
 
@@ -386,6 +447,16 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetOrderno()).compareTo(other.isSetOrderno());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetOrderno()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.orderno, other.orderno);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -423,10 +494,14 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
     first = false;
     if (!first) sb.append(", ");
     sb.append("amount:");
-    if (this.amount == null) {
+    sb.append(this.amount);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("orderno:");
+    if (this.orderno == null) {
       sb.append("null");
     } else {
-      sb.append(this.amount);
+      sb.append(this.orderno);
     }
     first = false;
     sb.append(")");
@@ -441,8 +516,9 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
     if (productid == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'productid' was not present! Struct: " + toString());
     }
-    if (amount == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'amount' was not present! Struct: " + toString());
+    // alas, we cannot check 'amount' because it's a primitive and you chose the non-beans generator.
+    if (orderno == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'orderno' was not present! Struct: " + toString());
     }
     // check for sub-struct validity
   }
@@ -457,6 +533,8 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
 
   private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
     try {
+      // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+      __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
     } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te);
@@ -498,9 +576,17 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
             }
             break;
           case 3: // AMOUNT
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.amount = iprot.readString();
+            if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+              struct.amount = iprot.readDouble();
               struct.setAmountIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 4: // ORDERNO
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.orderno = iprot.readString();
+              struct.setOrdernoIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -513,6 +599,9 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
       iprot.readStructEnd();
 
       // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetAmount()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'amount' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 
@@ -530,9 +619,12 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
         oprot.writeString(struct.productid);
         oprot.writeFieldEnd();
       }
-      if (struct.amount != null) {
-        oprot.writeFieldBegin(AMOUNT_FIELD_DESC);
-        oprot.writeString(struct.amount);
+      oprot.writeFieldBegin(AMOUNT_FIELD_DESC);
+      oprot.writeDouble(struct.amount);
+      oprot.writeFieldEnd();
+      if (struct.orderno != null) {
+        oprot.writeFieldBegin(ORDERNO_FIELD_DESC);
+        oprot.writeString(struct.orderno);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -554,7 +646,8 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeString(struct.investorID);
       oprot.writeString(struct.productid);
-      oprot.writeString(struct.amount);
+      oprot.writeDouble(struct.amount);
+      oprot.writeString(struct.orderno);
     }
 
     @Override
@@ -564,8 +657,10 @@ public class PurchaseResultStruct implements org.apache.thrift.TBase<PurchaseRes
       struct.setInvestorIDIsSet(true);
       struct.productid = iprot.readString();
       struct.setProductidIsSet(true);
-      struct.amount = iprot.readString();
+      struct.amount = iprot.readDouble();
       struct.setAmountIsSet(true);
+      struct.orderno = iprot.readString();
+      struct.setOrdernoIsSet(true);
     }
   }
 

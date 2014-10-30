@@ -1,47 +1,56 @@
-<case id="silverInvestTransfer_银转投">
+<case id="purchaseProduct">
 	<context>
 		<item name="INVESTOR_ID">00X00060</item>
-		<item name="amount">50</item>
-		<item name="currency">1</item>
-		<item name="transferType">1</item>
 		<item name="ACCOUNT_FUND_ID">AC00X00060</item>
+		<item name="PRODUCT_ID">PR000013</item>
+		<item name="amount">10</item>
 	</context>
-	<step note="清空当前账户余额">
+	<step note="设置账户余额">
 		<helper name="helper.mysql.execute">
-			<item name="sql" format="ACCOUNT_FUND_ID,INVESTOR_ID" statement="update"><![CDATA[update ACCOUNT_FUND set ACCOUNT_BALANCE='0' WHERE ACCOUNT_FUND_ID='%s'and INVESTOR_ID='%s']]></item>
+			<item name="sql" format="ACCOUNT_FUND_ID,INVESTOR_ID" statement="update"><![CDATA[update ACCOUNT_FUND set ACCOUNT_BALANCE='100' WHERE ACCOUNT_FUND_ID='%s'and INVESTOR_ID='%s']]></item>
 		</helper>
 	</step>
-	<step note="银投转账">
+	<step note="购买产品">
 		<helper name="helper.thrift">
-			<item name="call" function="silverInvestTransfer">
-				<param type="TransferInfoStruct">
+			<item name="call" function="purchaseProduct">
+				<param type="PurchaseInfoStruct">
 					<val name="investorID" format="INVESTOR_ID">%s</val>
-					 <val name="amount" format="amount">%s</val> 
-					<val name="currency" format="currency">%s</val>
-					<val name="transferType" format="transferType">%s</val>
 					<val name="invest_special_account" format="ACCOUNT_FUND_ID">%s</val>
+					<val name="productid" format="PRODUCT_ID">%s</val>
+					<val name="amount" format="amount">%s</val>	
 				</param>
-				<ret type="TransferResultStruct">
-					<val name="currentbalance">currentbalance</val>
+				<ret type="PurchaseResultStruct">
+					<val name="orderno">orderno</val>
 				</ret>
 			</item>
 		</helper>
 		<return>
-			<item name="currentbalance">currentbalance</item>
+			<item name="orderno">orderno</item>
 		</return>
 		<assert>
-			<item name="notnull" var="currentbalance"></item>
+			<item name="notnull" var="orderno"></item>
 		</assert>
 	</step>
-	<step note="检查数据库">
+	<step note="检查数据库交易表中生成一条记录">
 		<helper name="helper.mysql.execute">
-			<item name="sql" format="ACCOUNT_FUND_ID,INVESTOR_ID" statement="select"><![CDATA[SELECT ACCOUNT_BALANCE as a FROM ACCOUNT_FUND WHERE ACCOUNT_FUND_ID='%s' and INVESTOR_ID='%s']]></item>
+			<item name="sql" format="SERIAL_NO" statement="select"><![CDATA[SELECT COUNT(*) as t FROM TRADE WHERE SERIAL_NO='%s']]></item>
 		</helper>
 		<return>
-			<item name="ACCOUNT_BALANCE">a</item>
+			<item name="count">t</item>
 		</return>
 		<assert>
-			<item name="equals" var="ACCOUNT_BALANCE" param="50"></item>
+			<item name="equals" var="count" param="1"></item>
+		</assert>
+	</step>
+	<step note="检查数据库交易表中交易金额">
+		<helper name="helper.mysql.execute">
+			<item name="sql" format="AMOUNT" statement="select"><![CDATA[SELECT AMOUNT as a FROM TRADE WHERE SERIAL_NO='%s']]></item>
+		</helper>
+		<return>
+			<item name="AMOUNT">a</item>
+		</return>
+		<assert>
+			<item name="equals" var="AMOUNT" param="10.0"></item>
 		</assert>
 	</step>
 </case>
