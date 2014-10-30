@@ -32,11 +32,14 @@ public class ThriftHelper extends BaseHelper {
 	private String packageName;
 
 	public Class getClass(String namespace) throws ClassNotFoundException {
-		if (namespace.equals("String")) {
+		if (namespace.equals("String")
+				|| namespace.equals("java.lang.String")) {
 			return String.class;
-		} else if (namespace.equals("int")) {
+		} else if (namespace.equals("int")
+				|| namespace.equals("java.lang.Integer")) {
 			return int.class;
-		} else if (namespace.equals("Double")) {
+		} else if (namespace.equals("Double")
+				|| namespace.equals("java.lang.Double")) {
 			return Double.class;
 		}
 		return Class.forName(packageName + "." + namespace);
@@ -48,13 +51,16 @@ public class ThriftHelper extends BaseHelper {
 			IllegalAccessException, NoSuchFieldException,
 			SecurityException, NoSuchMethodException,
 			IllegalArgumentException, InvocationTargetException {
-		if (namespace.equals("String")) {
+		if (namespace.equals("String")
+				|| namespace.equals("java.lang.String")) {
 			Utils.formatElement(vars, el);
 			return el.getText();
-		} else if (namespace.equals("int")) {
+		} else if (namespace.equals("int")
+				|| namespace.equals("java.lang.Integer")) {
 			Utils.formatElement(vars, el);
 			return new Integer(el.getText());
-		} else if (namespace.equals("Double")) {
+		} else if (namespace.equals("Double")
+				|| namespace.equals("java.lang.Double")) {
 			Utils.formatElement(vars, el);
 			return new Double(el.getText());
 		}
