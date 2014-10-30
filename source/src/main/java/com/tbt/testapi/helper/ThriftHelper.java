@@ -16,6 +16,8 @@ import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 import com.tbt.testapi.BaseHelper;
@@ -27,6 +29,8 @@ import com.tongbaotu.fits.thrift.idl.Fits;
 import com.tongbaotu.fits.thrift.idl.FitsException;
 
 public class ThriftHelper extends BaseHelper {
+	private static final Logger logger = LoggerFactory
+			.getLogger(ThriftHelper.class);
 	private String host;
 	private int port;
 	private String packageName;
@@ -38,8 +42,8 @@ public class ThriftHelper extends BaseHelper {
 		} else if (namespace.equals("int")
 				|| namespace.equals("java.lang.Integer")) {
 			return int.class;
-		} else if (namespace.equals("Double")
-				|| namespace.equals("java.lang.Double")) {
+		} else if (namespace.equals("double")
+				|| namespace.equals("java.lang.double")) {
 			return Double.class;
 		}
 		return Class.forName(packageName + "." + namespace);
@@ -59,8 +63,8 @@ public class ThriftHelper extends BaseHelper {
 				|| namespace.equals("java.lang.Integer")) {
 			Utils.formatElement(vars, el);
 			return new Integer(el.getText());
-		} else if (namespace.equals("Double")
-				|| namespace.equals("java.lang.Double")) {
+		} else if (namespace.equals("double")
+				|| namespace.equals("java.lang.double")) {
 			Utils.formatElement(vars, el);
 			return new Double(el.getText());
 		}
@@ -238,6 +242,8 @@ public class ThriftHelper extends BaseHelper {
 			throw new HelperException("method not found "
 					+ e.getMessage());
 		}
+
+		logger.debug("thrift helper response " + jo);
 
 		return jo;
 	}

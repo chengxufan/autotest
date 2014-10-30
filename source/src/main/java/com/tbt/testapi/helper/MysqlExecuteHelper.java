@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -15,6 +17,9 @@ import com.tbt.testapi.TestApiException;
 import com.tbt.testapi.exception.HelperException;
 
 public class MysqlExecuteHelper extends BaseMysqlHelper {
+	private static final Logger logger = LoggerFactory
+			.getLogger(MysqlExecuteHelper.class);
+
 	ResultSet rs;
 
 	@Override
@@ -94,6 +99,8 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 				rs = null;
 			}
 		}
+
+		logger.debug("mysql helper response " + jo);
 
 		return jo;
 	}

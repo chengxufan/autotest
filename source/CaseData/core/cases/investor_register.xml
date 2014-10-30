@@ -1,39 +1,47 @@
-<case id="investor_register">
+<case id="silverInvestTransfer_银转投">
 	<context>
-		<item name="phone">18111101809</item>
+		<item name="INVESTOR_ID">00X00060</item>
+		<item name="amount">50</item>
+		<item name="currency">1</item>
+		<item name="transferType">1</item>
+		<item name="ACCOUNT_FUND_ID">AC00X00060</item>
 	</context>
-	<step note="清理投资人">
+	<step note="清空当前账户余额">
 		<helper name="helper.mysql.execute">
-			<item name="sql" format="phone" statement="delete"><![CDATA[DELETE FROM INVESTOR WHERE MOBILE_PHONE_NUMBER='%s']]></item>
+			<item name="sql" format="ACCOUNT_FUND_ID,INVESTOR_ID" statement="update"><![CDATA[update ACCOUNT_FUND set ACCOUNT_BALANCE='0' WHERE ACCOUNT_FUND_ID='%s'and INVESTOR_ID='%s']]></item>
 		</helper>
 	</step>
-	<step note="投资人注册">
+	<step note="银投转账">
 		<helper name="helper.thrift">
-			<item name="call" function="investor_register">
-				<param type="InvestorRegisterInfoStruct">
-					<val name="mobilePhoneNumber" format="phone">%s</val>
+			<item name="call" function="silverInvestTransfer">
+				<param type="TransferInfoStruct">
+					<val name="investorID" format="INVESTOR_ID">%s</val>
+					 <val name="amount" format="amount">%s</val> 
+					<val name="currency" format="currency">%s</val>
+					<val name="transferType" format="transferType">%s</val>
+					<val name="invest_special_account" format="ACCOUNT_FUND_ID">%s</val>
 				</param>
-				<ret type="ResultInfoStruct">
-					<val name="investorID">investorID</val>
+				<ret type="TransferResultStruct">
+					<val name="currentbalance">currentbalance</val>
 				</ret>
 			</item>
 		</helper>
 		<return>
-			<item name="investorID">investorID</item>
+			<item name="currentbalance">currentbalance</item>
 		</return>
 		<assert>
-			<item name="notnull" var="investorID"></item>
+			<item name="notnull" var="currentbalance"></item>
 		</assert>
 	</step>
 	<step note="检查数据库">
 		<helper name="helper.mysql.execute">
-			<item name="sql" format="phone" statement="select"><![CDATA[SELECT COUNT(*) as c FROM INVESTOR WHERE MOBILE_PHONE_NUMBER='%s']]></item>
+			<item name="sql" format="ACCOUNT_FUND_ID,INVESTOR_ID" statement="select"><![CDATA[SELECT ACCOUNT_BALANCE as a FROM ACCOUNT_FUND WHERE ACCOUNT_FUND_ID='%s' and INVESTOR_ID='%s']]></item>
 		</helper>
 		<return>
-			<item name="count">c</item>
+			<item name="ACCOUNT_BALANCE">a</item>
 		</return>
 		<assert>
-			<item name="equals" var="count" param="1"></item>
+			<item name="equals" var="ACCOUNT_BALANCE" param="50"></item>
 		</assert>
 	</step>
 </case>
