@@ -86,86 +86,65 @@ struct BankSignResultStruct
 }
 
 //代销行注册信息
-struct ProxyBankInfoStruct
+struct InstitutionInfoStruct
 {
-  //代销行ID
+  //机构ID
   1: string id
+  
+  //上一级机构ID
+  2: string superid
+  
+  //机构类别 1 发行机构；2 代销机构；3 发行兼代销机构；4 其他
+  3: required i32 type
 
-  //代销行名称
-  2: required string name
+  //机构名称
+  4: required string name
 
-  //代销行组织机构代码
-  3: required string organizationCode
+  //机构组织机构代码
+  5: required string organizationCode
 
-  //代销行地址
-  4: required string address
+  //机构地址
+  6: required string address
 
-  //代销行邮编
-  5: required string ZIP
+  //机构邮编
+  7: required string ZIP
 
   //固定联系电话
-  6: required string fixedTelephone
+  8: required string fixedTelephone
 
   //传真
-  7: required string FAX
+  9: required string FAX
 
   //网站站点
-  8: required string webSite
+  10: required string webSite
 
-  //通报图资金归集账户
-  9: required string TBTCapitalAccountID
+  //通报图资金归集(代销行)/清算(发行行)账户
+  11: required string TBTCapitalAccountID
 
   //联系人姓名
-  10: required string contactName
+  12: required string contactName
 
   //联系人移动电话号码
-  11: required string mobilePhoneNumber
+  13: required string mobilePhoneNumber
 
   //联系人电子邮箱
-  12: required string email
+  14: required string email
 
   //联系人住址
-  13: required string contactAddress
+  15: required string contactAddress
 
   //请求日期 
-  14: i32 registerDate
+  16: i32 registerDate
 
   //初始状态
-  15: i32 status
+  17: i32 status
 }
 
-//发行行注册信息
-struct IssuBankInfoStruct
+//代销行注册结果信息
+struct InstitutionResultStruct
 {
-  //发行行ID
-  1: string issu_bank_id
-
-  //通报图资金结算账户
-	2: required string settle_account_id
-
-  //名称
-	3: required string issu_bank_name
-
-  //组织机构代码
-	4: required string orga_number
-
-  //注册地址
-	5: required string regist_addr
-
-  //联系人名称
-	6: required string contact_name
-
-  //联系人地址
-	7: required string contact_addr
-
-  //固定电话
-	8: required string fixed_telephone
-
-  //联系人移动电话
-	9: required string mobile_phone
-
-  //初始状态
-	10: string cur_state
+  //机构ID
+  1: required string id
 }
 
 //发行行产品注册信息
@@ -337,18 +316,12 @@ service  Fits {
   //产品购买
   PurchaseResultStruct purchaseProduct(1:PurchaseInfoStruct purchaseInfo)  throws (1: FitsException fe),
   
-  //发行行注册
-  void issubank_register(1:IssuBankInfoStruct bInfo)  throws (1: FitsException fe),
-  
   //发行行产品注册
   IssuBankProductInfoResultStruct issubank_productregister(1:IssuBankProductInfoStruct productInfo)  throws (1: FitsException fe),
 
-  //获取发行行信息
-  IssuBankInfoStruct issubank_getBankInfo(1:string issu_bank_id)  throws (1: FitsException fe),
+  //机构注册
+  InstitutionResultStruct institution_regist(1:InstitutionInfoStruct institutionInfo)  throws (1: FitsException fe),
   
-  //代销行注册
-  void proxybank_regist(1:ProxyBankInfoStruct proxyBankInfo)  throws (1: FitsException fe),
-
-  //获取代销行信息
-  ProxyBankInfoStruct proxybank_get(1:string id)  throws (1: FitsException fe)
+  //获取机构信息
+  InstitutionInfoStruct institution_getInfo(1:string institutionid)  throws (1: FitsException fe),
 }

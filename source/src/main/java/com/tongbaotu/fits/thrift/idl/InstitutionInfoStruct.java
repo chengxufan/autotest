@@ -32,32 +32,36 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInfoStruct, ProxyBankInfoStruct._Fields>, java.io.Serializable, Cloneable, Comparable<ProxyBankInfoStruct> {
-  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ProxyBankInfoStruct");
+public class InstitutionInfoStruct implements org.apache.thrift.TBase<InstitutionInfoStruct, InstitutionInfoStruct._Fields>, java.io.Serializable, Cloneable, Comparable<InstitutionInfoStruct> {
+  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("InstitutionInfoStruct");
 
   private static final org.apache.thrift.protocol.TField ID_FIELD_DESC = new org.apache.thrift.protocol.TField("id", org.apache.thrift.protocol.TType.STRING, (short)1);
-  private static final org.apache.thrift.protocol.TField NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("name", org.apache.thrift.protocol.TType.STRING, (short)2);
-  private static final org.apache.thrift.protocol.TField ORGANIZATION_CODE_FIELD_DESC = new org.apache.thrift.protocol.TField("organizationCode", org.apache.thrift.protocol.TType.STRING, (short)3);
-  private static final org.apache.thrift.protocol.TField ADDRESS_FIELD_DESC = new org.apache.thrift.protocol.TField("address", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField ZIP_FIELD_DESC = new org.apache.thrift.protocol.TField("ZIP", org.apache.thrift.protocol.TType.STRING, (short)5);
-  private static final org.apache.thrift.protocol.TField FIXED_TELEPHONE_FIELD_DESC = new org.apache.thrift.protocol.TField("fixedTelephone", org.apache.thrift.protocol.TType.STRING, (short)6);
-  private static final org.apache.thrift.protocol.TField FAX_FIELD_DESC = new org.apache.thrift.protocol.TField("FAX", org.apache.thrift.protocol.TType.STRING, (short)7);
-  private static final org.apache.thrift.protocol.TField WEB_SITE_FIELD_DESC = new org.apache.thrift.protocol.TField("webSite", org.apache.thrift.protocol.TType.STRING, (short)8);
-  private static final org.apache.thrift.protocol.TField TBTCAPITAL_ACCOUNT_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("TBTCapitalAccountID", org.apache.thrift.protocol.TType.STRING, (short)9);
-  private static final org.apache.thrift.protocol.TField CONTACT_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("contactName", org.apache.thrift.protocol.TType.STRING, (short)10);
-  private static final org.apache.thrift.protocol.TField MOBILE_PHONE_NUMBER_FIELD_DESC = new org.apache.thrift.protocol.TField("mobilePhoneNumber", org.apache.thrift.protocol.TType.STRING, (short)11);
-  private static final org.apache.thrift.protocol.TField EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("email", org.apache.thrift.protocol.TType.STRING, (short)12);
-  private static final org.apache.thrift.protocol.TField CONTACT_ADDRESS_FIELD_DESC = new org.apache.thrift.protocol.TField("contactAddress", org.apache.thrift.protocol.TType.STRING, (short)13);
-  private static final org.apache.thrift.protocol.TField REGISTER_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("registerDate", org.apache.thrift.protocol.TType.I32, (short)14);
-  private static final org.apache.thrift.protocol.TField STATUS_FIELD_DESC = new org.apache.thrift.protocol.TField("status", org.apache.thrift.protocol.TType.I32, (short)15);
+  private static final org.apache.thrift.protocol.TField SUPERID_FIELD_DESC = new org.apache.thrift.protocol.TField("superid", org.apache.thrift.protocol.TType.STRING, (short)2);
+  private static final org.apache.thrift.protocol.TField TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("type", org.apache.thrift.protocol.TType.I32, (short)3);
+  private static final org.apache.thrift.protocol.TField NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("name", org.apache.thrift.protocol.TType.STRING, (short)4);
+  private static final org.apache.thrift.protocol.TField ORGANIZATION_CODE_FIELD_DESC = new org.apache.thrift.protocol.TField("organizationCode", org.apache.thrift.protocol.TType.STRING, (short)5);
+  private static final org.apache.thrift.protocol.TField ADDRESS_FIELD_DESC = new org.apache.thrift.protocol.TField("address", org.apache.thrift.protocol.TType.STRING, (short)6);
+  private static final org.apache.thrift.protocol.TField ZIP_FIELD_DESC = new org.apache.thrift.protocol.TField("ZIP", org.apache.thrift.protocol.TType.STRING, (short)7);
+  private static final org.apache.thrift.protocol.TField FIXED_TELEPHONE_FIELD_DESC = new org.apache.thrift.protocol.TField("fixedTelephone", org.apache.thrift.protocol.TType.STRING, (short)8);
+  private static final org.apache.thrift.protocol.TField FAX_FIELD_DESC = new org.apache.thrift.protocol.TField("FAX", org.apache.thrift.protocol.TType.STRING, (short)9);
+  private static final org.apache.thrift.protocol.TField WEB_SITE_FIELD_DESC = new org.apache.thrift.protocol.TField("webSite", org.apache.thrift.protocol.TType.STRING, (short)10);
+  private static final org.apache.thrift.protocol.TField TBTCAPITAL_ACCOUNT_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("TBTCapitalAccountID", org.apache.thrift.protocol.TType.STRING, (short)11);
+  private static final org.apache.thrift.protocol.TField CONTACT_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("contactName", org.apache.thrift.protocol.TType.STRING, (short)12);
+  private static final org.apache.thrift.protocol.TField MOBILE_PHONE_NUMBER_FIELD_DESC = new org.apache.thrift.protocol.TField("mobilePhoneNumber", org.apache.thrift.protocol.TType.STRING, (short)13);
+  private static final org.apache.thrift.protocol.TField EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("email", org.apache.thrift.protocol.TType.STRING, (short)14);
+  private static final org.apache.thrift.protocol.TField CONTACT_ADDRESS_FIELD_DESC = new org.apache.thrift.protocol.TField("contactAddress", org.apache.thrift.protocol.TType.STRING, (short)15);
+  private static final org.apache.thrift.protocol.TField REGISTER_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("registerDate", org.apache.thrift.protocol.TType.I32, (short)16);
+  private static final org.apache.thrift.protocol.TField STATUS_FIELD_DESC = new org.apache.thrift.protocol.TField("status", org.apache.thrift.protocol.TType.I32, (short)17);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
-    schemes.put(StandardScheme.class, new ProxyBankInfoStructStandardSchemeFactory());
-    schemes.put(TupleScheme.class, new ProxyBankInfoStructTupleSchemeFactory());
+    schemes.put(StandardScheme.class, new InstitutionInfoStructStandardSchemeFactory());
+    schemes.put(TupleScheme.class, new InstitutionInfoStructTupleSchemeFactory());
   }
 
   public String id; // required
+  public String superid; // required
+  public int type; // required
   public String name; // required
   public String organizationCode; // required
   public String address; // required
@@ -76,20 +80,22 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     ID((short)1, "id"),
-    NAME((short)2, "name"),
-    ORGANIZATION_CODE((short)3, "organizationCode"),
-    ADDRESS((short)4, "address"),
-    ZIP((short)5, "ZIP"),
-    FIXED_TELEPHONE((short)6, "fixedTelephone"),
-    FAX((short)7, "FAX"),
-    WEB_SITE((short)8, "webSite"),
-    TBTCAPITAL_ACCOUNT_ID((short)9, "TBTCapitalAccountID"),
-    CONTACT_NAME((short)10, "contactName"),
-    MOBILE_PHONE_NUMBER((short)11, "mobilePhoneNumber"),
-    EMAIL((short)12, "email"),
-    CONTACT_ADDRESS((short)13, "contactAddress"),
-    REGISTER_DATE((short)14, "registerDate"),
-    STATUS((short)15, "status");
+    SUPERID((short)2, "superid"),
+    TYPE((short)3, "type"),
+    NAME((short)4, "name"),
+    ORGANIZATION_CODE((short)5, "organizationCode"),
+    ADDRESS((short)6, "address"),
+    ZIP((short)7, "ZIP"),
+    FIXED_TELEPHONE((short)8, "fixedTelephone"),
+    FAX((short)9, "FAX"),
+    WEB_SITE((short)10, "webSite"),
+    TBTCAPITAL_ACCOUNT_ID((short)11, "TBTCapitalAccountID"),
+    CONTACT_NAME((short)12, "contactName"),
+    MOBILE_PHONE_NUMBER((short)13, "mobilePhoneNumber"),
+    EMAIL((short)14, "email"),
+    CONTACT_ADDRESS((short)15, "contactAddress"),
+    REGISTER_DATE((short)16, "registerDate"),
+    STATUS((short)17, "status");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -106,33 +112,37 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
       switch(fieldId) {
         case 1: // ID
           return ID;
-        case 2: // NAME
+        case 2: // SUPERID
+          return SUPERID;
+        case 3: // TYPE
+          return TYPE;
+        case 4: // NAME
           return NAME;
-        case 3: // ORGANIZATION_CODE
+        case 5: // ORGANIZATION_CODE
           return ORGANIZATION_CODE;
-        case 4: // ADDRESS
+        case 6: // ADDRESS
           return ADDRESS;
-        case 5: // ZIP
+        case 7: // ZIP
           return ZIP;
-        case 6: // FIXED_TELEPHONE
+        case 8: // FIXED_TELEPHONE
           return FIXED_TELEPHONE;
-        case 7: // FAX
+        case 9: // FAX
           return FAX;
-        case 8: // WEB_SITE
+        case 10: // WEB_SITE
           return WEB_SITE;
-        case 9: // TBTCAPITAL_ACCOUNT_ID
+        case 11: // TBTCAPITAL_ACCOUNT_ID
           return TBTCAPITAL_ACCOUNT_ID;
-        case 10: // CONTACT_NAME
+        case 12: // CONTACT_NAME
           return CONTACT_NAME;
-        case 11: // MOBILE_PHONE_NUMBER
+        case 13: // MOBILE_PHONE_NUMBER
           return MOBILE_PHONE_NUMBER;
-        case 12: // EMAIL
+        case 14: // EMAIL
           return EMAIL;
-        case 13: // CONTACT_ADDRESS
+        case 15: // CONTACT_ADDRESS
           return CONTACT_ADDRESS;
-        case 14: // REGISTER_DATE
+        case 16: // REGISTER_DATE
           return REGISTER_DATE;
-        case 15: // STATUS
+        case 17: // STATUS
           return STATUS;
         default:
           return null;
@@ -174,14 +184,19 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
   }
 
   // isset id assignments
-  private static final int __REGISTERDATE_ISSET_ID = 0;
-  private static final int __STATUS_ISSET_ID = 1;
+  private static final int __TYPE_ISSET_ID = 0;
+  private static final int __REGISTERDATE_ISSET_ID = 1;
+  private static final int __STATUS_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.ID, new org.apache.thrift.meta_data.FieldMetaData("id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.SUPERID, new org.apache.thrift.meta_data.FieldMetaData("superid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.TYPE, new org.apache.thrift.meta_data.FieldMetaData("type", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.NAME, new org.apache.thrift.meta_data.FieldMetaData("name", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.ORGANIZATION_CODE, new org.apache.thrift.meta_data.FieldMetaData("organizationCode", org.apache.thrift.TFieldRequirementType.REQUIRED, 
@@ -211,14 +226,16 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     tmpMap.put(_Fields.STATUS, new org.apache.thrift.meta_data.FieldMetaData("status", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
-    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ProxyBankInfoStruct.class, metaDataMap);
+    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(InstitutionInfoStruct.class, metaDataMap);
   }
 
-  public ProxyBankInfoStruct() {
+  public InstitutionInfoStruct() {
   }
 
-  public ProxyBankInfoStruct(
+  public InstitutionInfoStruct(
     String id,
+    String superid,
+    int type,
     String name,
     String organizationCode,
     String address,
@@ -236,6 +253,9 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
   {
     this();
     this.id = id;
+    this.superid = superid;
+    this.type = type;
+    setTypeIsSet(true);
     this.name = name;
     this.organizationCode = organizationCode;
     this.address = address;
@@ -257,11 +277,15 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
   /**
    * Performs a deep copy on <i>other</i>.
    */
-  public ProxyBankInfoStruct(ProxyBankInfoStruct other) {
+  public InstitutionInfoStruct(InstitutionInfoStruct other) {
     __isset_bitfield = other.__isset_bitfield;
     if (other.isSetId()) {
       this.id = other.id;
     }
+    if (other.isSetSuperid()) {
+      this.superid = other.superid;
+    }
+    this.type = other.type;
     if (other.isSetName()) {
       this.name = other.name;
     }
@@ -302,13 +326,16 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     this.status = other.status;
   }
 
-  public ProxyBankInfoStruct deepCopy() {
-    return new ProxyBankInfoStruct(this);
+  public InstitutionInfoStruct deepCopy() {
+    return new InstitutionInfoStruct(this);
   }
 
   @Override
   public void clear() {
     this.id = null;
+    this.superid = null;
+    setTypeIsSet(false);
+    this.type = 0;
     this.name = null;
     this.organizationCode = null;
     this.address = null;
@@ -331,7 +358,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.id;
   }
 
-  public ProxyBankInfoStruct setId(String id) {
+  public InstitutionInfoStruct setId(String id) {
     this.id = id;
     return this;
   }
@@ -351,11 +378,58 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     }
   }
 
+  public String getSuperid() {
+    return this.superid;
+  }
+
+  public InstitutionInfoStruct setSuperid(String superid) {
+    this.superid = superid;
+    return this;
+  }
+
+  public void unsetSuperid() {
+    this.superid = null;
+  }
+
+  /** Returns true if field superid is set (has been assigned a value) and false otherwise */
+  public boolean isSetSuperid() {
+    return this.superid != null;
+  }
+
+  public void setSuperidIsSet(boolean value) {
+    if (!value) {
+      this.superid = null;
+    }
+  }
+
+  public int getType() {
+    return this.type;
+  }
+
+  public InstitutionInfoStruct setType(int type) {
+    this.type = type;
+    setTypeIsSet(true);
+    return this;
+  }
+
+  public void unsetType() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __TYPE_ISSET_ID);
+  }
+
+  /** Returns true if field type is set (has been assigned a value) and false otherwise */
+  public boolean isSetType() {
+    return EncodingUtils.testBit(__isset_bitfield, __TYPE_ISSET_ID);
+  }
+
+  public void setTypeIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __TYPE_ISSET_ID, value);
+  }
+
   public String getName() {
     return this.name;
   }
 
-  public ProxyBankInfoStruct setName(String name) {
+  public InstitutionInfoStruct setName(String name) {
     this.name = name;
     return this;
   }
@@ -379,7 +453,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.organizationCode;
   }
 
-  public ProxyBankInfoStruct setOrganizationCode(String organizationCode) {
+  public InstitutionInfoStruct setOrganizationCode(String organizationCode) {
     this.organizationCode = organizationCode;
     return this;
   }
@@ -403,7 +477,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.address;
   }
 
-  public ProxyBankInfoStruct setAddress(String address) {
+  public InstitutionInfoStruct setAddress(String address) {
     this.address = address;
     return this;
   }
@@ -427,7 +501,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.ZIP;
   }
 
-  public ProxyBankInfoStruct setZIP(String ZIP) {
+  public InstitutionInfoStruct setZIP(String ZIP) {
     this.ZIP = ZIP;
     return this;
   }
@@ -451,7 +525,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.fixedTelephone;
   }
 
-  public ProxyBankInfoStruct setFixedTelephone(String fixedTelephone) {
+  public InstitutionInfoStruct setFixedTelephone(String fixedTelephone) {
     this.fixedTelephone = fixedTelephone;
     return this;
   }
@@ -475,7 +549,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.FAX;
   }
 
-  public ProxyBankInfoStruct setFAX(String FAX) {
+  public InstitutionInfoStruct setFAX(String FAX) {
     this.FAX = FAX;
     return this;
   }
@@ -499,7 +573,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.webSite;
   }
 
-  public ProxyBankInfoStruct setWebSite(String webSite) {
+  public InstitutionInfoStruct setWebSite(String webSite) {
     this.webSite = webSite;
     return this;
   }
@@ -523,7 +597,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.TBTCapitalAccountID;
   }
 
-  public ProxyBankInfoStruct setTBTCapitalAccountID(String TBTCapitalAccountID) {
+  public InstitutionInfoStruct setTBTCapitalAccountID(String TBTCapitalAccountID) {
     this.TBTCapitalAccountID = TBTCapitalAccountID;
     return this;
   }
@@ -547,7 +621,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.contactName;
   }
 
-  public ProxyBankInfoStruct setContactName(String contactName) {
+  public InstitutionInfoStruct setContactName(String contactName) {
     this.contactName = contactName;
     return this;
   }
@@ -571,7 +645,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.mobilePhoneNumber;
   }
 
-  public ProxyBankInfoStruct setMobilePhoneNumber(String mobilePhoneNumber) {
+  public InstitutionInfoStruct setMobilePhoneNumber(String mobilePhoneNumber) {
     this.mobilePhoneNumber = mobilePhoneNumber;
     return this;
   }
@@ -595,7 +669,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.email;
   }
 
-  public ProxyBankInfoStruct setEmail(String email) {
+  public InstitutionInfoStruct setEmail(String email) {
     this.email = email;
     return this;
   }
@@ -619,7 +693,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.contactAddress;
   }
 
-  public ProxyBankInfoStruct setContactAddress(String contactAddress) {
+  public InstitutionInfoStruct setContactAddress(String contactAddress) {
     this.contactAddress = contactAddress;
     return this;
   }
@@ -643,7 +717,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.registerDate;
   }
 
-  public ProxyBankInfoStruct setRegisterDate(int registerDate) {
+  public InstitutionInfoStruct setRegisterDate(int registerDate) {
     this.registerDate = registerDate;
     setRegisterDateIsSet(true);
     return this;
@@ -666,7 +740,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     return this.status;
   }
 
-  public ProxyBankInfoStruct setStatus(int status) {
+  public InstitutionInfoStruct setStatus(int status) {
     this.status = status;
     setStatusIsSet(true);
     return this;
@@ -692,6 +766,22 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
         unsetId();
       } else {
         setId((String)value);
+      }
+      break;
+
+    case SUPERID:
+      if (value == null) {
+        unsetSuperid();
+      } else {
+        setSuperid((String)value);
+      }
+      break;
+
+    case TYPE:
+      if (value == null) {
+        unsetType();
+      } else {
+        setType((Integer)value);
       }
       break;
 
@@ -815,6 +905,12 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     case ID:
       return getId();
 
+    case SUPERID:
+      return getSuperid();
+
+    case TYPE:
+      return Integer.valueOf(getType());
+
     case NAME:
       return getName();
 
@@ -870,6 +966,10 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     switch (field) {
     case ID:
       return isSetId();
+    case SUPERID:
+      return isSetSuperid();
+    case TYPE:
+      return isSetType();
     case NAME:
       return isSetName();
     case ORGANIZATION_CODE:
@@ -906,12 +1006,12 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
   public boolean equals(Object that) {
     if (that == null)
       return false;
-    if (that instanceof ProxyBankInfoStruct)
-      return this.equals((ProxyBankInfoStruct)that);
+    if (that instanceof InstitutionInfoStruct)
+      return this.equals((InstitutionInfoStruct)that);
     return false;
   }
 
-  public boolean equals(ProxyBankInfoStruct that) {
+  public boolean equals(InstitutionInfoStruct that) {
     if (that == null)
       return false;
 
@@ -921,6 +1021,24 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
       if (!(this_present_id && that_present_id))
         return false;
       if (!this.id.equals(that.id))
+        return false;
+    }
+
+    boolean this_present_superid = true && this.isSetSuperid();
+    boolean that_present_superid = true && that.isSetSuperid();
+    if (this_present_superid || that_present_superid) {
+      if (!(this_present_superid && that_present_superid))
+        return false;
+      if (!this.superid.equals(that.superid))
+        return false;
+    }
+
+    boolean this_present_type = true;
+    boolean that_present_type = true;
+    if (this_present_type || that_present_type) {
+      if (!(this_present_type && that_present_type))
+        return false;
+      if (this.type != that.type)
         return false;
     }
 
@@ -1059,7 +1177,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
   }
 
   @Override
-  public int compareTo(ProxyBankInfoStruct other) {
+  public int compareTo(InstitutionInfoStruct other) {
     if (!getClass().equals(other.getClass())) {
       return getClass().getName().compareTo(other.getClass().getName());
     }
@@ -1072,6 +1190,26 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     }
     if (isSetId()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.id, other.id);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetSuperid()).compareTo(other.isSetSuperid());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetSuperid()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.superid, other.superid);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetType()).compareTo(other.isSetType());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetType()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.type, other.type);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -1233,7 +1371,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("ProxyBankInfoStruct(");
+    StringBuilder sb = new StringBuilder("InstitutionInfoStruct(");
     boolean first = true;
 
     sb.append("id:");
@@ -1242,6 +1380,18 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     } else {
       sb.append(this.id);
     }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("superid:");
+    if (this.superid == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.superid);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("type:");
+    sb.append(this.type);
     first = false;
     if (!first) sb.append(", ");
     sb.append("name:");
@@ -1353,6 +1503,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
+    // alas, we cannot check 'type' because it's a primitive and you chose the non-beans generator.
     if (name == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'name' was not present! Struct: " + toString());
     }
@@ -1410,15 +1561,15 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     }
   }
 
-  private static class ProxyBankInfoStructStandardSchemeFactory implements SchemeFactory {
-    public ProxyBankInfoStructStandardScheme getScheme() {
-      return new ProxyBankInfoStructStandardScheme();
+  private static class InstitutionInfoStructStandardSchemeFactory implements SchemeFactory {
+    public InstitutionInfoStructStandardScheme getScheme() {
+      return new InstitutionInfoStructStandardScheme();
     }
   }
 
-  private static class ProxyBankInfoStructStandardScheme extends StandardScheme<ProxyBankInfoStruct> {
+  private static class InstitutionInfoStructStandardScheme extends StandardScheme<InstitutionInfoStruct> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, ProxyBankInfoStruct struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, InstitutionInfoStruct struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -1436,7 +1587,23 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // NAME
+          case 2: // SUPERID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.superid = iprot.readString();
+              struct.setSuperidIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 3: // TYPE
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.type = iprot.readI32();
+              struct.setTypeIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 4: // NAME
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.name = iprot.readString();
               struct.setNameIsSet(true);
@@ -1444,7 +1611,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // ORGANIZATION_CODE
+          case 5: // ORGANIZATION_CODE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.organizationCode = iprot.readString();
               struct.setOrganizationCodeIsSet(true);
@@ -1452,7 +1619,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 4: // ADDRESS
+          case 6: // ADDRESS
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.address = iprot.readString();
               struct.setAddressIsSet(true);
@@ -1460,7 +1627,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 5: // ZIP
+          case 7: // ZIP
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.ZIP = iprot.readString();
               struct.setZIPIsSet(true);
@@ -1468,7 +1635,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 6: // FIXED_TELEPHONE
+          case 8: // FIXED_TELEPHONE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.fixedTelephone = iprot.readString();
               struct.setFixedTelephoneIsSet(true);
@@ -1476,7 +1643,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 7: // FAX
+          case 9: // FAX
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.FAX = iprot.readString();
               struct.setFAXIsSet(true);
@@ -1484,7 +1651,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 8: // WEB_SITE
+          case 10: // WEB_SITE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.webSite = iprot.readString();
               struct.setWebSiteIsSet(true);
@@ -1492,7 +1659,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 9: // TBTCAPITAL_ACCOUNT_ID
+          case 11: // TBTCAPITAL_ACCOUNT_ID
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.TBTCapitalAccountID = iprot.readString();
               struct.setTBTCapitalAccountIDIsSet(true);
@@ -1500,7 +1667,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 10: // CONTACT_NAME
+          case 12: // CONTACT_NAME
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.contactName = iprot.readString();
               struct.setContactNameIsSet(true);
@@ -1508,7 +1675,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 11: // MOBILE_PHONE_NUMBER
+          case 13: // MOBILE_PHONE_NUMBER
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.mobilePhoneNumber = iprot.readString();
               struct.setMobilePhoneNumberIsSet(true);
@@ -1516,7 +1683,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 12: // EMAIL
+          case 14: // EMAIL
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.email = iprot.readString();
               struct.setEmailIsSet(true);
@@ -1524,7 +1691,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 13: // CONTACT_ADDRESS
+          case 15: // CONTACT_ADDRESS
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.contactAddress = iprot.readString();
               struct.setContactAddressIsSet(true);
@@ -1532,7 +1699,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 14: // REGISTER_DATE
+          case 16: // REGISTER_DATE
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.registerDate = iprot.readI32();
               struct.setRegisterDateIsSet(true);
@@ -1540,7 +1707,7 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 15: // STATUS
+          case 17: // STATUS
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.status = iprot.readI32();
               struct.setStatusIsSet(true);
@@ -1556,10 +1723,13 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
       iprot.readStructEnd();
 
       // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetType()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'type' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, ProxyBankInfoStruct struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, InstitutionInfoStruct struct) throws org.apache.thrift.TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -1568,6 +1738,14 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
         oprot.writeString(struct.id);
         oprot.writeFieldEnd();
       }
+      if (struct.superid != null) {
+        oprot.writeFieldBegin(SUPERID_FIELD_DESC);
+        oprot.writeString(struct.superid);
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldBegin(TYPE_FIELD_DESC);
+      oprot.writeI32(struct.type);
+      oprot.writeFieldEnd();
       if (struct.name != null) {
         oprot.writeFieldBegin(NAME_FIELD_DESC);
         oprot.writeString(struct.name);
@@ -1640,17 +1818,18 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
 
   }
 
-  private static class ProxyBankInfoStructTupleSchemeFactory implements SchemeFactory {
-    public ProxyBankInfoStructTupleScheme getScheme() {
-      return new ProxyBankInfoStructTupleScheme();
+  private static class InstitutionInfoStructTupleSchemeFactory implements SchemeFactory {
+    public InstitutionInfoStructTupleScheme getScheme() {
+      return new InstitutionInfoStructTupleScheme();
     }
   }
 
-  private static class ProxyBankInfoStructTupleScheme extends TupleScheme<ProxyBankInfoStruct> {
+  private static class InstitutionInfoStructTupleScheme extends TupleScheme<InstitutionInfoStruct> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, ProxyBankInfoStruct struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, InstitutionInfoStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
+      oprot.writeI32(struct.type);
       oprot.writeString(struct.name);
       oprot.writeString(struct.organizationCode);
       oprot.writeString(struct.address);
@@ -1667,15 +1846,21 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
       if (struct.isSetId()) {
         optionals.set(0);
       }
-      if (struct.isSetRegisterDate()) {
+      if (struct.isSetSuperid()) {
         optionals.set(1);
       }
-      if (struct.isSetStatus()) {
+      if (struct.isSetRegisterDate()) {
         optionals.set(2);
       }
-      oprot.writeBitSet(optionals, 3);
+      if (struct.isSetStatus()) {
+        optionals.set(3);
+      }
+      oprot.writeBitSet(optionals, 4);
       if (struct.isSetId()) {
         oprot.writeString(struct.id);
+      }
+      if (struct.isSetSuperid()) {
+        oprot.writeString(struct.superid);
       }
       if (struct.isSetRegisterDate()) {
         oprot.writeI32(struct.registerDate);
@@ -1686,8 +1871,10 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, ProxyBankInfoStruct struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, InstitutionInfoStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
+      struct.type = iprot.readI32();
+      struct.setTypeIsSet(true);
       struct.name = iprot.readString();
       struct.setNameIsSet(true);
       struct.organizationCode = iprot.readString();
@@ -1712,16 +1899,20 @@ public class ProxyBankInfoStruct implements org.apache.thrift.TBase<ProxyBankInf
       struct.setEmailIsSet(true);
       struct.contactAddress = iprot.readString();
       struct.setContactAddressIsSet(true);
-      BitSet incoming = iprot.readBitSet(3);
+      BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         struct.id = iprot.readString();
         struct.setIdIsSet(true);
       }
       if (incoming.get(1)) {
+        struct.superid = iprot.readString();
+        struct.setSuperidIsSet(true);
+      }
+      if (incoming.get(2)) {
         struct.registerDate = iprot.readI32();
         struct.setRegisterDateIsSet(true);
       }
-      if (incoming.get(2)) {
+      if (incoming.get(3)) {
         struct.status = iprot.readI32();
         struct.setStatusIsSet(true);
       }

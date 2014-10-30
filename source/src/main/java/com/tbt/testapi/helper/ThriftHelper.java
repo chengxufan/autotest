@@ -31,6 +31,70 @@ public class ThriftHelper extends BaseHelper {
 	private int port;
 	private String packageName;
 
+	public Class getClass(String namespace) throws ClassNotFoundException {
+		if (namespace.equals("String")) {
+			return String.class;
+		} else if (namespace.equals("int")) {
+			return int.class;
+		} else if (namespace.equals("Double")) {
+			return Double.class;
+		}
+		return Class.forName(packageName + "." + namespace);
+	}
+
+	public Object newInstance(String namespace, Element el,
+			HashMap<String, String> vars)
+			throws ClassNotFoundException, InstantiationException,
+			IllegalAccessException, NoSuchFieldException,
+			SecurityException, NoSuchMethodException,
+			IllegalArgumentException, InvocationTargetException {
+		if (namespace.equals("String")) {
+			Utils.formatElement(vars, el);
+			return el.getText();
+		} else if (namespace.equals("int")) {
+			Utils.formatElement(vars, el);
+			return new Integer(el.getText());
+		} else if (namespace.equals("Double")) {
+			Utils.formatElement(vars, el);
+			return new Double(el.getText());
+		}
+		Object object = Class.forName(packageName + "." + namespace)
+				.newInstance();
+		newStruct(object, el, vars);
+		return object;
+	}
+
+	public void newStruct(Object object, Element root,
+			HashMap<String, String> vars)
+			throws NoSuchFieldException, SecurityException,
+			ClassNotFoundException, NoSuchMethodException,
+			IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, InstantiationException {
+
+		for (Iterator<Element> varsIt = root.elementIterator("val"); varsIt
+				.hasNext();) {
+			Element vel = varsIt.next();
+
+			String name = vel.attributeValue("name");
+
+			Utils.formatElement(vars, vel);
+
+			String val = vel.getText();
+
+			Field f = object.getClass().getDeclaredField(name);
+
+			String type = f.getType().getName();
+
+			Object sub = newInstance(type, vel, vars);
+			Method method = object
+					.getClass()
+					.getMethod("set"
+							+ Utils.toUpperCaseFirstOne(name),
+							new Class[] { f.getType() });
+			method.invoke(object, new Object[] { sub });
+		}
+	}
+
 	@Override
 	public void init() throws HelperException {
 		Element el = (Element) EnvConfig.getInstance().doc
@@ -84,73 +148,8 @@ public class ThriftHelper extends BaseHelper {
 					.hasNext();) {
 				Element pel = it.next();
 				String type = pel.attributeValue("type");
-				Class param = null;
-				if (type.equals("String")) {
-					param = String.class;
-				} else if (type.equals("int")) {
-
-					param = int.class;
-				} else {
-					param = Class.forName(packageName + "."
-							+ type);
-				}
-				Object object = null;
-				if (type.equals("String")) {
-					object = new String();
-				} else if (type.equals("int")) {
-					object = new Integer(0);
-				} else {
-					object = Class.forName(
-							packageName + "."
-									+ type)
-							.newInstance();
-				}
-
-				for (Iterator<Element> varsIt = pel
-						.elementIterator("val"); varsIt
-						.hasNext();) {
-					Element vel = varsIt.next();
-
-					String name = vel
-							.attributeValue("name");
-					Utils.formatElement(vars, vel);
-
-					String val = vel.getText();
-
-					if (type.equals("String")) {
-						object = val;
-					} else if (type.equals("int")) {
-						object = Integer.parseInt(val);
-					} else {
-
-						Field f = object.getClass()
-								.getDeclaredField(
-										name);
-
-						method = object.getClass()
-								.getMethod("set"
-										+ Utils.toUpperCaseFirstOne(name),
-										new Class[] { f.getType() });
-
-						Object obj = null;
-
-						if (f.getType()
-								.isAssignableFrom(
-										Integer.TYPE)) {
-							obj = Integer.parseInt(val);
-						} else if (f.getType()
-								.isAssignableFrom(
-										Float.TYPE)) {
-							obj = Float.parseFloat(val);
-						} else {
-							obj = val;
-						}
-
-						method.invoke(object,
-								new Object[] { obj });
-					}
-				}
-
+				Class param = getClass(type);
+				Object object = newInstance(type, pel, vars);
 				params.add(param);
 				runParams.add(object);
 			}
@@ -216,9 +215,7 @@ public class ThriftHelper extends BaseHelper {
 			throw new HelperException("class not found "
 					+ e.getMessage());
 		}
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
+
 		catch (InstantiationException e) {
 			throw new HelperException("object not get instance "
 					+ e.getMessage());
