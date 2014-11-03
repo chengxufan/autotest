@@ -19,7 +19,11 @@ import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.tbt.testapi.BaseHelper;
 import com.tbt.testapi.EnvConfig;
 import com.tbt.testapi.TestApiException;
@@ -51,7 +55,7 @@ public class ThriftHelper extends BaseHelper {
 	}
 
 	public Object newInstance(String namespace, Element el,
-			HashMap<String, String> vars)
+			HashMap<String, Object> vars)
 			throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException, NoSuchFieldException,
 			SecurityException, NoSuchMethodException,
@@ -77,7 +81,7 @@ public class ThriftHelper extends BaseHelper {
 	}
 
 	public void newStruct(Object object, Element root,
-			HashMap<String, String> vars)
+			HashMap<String, Object> vars)
 			throws NoSuchFieldException, SecurityException,
 			ClassNotFoundException, NoSuchMethodException,
 			IllegalAccessException, IllegalArgumentException,
@@ -132,7 +136,7 @@ public class ThriftHelper extends BaseHelper {
 	}
 
 	@Override
-	public JsonObject run(Document doc, HashMap<String, String> vars)
+	public JsonObject run(Document doc, HashMap<String, Object> vars)
 			throws TestApiException, HelperException,
 			IllegalArgumentException, StepException {
 		JsonObject jo = new JsonObject();
@@ -173,7 +177,7 @@ public class ThriftHelper extends BaseHelper {
 					classParams);
 
 			Object ret = method.invoke(client, runParams.toArray());
-
+			logger.debug("thrift helper response obj " + ret);
 			Element rel = (Element) el.selectSingleNode("ret");
 			if (rel != null) {
 				list = rel.selectNodes("val");
@@ -181,6 +185,9 @@ public class ThriftHelper extends BaseHelper {
 						.hasNext();) {
 
 					Element rvel = retIt.next();
+
+					String type = rvel
+							.attributeValue("type");
 
 					Field f = ret.getClass()
 							.getDeclaredField(
@@ -194,10 +201,27 @@ public class ThriftHelper extends BaseHelper {
 					Object retObj = method.invoke(ret,
 							new Object[] {});
 
-					String retVal = String.valueOf(retObj);
-					jo.addProperty(rvel
-							.attributeValue("name"),
-							retVal);
+					if (type == null) {
+						String retVal = String
+								.valueOf(retObj);
+						jo.addProperty(rvel
+								.attributeValue("name"),
+								retVal);
+					} else {
+						if (type.equals("list")) {
+							Gson gson = new Gson();
+							String jsonString = gson
+									.toJson(retObj);
+							JsonParser jp = new JsonParser();
+							JsonElement je = jp
+									.parse(jsonString);
+							JsonArray ja = je
+									.getAsJsonArray();
+							jo.add(rvel.attributeValue("name"),
+									ja);
+
+						}
+					}
 				}
 
 			}
@@ -247,7 +271,7 @@ public class ThriftHelper extends BaseHelper {
 					+ e.getMessage());
 		}
 
-		logger.debug("thrift helper response " + jo);
+		// logger.debug("thrift helper response " + jo);
 
 		return jo;
 	}

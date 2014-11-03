@@ -14,7 +14,7 @@ abstract public class BaseHelper {
 	abstract public void destroy();
 
 	static public JsonObject execute(String namespace, Document doc,
-			HashMap<String, String> vars) throws TestApiException,
+			HashMap<String, Object> vars) throws TestApiException,
 			HelperException, IllegalArgumentException,
 			StepException {
 		BaseHelper base = createHelper(namespace);
@@ -25,7 +25,7 @@ abstract public class BaseHelper {
 	}
 
 	abstract public JsonObject run(Document doc,
-			HashMap<String, String> vars) throws TestApiException,
+			HashMap<String, Object> vars) throws TestApiException,
 			HelperException, IllegalArgumentException,
 			StepException;
 

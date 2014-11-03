@@ -23,7 +23,7 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 	ResultSet rs;
 
 	@Override
-	public JsonObject run(Document doc, HashMap<String, String> vars)
+	public JsonObject run(Document doc, HashMap<String, Object> vars)
 			throws TestApiException, HelperException {
 		JsonObject jo = new JsonObject();
 		try {

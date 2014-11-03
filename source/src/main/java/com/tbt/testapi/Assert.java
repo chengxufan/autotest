@@ -1,6 +1,12 @@
 package com.tbt.testapi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Assert {
+	private static final Logger logger = LoggerFactory
+			.getLogger(Assert.class);
+
 	static public boolean run(String name, String message, String param) {
 		if (name == null)
 			return false;
@@ -19,6 +25,7 @@ public class Assert {
 	}
 
 	static protected boolean notNull(String message) {
+		logger.debug("notnull message is" + message);
 		if (message == null)
 			return false;
 		if (message == "")

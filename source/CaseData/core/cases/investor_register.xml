@@ -1,56 +1,40 @@
-<case id="purchaseProduct">
+<case id="institution_productaudit">
 	<context>
-		<item name="INVESTOR_ID">00X00060</item>
-		<item name="ACCOUNT_FUND_ID">AC00X00060</item>
-		<item name="PRODUCT_ID">PR000013</item>
-		<item name="amount">10</item>
+		<item name="institutionID">900900902</item>
+		<item name="PRODUCT_ID">PR900014</item>	
 	</context>
-	<step note="设置账户余额">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="ACCOUNT_FUND_ID,INVESTOR_ID" statement="update"><![CDATA[update ACCOUNT_FUND set ACCOUNT_BALANCE='100' WHERE ACCOUNT_FUND_ID='%s'and INVESTOR_ID='%s']]></item>
-		</helper>
-	</step>
-	<step note="购买产品">
+	<step note="更新代购产品">
 		<helper name="helper.thrift">
-			<item name="call" function="purchaseProduct">
-				<param type="PurchaseInfoStruct">
-					<val name="investorID" format="INVESTOR_ID">%s</val>
-					<val name="invest_special_account" format="ACCOUNT_FUND_ID">%s</val>
-					<val name="productid" format="PRODUCT_ID">%s</val>
-					<val name="amount" format="amount">%s</val>	
+			<item name="call" function="institution_productaudit">
+				<param type="ProductAuditStruct">
+					<val name="institutionID" format="institutionID">%s</val>
+					<val name="productids" type="Set" typeName="ProductAuditItem">
+					    <object>
+					        <item ></item>
+					    </object>
+					</val>	
 				</param>
-				<ret type="PurchaseResultStruct">
-					<val name="orderno">orderno</val>
+				<ret type="ProductAuditResultStruct">
+					<val name="count">count</val>
 				</ret>
 			</item>
 		</helper>
 		<return>
-			<item name="orderno">orderno</item>
+			<item name="count">count</item>
 		</return>
 		<assert>
-			<item name="notnull" var="orderno"></item>
+			<item name="notnull" var="count"></item>
 		</assert>
 	</step>
-	<step note="检查数据库交易表中生成一条记录">
+	<step note="检查数据库机构产品表中增加了两条记录">
 		<helper name="helper.mysql.execute">
-			<item name="sql" format="SERIAL_NO" statement="select"><![CDATA[SELECT COUNT(*) as t FROM TRADE WHERE SERIAL_NO='%s']]></item>
+			<item name="sql" format="institutionID" statement="select"><![CDATA[SELECT COUNT(*) as c FROM INSTITUTION_PRODUCT WHERE INSTITUTION_ID='%s']]></item>
 		</helper>
 		<return>
-			<item name="count">t</item>
+			<item name="count">c</item>
 		</return>
 		<assert>
-			<item name="equals" var="count" param="1"></item>
-		</assert>
-	</step>
-	<step note="检查数据库交易表中交易金额">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="AMOUNT" statement="select"><![CDATA[SELECT AMOUNT as a FROM TRADE WHERE SERIAL_NO='%s']]></item>
-		</helper>
-		<return>
-			<item name="AMOUNT">a</item>
-		</return>
-		<assert>
-			<item name="equals" var="AMOUNT" param="10.0"></item>
+			<item name="equals" var="count" param="2"></item>
 		</assert>
 	</step>
 </case>

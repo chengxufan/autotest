@@ -148,7 +148,7 @@ struct InstitutionResultStruct
 }
 
 //发行行产品注册信息
-struct IssuBankProductInfoStruct
+struct ProductInfoStruct
 {
    //产品name
    1: required string name
@@ -219,6 +219,9 @@ struct IssuBankProductInfoStruct
    
    //状态 0 正常；1 无效；2 已清算
    23: i32 productStatus
+   
+   //产品id
+   24: string id
 }
 
 //发行行产品注册处理结果信息
@@ -293,6 +296,42 @@ struct PurchaseResultStruct
   4: required string orderno
 }
 
+struct ProductAuditItem
+{
+   //产品ID
+  1: required string productid
+  
+  // 1 新增； 2 删除
+  2: required i32 opetype
+}
+
+//已审核通过的产品列表
+struct ProductAuditStruct
+{
+  //机构ID
+  1: required string institutionID
+  
+  //已审核过的产品ID列表
+  2: required set<ProductAuditItem> productids
+}
+
+//机构和审核过的产品的关联结果列表
+struct ProductAuditResultStruct
+{
+  //机构ID
+  1: required string institutionID
+  
+  //本次成功进行关联的条数
+  2: required i32 count
+}
+
+//产品列表
+struct ProductListReultStruct
+{
+  //产品列表
+  1: required list<ProductInfoStruct> products
+}
+
 service  Fits {
 	
   //投资者注册
@@ -320,10 +359,21 @@ service  Fits {
   PurchaseResultStruct purchaseProduct(1:PurchaseInfoStruct purchaseInfo)  throws (1: FitsException fe),
   
   //发行行产品注册
-  IssuBankProductInfoResultStruct issubank_productregister(1:IssuBankProductInfoStruct productInfo)  throws (1: FitsException fe),
+  IssuBankProductInfoResultStruct issubank_productregister(1:ProductInfoStruct productInfo)  throws (1: FitsException fe),
+
+  //发行行产品更新
+  //productInfo的ID需要填写，否则会找不到
+  //后端更新的逻辑是删除该指定ID的产品，然后将该productInfo所载信息插入到产品表里面
+  void issubank_productupdate(1:ProductInfoStruct productInfo)  throws (1: FitsException fe),
 
   //机构注册
   InstitutionResultStruct institution_regist(1:InstitutionInfoStruct institutionInfo)  throws (1: FitsException fe),
+  
+  //获取全部产品产品列表
+  ProductListReultStruct institution_getallproduct()  throws (1: FitsException fe),
+  
+  //产品审核后进行关联
+  ProductAuditResultStruct institution_productaudit(1: ProductAuditStruct productaudit)  throws (1: FitsException fe),
   
   //获取机构信息
   InstitutionInfoStruct institution_getInfo(1:string institutionid)  throws (1: FitsException fe),

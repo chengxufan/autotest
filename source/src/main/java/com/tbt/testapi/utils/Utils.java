@@ -15,7 +15,7 @@ public class Utils {
 	private static final Logger logger = LoggerFactory
 			.getLogger(Utils.class);
 
-	public static Element formatElement(HashMap<String, String> vars,
+	public static Element formatElement(HashMap<String, Object> vars,
 			Element item) throws StepException {
 		String name = item.attributeValue("name");
 		String value = item.getText();
@@ -25,7 +25,7 @@ public class Utils {
 			List<String> values = new ArrayList<String>();
 			for (int i = 0; i < split.length; i++) {
 				String key = split[i];
-				String val = vars.get(key);
+				String val = vars.get(key).toString();
 				if (val == null) {
 					throw new StepException("Global var "
 							+ key + " undefined.");

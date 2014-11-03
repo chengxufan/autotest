@@ -29,7 +29,7 @@ public class CaseCommand extends BaseCommand {
 	private static final Logger logger = LoggerFactory
 			.getLogger(CaseCommand.class);
 
-	HashMap<String, String> vars;
+	HashMap<String, Object> vars;
 	public String caseId = null;
 
 	@Override
@@ -37,7 +37,7 @@ public class CaseCommand extends BaseCommand {
 		boolean ret = false;
 		try {
 			caseId = id;
-			vars = new HashMap<String, String>();
+			vars = new HashMap<String, Object>();
 			String filePath = Config.getInstance().caseDataPath
 					+ "cases/" + id + ".xml";
 			if (!new File(filePath).exists())
@@ -154,7 +154,7 @@ public class CaseCommand extends BaseCommand {
 						}
 						jel = data;
 					}
-					vars.put(key, jel.getAsString());
+					vars.put(key, jel);
 				}
 			}
 
@@ -167,8 +167,9 @@ public class CaseCommand extends BaseCommand {
 					Element item = it.next();
 					String name = item
 							.attributeValue("name");
-					String message = vars.get(item
-							.attributeValue("var"));
+					String message = vars
+							.get(item.attributeValue("var"))
+							.toString();
 					String param = item
 							.attributeValue("param");
 					boolean ret = Assert.run(name, message,

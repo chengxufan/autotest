@@ -32,8 +32,8 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBankProductInfoStruct, IssuBankProductInfoStruct._Fields>, java.io.Serializable, Cloneable, Comparable<IssuBankProductInfoStruct> {
-  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("IssuBankProductInfoStruct");
+public class ProductInfoStruct implements org.apache.thrift.TBase<ProductInfoStruct, ProductInfoStruct._Fields>, java.io.Serializable, Cloneable, Comparable<ProductInfoStruct> {
+  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ProductInfoStruct");
 
   private static final org.apache.thrift.protocol.TField NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("name", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("type", org.apache.thrift.protocol.TType.I32, (short)2);
@@ -58,11 +58,12 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
   private static final org.apache.thrift.protocol.TField RECKON_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("reckon_date", org.apache.thrift.protocol.TType.I32, (short)21);
   private static final org.apache.thrift.protocol.TField EXPECTED_PAYMENT_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("expected_payment_date", org.apache.thrift.protocol.TType.I32, (short)22);
   private static final org.apache.thrift.protocol.TField PRODUCT_STATUS_FIELD_DESC = new org.apache.thrift.protocol.TField("productStatus", org.apache.thrift.protocol.TType.I32, (short)23);
+  private static final org.apache.thrift.protocol.TField ID_FIELD_DESC = new org.apache.thrift.protocol.TField("id", org.apache.thrift.protocol.TType.STRING, (short)24);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
-    schemes.put(StandardScheme.class, new IssuBankProductInfoStructStandardSchemeFactory());
-    schemes.put(TupleScheme.class, new IssuBankProductInfoStructTupleSchemeFactory());
+    schemes.put(StandardScheme.class, new ProductInfoStructStandardSchemeFactory());
+    schemes.put(TupleScheme.class, new ProductInfoStructTupleSchemeFactory());
   }
 
   public String name; // required
@@ -88,6 +89,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
   public int reckon_date; // required
   public int expected_payment_date; // required
   public int productStatus; // required
+  public String id; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -113,7 +115,8 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     DUE_DATE((short)20, "due_date"),
     RECKON_DATE((short)21, "reckon_date"),
     EXPECTED_PAYMENT_DATE((short)22, "expected_payment_date"),
-    PRODUCT_STATUS((short)23, "productStatus");
+    PRODUCT_STATUS((short)23, "productStatus"),
+    ID((short)24, "id");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -174,6 +177,8 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
           return EXPECTED_PAYMENT_DATE;
         case 23: // PRODUCT_STATUS
           return PRODUCT_STATUS;
+        case 24: // ID
+          return ID;
         default:
           return null;
       }
@@ -283,14 +288,16 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.PRODUCT_STATUS, new org.apache.thrift.meta_data.FieldMetaData("productStatus", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+    tmpMap.put(_Fields.ID, new org.apache.thrift.meta_data.FieldMetaData("id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
-    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(IssuBankProductInfoStruct.class, metaDataMap);
+    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ProductInfoStruct.class, metaDataMap);
   }
 
-  public IssuBankProductInfoStruct() {
+  public ProductInfoStruct() {
   }
 
-  public IssuBankProductInfoStruct(
+  public ProductInfoStruct(
     String name,
     int type,
     int calculationearn,
@@ -313,7 +320,8 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     int due_date,
     int reckon_date,
     int expected_payment_date,
-    int productStatus)
+    int productStatus,
+    String id)
   {
     this();
     this.name = name;
@@ -358,12 +366,13 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     setExpected_payment_dateIsSet(true);
     this.productStatus = productStatus;
     setProductStatusIsSet(true);
+    this.id = id;
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
-  public IssuBankProductInfoStruct(IssuBankProductInfoStruct other) {
+  public ProductInfoStruct(ProductInfoStruct other) {
     __isset_bitfield = other.__isset_bitfield;
     if (other.isSetName()) {
       this.name = other.name;
@@ -396,10 +405,13 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     this.reckon_date = other.reckon_date;
     this.expected_payment_date = other.expected_payment_date;
     this.productStatus = other.productStatus;
+    if (other.isSetId()) {
+      this.id = other.id;
+    }
   }
 
-  public IssuBankProductInfoStruct deepCopy() {
-    return new IssuBankProductInfoStruct(this);
+  public ProductInfoStruct deepCopy() {
+    return new ProductInfoStruct(this);
   }
 
   @Override
@@ -446,13 +458,14 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     this.expected_payment_date = 0;
     setProductStatusIsSet(false);
     this.productStatus = 0;
+    this.id = null;
   }
 
   public String getName() {
     return this.name;
   }
 
-  public IssuBankProductInfoStruct setName(String name) {
+  public ProductInfoStruct setName(String name) {
     this.name = name;
     return this;
   }
@@ -476,7 +489,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.type;
   }
 
-  public IssuBankProductInfoStruct setType(int type) {
+  public ProductInfoStruct setType(int type) {
     this.type = type;
     setTypeIsSet(true);
     return this;
@@ -499,7 +512,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.calculationearn;
   }
 
-  public IssuBankProductInfoStruct setCalculationearn(int calculationearn) {
+  public ProductInfoStruct setCalculationearn(int calculationearn) {
     this.calculationearn = calculationearn;
     setCalculationearnIsSet(true);
     return this;
@@ -522,7 +535,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.target_rate_formula;
   }
 
-  public IssuBankProductInfoStruct setTarget_rate_formula(int target_rate_formula) {
+  public ProductInfoStruct setTarget_rate_formula(int target_rate_formula) {
     this.target_rate_formula = target_rate_formula;
     setTarget_rate_formulaIsSet(true);
     return this;
@@ -545,7 +558,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.assetManager;
   }
 
-  public IssuBankProductInfoStruct setAssetManager(String assetManager) {
+  public ProductInfoStruct setAssetManager(String assetManager) {
     this.assetManager = assetManager;
     return this;
   }
@@ -569,7 +582,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.assetTrustee;
   }
 
-  public IssuBankProductInfoStruct setAssetTrustee(String assetTrustee) {
+  public ProductInfoStruct setAssetTrustee(String assetTrustee) {
     this.assetTrustee = assetTrustee;
     return this;
   }
@@ -593,7 +606,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.issubankid;
   }
 
-  public IssuBankProductInfoStruct setIssubankid(String issubankid) {
+  public ProductInfoStruct setIssubankid(String issubankid) {
     this.issubankid = issubankid;
     return this;
   }
@@ -617,7 +630,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.currency;
   }
 
-  public IssuBankProductInfoStruct setCurrency(int currency) {
+  public ProductInfoStruct setCurrency(int currency) {
     this.currency = currency;
     setCurrencyIsSet(true);
     return this;
@@ -640,7 +653,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.risk_level;
   }
 
-  public IssuBankProductInfoStruct setRisk_level(int risk_level) {
+  public ProductInfoStruct setRisk_level(int risk_level) {
     this.risk_level = risk_level;
     setRisk_levelIsSet(true);
     return this;
@@ -663,7 +676,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.target_rate;
   }
 
-  public IssuBankProductInfoStruct setTarget_rate(double target_rate) {
+  public ProductInfoStruct setTarget_rate(double target_rate) {
     this.target_rate = target_rate;
     setTarget_rateIsSet(true);
     return this;
@@ -686,7 +699,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.raise_upper;
   }
 
-  public IssuBankProductInfoStruct setRaise_upper(double raise_upper) {
+  public ProductInfoStruct setRaise_upper(double raise_upper) {
     this.raise_upper = raise_upper;
     setRaise_upperIsSet(true);
     return this;
@@ -709,7 +722,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.raise_low;
   }
 
-  public IssuBankProductInfoStruct setRaise_low(double raise_low) {
+  public ProductInfoStruct setRaise_low(double raise_low) {
     this.raise_low = raise_low;
     setRaise_lowIsSet(true);
     return this;
@@ -732,7 +745,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.investment_upper_limit;
   }
 
-  public IssuBankProductInfoStruct setInvestment_upper_limit(double investment_upper_limit) {
+  public ProductInfoStruct setInvestment_upper_limit(double investment_upper_limit) {
     this.investment_upper_limit = investment_upper_limit;
     setInvestment_upper_limitIsSet(true);
     return this;
@@ -755,7 +768,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.investment_low_limit;
   }
 
-  public IssuBankProductInfoStruct setInvestment_low_limit(double investment_low_limit) {
+  public ProductInfoStruct setInvestment_low_limit(double investment_low_limit) {
     this.investment_low_limit = investment_low_limit;
     setInvestment_low_limitIsSet(true);
     return this;
@@ -778,7 +791,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.max_raise_number;
   }
 
-  public IssuBankProductInfoStruct setMax_raise_number(int max_raise_number) {
+  public ProductInfoStruct setMax_raise_number(int max_raise_number) {
     this.max_raise_number = max_raise_number;
     setMax_raise_numberIsSet(true);
     return this;
@@ -801,7 +814,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.launch_date;
   }
 
-  public IssuBankProductInfoStruct setLaunch_date(int launch_date) {
+  public ProductInfoStruct setLaunch_date(int launch_date) {
     this.launch_date = launch_date;
     setLaunch_dateIsSet(true);
     return this;
@@ -824,7 +837,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.raise_start_date;
   }
 
-  public IssuBankProductInfoStruct setRaise_start_date(int raise_start_date) {
+  public ProductInfoStruct setRaise_start_date(int raise_start_date) {
     this.raise_start_date = raise_start_date;
     setRaise_start_dateIsSet(true);
     return this;
@@ -847,7 +860,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.raise_end_date;
   }
 
-  public IssuBankProductInfoStruct setRaise_end_date(int raise_end_date) {
+  public ProductInfoStruct setRaise_end_date(int raise_end_date) {
     this.raise_end_date = raise_end_date;
     setRaise_end_dateIsSet(true);
     return this;
@@ -870,7 +883,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.value_date;
   }
 
-  public IssuBankProductInfoStruct setValue_date(int value_date) {
+  public ProductInfoStruct setValue_date(int value_date) {
     this.value_date = value_date;
     setValue_dateIsSet(true);
     return this;
@@ -893,7 +906,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.due_date;
   }
 
-  public IssuBankProductInfoStruct setDue_date(int due_date) {
+  public ProductInfoStruct setDue_date(int due_date) {
     this.due_date = due_date;
     setDue_dateIsSet(true);
     return this;
@@ -916,7 +929,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.reckon_date;
   }
 
-  public IssuBankProductInfoStruct setReckon_date(int reckon_date) {
+  public ProductInfoStruct setReckon_date(int reckon_date) {
     this.reckon_date = reckon_date;
     setReckon_dateIsSet(true);
     return this;
@@ -939,7 +952,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.expected_payment_date;
   }
 
-  public IssuBankProductInfoStruct setExpected_payment_date(int expected_payment_date) {
+  public ProductInfoStruct setExpected_payment_date(int expected_payment_date) {
     this.expected_payment_date = expected_payment_date;
     setExpected_payment_dateIsSet(true);
     return this;
@@ -962,7 +975,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     return this.productStatus;
   }
 
-  public IssuBankProductInfoStruct setProductStatus(int productStatus) {
+  public ProductInfoStruct setProductStatus(int productStatus) {
     this.productStatus = productStatus;
     setProductStatusIsSet(true);
     return this;
@@ -979,6 +992,30 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
 
   public void setProductStatusIsSet(boolean value) {
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __PRODUCTSTATUS_ISSET_ID, value);
+  }
+
+  public String getId() {
+    return this.id;
+  }
+
+  public ProductInfoStruct setId(String id) {
+    this.id = id;
+    return this;
+  }
+
+  public void unsetId() {
+    this.id = null;
+  }
+
+  /** Returns true if field id is set (has been assigned a value) and false otherwise */
+  public boolean isSetId() {
+    return this.id != null;
+  }
+
+  public void setIdIsSet(boolean value) {
+    if (!value) {
+      this.id = null;
+    }
   }
 
   public void setFieldValue(_Fields field, Object value) {
@@ -1167,6 +1204,14 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
       }
       break;
 
+    case ID:
+      if (value == null) {
+        unsetId();
+      } else {
+        setId((String)value);
+      }
+      break;
+
     }
   }
 
@@ -1241,6 +1286,9 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     case PRODUCT_STATUS:
       return Integer.valueOf(getProductStatus());
 
+    case ID:
+      return getId();
+
     }
     throw new IllegalStateException();
   }
@@ -1298,6 +1346,8 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
       return isSetExpected_payment_date();
     case PRODUCT_STATUS:
       return isSetProductStatus();
+    case ID:
+      return isSetId();
     }
     throw new IllegalStateException();
   }
@@ -1306,12 +1356,12 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
   public boolean equals(Object that) {
     if (that == null)
       return false;
-    if (that instanceof IssuBankProductInfoStruct)
-      return this.equals((IssuBankProductInfoStruct)that);
+    if (that instanceof ProductInfoStruct)
+      return this.equals((ProductInfoStruct)that);
     return false;
   }
 
-  public boolean equals(IssuBankProductInfoStruct that) {
+  public boolean equals(ProductInfoStruct that) {
     if (that == null)
       return false;
 
@@ -1522,6 +1572,15 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
         return false;
     }
 
+    boolean this_present_id = true && this.isSetId();
+    boolean that_present_id = true && that.isSetId();
+    if (this_present_id || that_present_id) {
+      if (!(this_present_id && that_present_id))
+        return false;
+      if (!this.id.equals(that.id))
+        return false;
+    }
+
     return true;
   }
 
@@ -1531,7 +1590,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
   }
 
   @Override
-  public int compareTo(IssuBankProductInfoStruct other) {
+  public int compareTo(ProductInfoStruct other) {
     if (!getClass().equals(other.getClass())) {
       return getClass().getName().compareTo(other.getClass().getName());
     }
@@ -1768,6 +1827,16 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetId()).compareTo(other.isSetId());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetId()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.id, other.id);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -1785,7 +1854,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("IssuBankProductInfoStruct(");
+    StringBuilder sb = new StringBuilder("ProductInfoStruct(");
     boolean first = true;
 
     sb.append("name:");
@@ -1895,6 +1964,14 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     sb.append("productStatus:");
     sb.append(this.productStatus);
     first = false;
+    if (!first) sb.append(", ");
+    sb.append("id:");
+    if (this.id == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.id);
+    }
+    first = false;
     sb.append(")");
     return sb.toString();
   }
@@ -1952,15 +2029,15 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
     }
   }
 
-  private static class IssuBankProductInfoStructStandardSchemeFactory implements SchemeFactory {
-    public IssuBankProductInfoStructStandardScheme getScheme() {
-      return new IssuBankProductInfoStructStandardScheme();
+  private static class ProductInfoStructStandardSchemeFactory implements SchemeFactory {
+    public ProductInfoStructStandardScheme getScheme() {
+      return new ProductInfoStructStandardScheme();
     }
   }
 
-  private static class IssuBankProductInfoStructStandardScheme extends StandardScheme<IssuBankProductInfoStruct> {
+  private static class ProductInfoStructStandardScheme extends StandardScheme<ProductInfoStruct> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, IssuBankProductInfoStruct struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, ProductInfoStruct struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -2154,6 +2231,14 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 24: // ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.id = iprot.readString();
+              struct.setIdIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -2219,7 +2304,7 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, IssuBankProductInfoStruct struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, ProductInfoStruct struct) throws org.apache.thrift.TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -2300,22 +2385,27 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
       oprot.writeFieldBegin(PRODUCT_STATUS_FIELD_DESC);
       oprot.writeI32(struct.productStatus);
       oprot.writeFieldEnd();
+      if (struct.id != null) {
+        oprot.writeFieldBegin(ID_FIELD_DESC);
+        oprot.writeString(struct.id);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
 
   }
 
-  private static class IssuBankProductInfoStructTupleSchemeFactory implements SchemeFactory {
-    public IssuBankProductInfoStructTupleScheme getScheme() {
-      return new IssuBankProductInfoStructTupleScheme();
+  private static class ProductInfoStructTupleSchemeFactory implements SchemeFactory {
+    public ProductInfoStructTupleScheme getScheme() {
+      return new ProductInfoStructTupleScheme();
     }
   }
 
-  private static class IssuBankProductInfoStructTupleScheme extends TupleScheme<IssuBankProductInfoStruct> {
+  private static class ProductInfoStructTupleScheme extends TupleScheme<ProductInfoStruct> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, IssuBankProductInfoStruct struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, ProductInfoStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeString(struct.name);
       oprot.writeI32(struct.type);
@@ -2343,14 +2433,20 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
       if (struct.isSetProductStatus()) {
         optionals.set(0);
       }
-      oprot.writeBitSet(optionals, 1);
+      if (struct.isSetId()) {
+        optionals.set(1);
+      }
+      oprot.writeBitSet(optionals, 2);
       if (struct.isSetProductStatus()) {
         oprot.writeI32(struct.productStatus);
+      }
+      if (struct.isSetId()) {
+        oprot.writeString(struct.id);
       }
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, IssuBankProductInfoStruct struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, ProductInfoStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.name = iprot.readString();
       struct.setNameIsSet(true);
@@ -2396,10 +2492,14 @@ public class IssuBankProductInfoStruct implements org.apache.thrift.TBase<IssuBa
       struct.setReckon_dateIsSet(true);
       struct.expected_payment_date = iprot.readI32();
       struct.setExpected_payment_dateIsSet(true);
-      BitSet incoming = iprot.readBitSet(1);
+      BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
         struct.productStatus = iprot.readI32();
         struct.setProductStatusIsSet(true);
+      }
+      if (incoming.get(1)) {
+        struct.id = iprot.readString();
+        struct.setIdIsSet(true);
       }
     }
   }

@@ -73,7 +73,7 @@ public class RequestPostHelper extends BaseHelper {
 	}
 
 	@Override
-	public JsonObject run(Document doc, HashMap<String, String> vars)
+	public JsonObject run(Document doc, HashMap<String, Object> vars)
 			throws TestApiException, HelperException {
 		Element uri = (Element) doc
 				.selectSingleNode("/root/item[@name='uri']");
