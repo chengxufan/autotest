@@ -24,6 +24,10 @@ public class Assert {
 		return (message.equals(expected));
 	}
 
+	static protected boolean notEquals(String message, String expected) {
+		return !(message.equals(expected));
+	}
+
 	static protected boolean notNull(String message) {
 		logger.debug("notnull message is" + message);
 		if (message == null)

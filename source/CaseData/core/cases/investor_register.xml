@@ -1,40 +1,19 @@
-<case id="institution_productaudit">
+<case id="institution_getallproduct">
 	<context>
-		<item name="institutionID">900900902</item>
-		<item name="PRODUCT_ID">PR900014</item>	
 	</context>
-	<step note="更新代购产品">
+	<step note="获取产品列表">
 		<helper name="helper.thrift">
-			<item name="call" function="institution_productaudit">
-				<param type="ProductAuditStruct">
-					<val name="institutionID" format="institutionID">%s</val>
-					<val name="productids" type="Set" typeName="ProductAuditItem">
-					    <object>
-					        <item ></item>
-					    </object>
-					</val>	
-				</param>
-				<ret type="ProductAuditResultStruct">
-					<val name="count">count</val>
+			<item name="call" function="institution_getallproduct">
+				<ret type="ProductListReultStruct">
+					<val name="products" type="list">products</val>
 				</ret>
 			</item>
 		</helper>
 		<return>
-			<item name="count">count</item>
+			<item name="products" type="list">products</item>
 		</return>
 		<assert>
-			<item name="notnull" var="count"></item>
-		</assert>
-	</step>
-	<step note="检查数据库机构产品表中增加了两条记录">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="institutionID" statement="select"><![CDATA[SELECT COUNT(*) as c FROM INSTITUTION_PRODUCT WHERE INSTITUTION_ID='%s']]></item>
-		</helper>
-		<return>
-			<item name="count">c</item>
-		</return>
-		<assert>
-			<item name="equals" var="count" param="2"></item>
+			<item name="notnull" var="products"></item>
 		</assert>
 	</step>
 </case>
