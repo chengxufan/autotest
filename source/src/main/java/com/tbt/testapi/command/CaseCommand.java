@@ -73,6 +73,7 @@ public class CaseCommand extends BaseCommand {
 						"case %s step is null", id));
 			}
 		} catch (HelperException e) {
+			e.printStackTrace();
 			ret = false;
 			logger.debug("helper exception\n" + e.getMessage());
 		} catch (DocumentException e) {

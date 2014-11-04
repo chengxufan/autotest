@@ -228,12 +228,14 @@ public class ThriftHelper extends BaseHelper {
 			for (Iterator<Element> it = list.iterator(); it
 					.hasNext();) {
 				Element pel = it.next();
+				Class c = getClass(pel.attributeValue("type"));
 				Object object = parseStruct(pel, vars);
 				runParams.add(object);
-				params.add(object.getClass());
+				params.add(c);
 			}
 
 			Class[] classParams = new Class[params.size()];
+
 			classParams = params.toArray(classParams);
 			method = client.getClass().getMethod(function,
 					classParams);
@@ -332,6 +334,7 @@ public class ThriftHelper extends BaseHelper {
 			throw new HelperException("field not found "
 					+ e.getMessage());
 		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
 			throw new HelperException("method not found "
 					+ e.getMessage());
 		}
