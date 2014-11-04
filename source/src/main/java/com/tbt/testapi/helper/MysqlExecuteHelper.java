@@ -50,9 +50,13 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 				JsonElement je = null;
 				while (rs.next()) {
 					for (int i = 1; i <= cols; i++) {
+
 						String cname = rsmd
 								.getColumnLabel(i);
-						if (rsmd.getColumnType(i) == java.sql.Types.BIGINT) {
+						int type = rsmd.getColumnType(i);
+						if (type == java.sql.Types.BIGINT
+								|| type == java.sql.Types.SMALLINT
+								|| type == java.sql.Types.INTEGER) {
 							jo.addProperty(cname,
 									rs.getInt(i));
 						} else if (rsmd.getColumnType(i) == java.sql.Types.BOOLEAN) {
@@ -61,9 +65,6 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 						} else if (rsmd.getColumnType(i) == java.sql.Types.DOUBLE) {
 							jo.addProperty(cname,
 									rs.getDouble(i));
-						} else if (rsmd.getColumnType(i) == java.sql.Types.INTEGER) {
-							jo.addProperty(cname,
-									rs.getInt(i));
 						} else {
 							jo.addProperty(cname,
 									rs.getString(i));
@@ -104,5 +105,4 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 
 		return jo;
 	}
-
 }

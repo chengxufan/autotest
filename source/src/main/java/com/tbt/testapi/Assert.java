@@ -8,6 +8,7 @@ public class Assert {
 			.getLogger(Assert.class);
 
 	static public boolean run(String name, String message, String param) {
+
 		if (name == null)
 			return false;
 		if (name.equals("equals")) {
