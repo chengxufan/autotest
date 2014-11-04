@@ -105,7 +105,8 @@ public class ThriftHelper extends BaseHelper {
 				ParameterizedType pt = (ParameterizedType) f
 						.getGenericType();
 				varType = pt.getActualTypeArguments()[0]
-						.getTypeName();
+						.toString();
+				varType = varType.replace("class ", "");
 				// logger.debug("varType " + varType);
 			}
 
@@ -265,7 +266,8 @@ public class ThriftHelper extends BaseHelper {
 					if (type == null) {
 						String retVal = String
 								.valueOf(retObj);
-						logger.debug("retVal " + retVal);
+						// logger.debug("retVal " +
+						// retVal);
 						jo.addProperty(rvel
 								.attributeValue("name"),
 								retVal);

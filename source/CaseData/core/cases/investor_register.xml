@@ -28,7 +28,9 @@
 		<return>
 			<item name="count">count</item>
 		</return>
-
+		<assert>
+			<item name="equals" var="count" param="2"></item>
+		</assert>
 	</step>
 	<step note="检查数据库机构产品表中增加了两条记录">
 		<helper name="helper.mysql.execute">
@@ -38,7 +40,7 @@
 			<item name="count">c</item>
 		</return>
 		<assert>
-			<item name="equals" var="count" param="3"></item>
+			<item name="equals" var="count" param="2"></item>
 		</assert>
 	</step>
 </case>

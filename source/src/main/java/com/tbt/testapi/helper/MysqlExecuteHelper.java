@@ -51,8 +51,8 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 				JsonElement je = null;
 				while (rs.next()) {
 					for (int i = 1; i <= cols; i++) {
-						logger.debug("rs "
-								+ rs.getInt(i));
+						// logger.debug("rs "
+						// + rs.getInt(i));
 						String cname = rsmd
 								.getColumnLabel(i);
 						int type = rsmd.getColumnType(i);
