@@ -154,7 +154,8 @@ public class CaseCommand extends BaseCommand {
 						}
 						jel = data;
 					}
-					vars.put(key, jel);
+
+					vars.put(key, jel.getAsString());
 				}
 			}
 
@@ -167,11 +168,16 @@ public class CaseCommand extends BaseCommand {
 					Element item = it.next();
 					String name = item
 							.attributeValue("name");
+					logger.debug("type "
+							+ vars.get(item.attributeValue("var"))
+									.getClass());
+
 					String message = vars
 							.get(item.attributeValue("var"))
 							.toString();
 					String param = item
 							.attributeValue("param");
+					logger.debug("param " + message);
 					boolean ret = Assert.run(name, message,
 							param);
 					if (ret == false) {

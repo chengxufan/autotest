@@ -1,96 +1,44 @@
-<case id="BankSign">
+<case id="institution_productaudit">
 	<context>
-		<item name="INVESTOR_ID">00X00060</item>	<!--投资人ID  -->
-		<item name="ID_TYPE">0</item>				<!--有效身份证件类型 0中国居民身份证、2港澳居民来往内地通行证、3台湾居民来往大陆通行证、4外国人永久居留证、5外国护照、6其他  -->
-		<item name="ID_NAME">gll</item>				<!-- 有效身份证件的姓名 -->
-		<item name="ID_NUMBER">131022497802042028</item>	<!--有效身份证件的号码  -->
-		<item name="ID_AUTHORITY">河北省廊坊市公安局</item>			<!--  有效身份证件的发证单位-->
-		<item name="ID_ADDRESS">河北省廊坊市</item>			<!-- 有效身份证件所记录的地址 -->
-		<item name="ID_CARD_VAILD_DATE">20141028</item>	<!--  有效身份证件的有效期-->
-		<item name="GENDER">1</item>				<!--性别  -->
-		<item name="CLEARBANK_ID">1</item>
-		<item name="bank_account">622788012455</item>				<!-- 普通结算户号码 -->
+		<item name="institutionID">900900902</item>
+		<item name="PRODUCT_ID_A">PR000013</item>
+		<item name="PRODUCT_ID_B">PR100018</item>
 	</context>
-	<step note="打桩-初始化状态-删除投资资金专用账户记录">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="INVESTOR_ID" statement="delete"><![CDATA[delete from ACCOUNT_FUND WHERE INVESTOR_ID='%s']]></item>
-		</helper>
-	</step>
-	<step note="打桩初始化状态-删除产品账户记录">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="INVESTOR_ID" statement="delete"><![CDATA[delete from ACCOUNT_PRODUCT WHERE INVESTOR_ID='%s']]></item>
-		</helper>
-	</step>
-	<step note="打桩-初始化状态-删除个人投资者记录">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="INVESTOR_ID" statement="delete"><![CDATA[delete from INVESTOR_INDIVIDUAL WHERE INVESTOR_ID='%s']]></item>
-		</helper>
-	</step>
-	<step note="打桩-初始化状态-删除投资者和机构关联记录">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="INVESTOR_ID" statement="delete"><![CDATA[delete from INVESTOR_INSTITUTION WHERE INVESTOR_ID='%s']]></item>
-		</helper>
-	</step>
-	<step note="投资者银行签约">
+	<step note="更新代购产品">
 		<helper name="helper.thrift">
-			<item name="call" function="investor_bankSign">
-				<param type="BankSignInfoStruct">
-					<val name="investorID" format="INVESTOR_ID">%s</val>
-					<val name="id_type" format="ID_TYPE">%s</val>
-					<val name="id_name" format="ID_NAME">%s</val>
-					<val name="id_number" format="ID_NUMBER">%s</val>
-					<val name="id_authority" format="ID_AUTHORITY">%s</val>
-					<val name="id_address" format="ID_ADDRESS">%s</val>
-					<val name="id_card_vaild" format="ID_CARD_VAILD_DATE">%s</val>
-					<val name="gender" format="GENDER">%s</val>
-					<val name="proxyBankID" format="CLEARBANK_ID">%s</val>   
-					<val name="bank_account" format="bank_account">%s</val>    
+			<item name="call" function="institution_productaudit">
+				<param type="ProductAuditStruct" name="productaudit">
+					<val name="institutionID" format="institutionID">%s</val>
+					<val name="productids">
+						<item>
+							<val name="productid" format="PRODUCT_ID_A">%s</val>
+							<val name="opetype">1</val>
+						</item>
+						<item>
+							<val name="productid" format="PRODUCT_ID_B">%s</val>
+							<val name="opetype">1</val>
+						</item>
+					</val>
 				</param>
+				<ret type="ProductAuditResultStruct">
+					<val name="count">count</val>
+				</ret>
 			</item>
 		</helper>
+		<return>
+			<item name="count">count</item>
+		</return>
+
 	</step>
-	<step note="检查数据库-签约账户中有一条记录">
+	<step note="检查数据库机构产品表中增加了两条记录">
 		<helper name="helper.mysql.execute">
-			<item name="sql" format="INVESTOR_ID" statement="select"><![CDATA[SELECT COUNT(*) as c FROM ACCOUNT_FUND WHERE INVESTOR_ID ='%s']]></item>
+			<item name="sql" format="institutionID" statement="select"><![CDATA[SELECT COUNT(*) as c FROM INSTITUTION_PRODUCT WHERE INSTITUTION_ID='%s']]></item>
 		</helper>
 		<return>
 			<item name="count">c</item>
 		</return>
 		<assert>
-			<item name="equals" var="count" param="1"></item>
-		</assert>
-	</step>
-	<step note="检查数据库-产品账户中有一条记录">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="INVESTOR_ID" statement="select"><![CDATA[SELECT COUNT(*) as c1 FROM ACCOUNT_PRODUCT WHERE INVESTOR_ID ='%s']]></item>
-		</helper>
-		<return>
-			<item name="count">c1</item>
-		</return>
-		<assert>
-			<item name="equals" var="count" param="1"></item>
-		</assert>
-	</step>
-	<step note="检查数据库-个人投资者中有一条记录">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="INVESTOR_ID" statement="select"><![CDATA[SELECT COUNT(*) as c1 FROM INVESTOR_INDIVIDUAL WHERE INVESTOR_ID ='%s']]></item>
-		</helper>
-		<return>
-			<item name="count">c1</item>
-		</return>
-		<assert>
-			<item name="equals" var="count" param="1"></item>
-		</assert>
-	</step>
-	<step note="检查数据库-客户状态变化">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="INVESTOR_ID" statement="select"><![CDATA[SELECT INVESTOR_STATE as s FROM INVESTOR WHERE INVESTOR_ID ='%s']]></item>
-		</helper>
-		<return>
-			<item name="INVESTOR_STATE">s</item>
-		</return>
-		<assert>
-			<item name="equals" var="INVESTOR_STATE" param="0"></item>
+			<item name="equals" var="count" param="3"></item>
 		</assert>
 	</step>
 </case>

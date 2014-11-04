@@ -30,13 +30,14 @@ public class Assert {
 	}
 
 	static protected boolean notNull(String message) {
-		logger.debug("notnull message is" + message);
+
 		if (message == null)
 			return false;
 		if (message == "")
 			return false;
 		if (message.length() == 0)
 			return false;
+
 		return true;
 	}
 

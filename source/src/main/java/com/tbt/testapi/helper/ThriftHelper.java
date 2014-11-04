@@ -3,10 +3,13 @@ package com.tbt.testapi.helper;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.thrift.TApplicationException;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -61,26 +64,25 @@ public class ThriftHelper extends BaseHelper {
 			SecurityException, NoSuchMethodException,
 			IllegalArgumentException, InvocationTargetException,
 			StepException {
+		// logger.debug("newInstance n " + namespace);
+		// logger.debug("newInstance e " + el);
+		Utils.formatElement(vars, el);
 		if (namespace.equals("String")
 				|| namespace.equals("java.lang.String")) {
-			Utils.formatElement(vars, el);
+
 			return el.getText();
 		} else if (namespace.equals("int")
 				|| namespace.equals("java.lang.Integer")) {
-			Utils.formatElement(vars, el);
 			return new Integer(el.getText());
 		} else if (namespace.equals("double")
 				|| namespace.equals("java.lang.double")) {
-			Utils.formatElement(vars, el);
 			return new Double(el.getText());
 		}
-		Object object = Class.forName(packageName + "." + namespace)
-				.newInstance();
-		newStruct(object, el, vars);
-		return object;
+
+		return newStruct(namespace, el, vars);
 	}
 
-	public void newStruct(Object object, Element root,
+	public Object newStruct(String type, Element el,
 			HashMap<String, Object> vars)
 			throws NoSuchFieldException, SecurityException,
 			ClassNotFoundException, NoSuchMethodException,
@@ -88,28 +90,88 @@ public class ThriftHelper extends BaseHelper {
 			InvocationTargetException, InstantiationException,
 			StepException {
 
-		for (Iterator<Element> varsIt = root.elementIterator("val"); varsIt
-				.hasNext();) {
-			Element vel = varsIt.next();
+		Object object = Class.forName(packageName + "." + type)
+				.newInstance();
 
-			String name = vel.attributeValue("name");
+		List<Element> list = el.selectNodes("val");
 
-			Utils.formatElement(vars, vel);
+		for (Iterator<Element> it = list.iterator(); it.hasNext();) {
+			Element val = it.next();
+			String valName = val.attributeValue("name");
+			Field f = object.getClass().getDeclaredField(valName);
+			String varType = f.getType().getName();
 
-			String val = vel.getText();
+			if (varType.equals("java.util.Set")) {
+				ParameterizedType pt = (ParameterizedType) f
+						.getGenericType();
+				varType = pt.getActualTypeArguments()[0]
+						.getTypeName();
+				// logger.debug("varType " + varType);
+			}
 
-			Field f = object.getClass().getDeclaredField(name);
+			Object sub = parseStruct(varType, val, vars);
 
-			String type = f.getType().getName();
-
-			Object sub = newInstance(type, vel, vars);
 			Method method = object
 					.getClass()
 					.getMethod("set"
-							+ Utils.toUpperCaseFirstOne(name),
+							+ Utils.toUpperCaseFirstOne(valName),
 							new Class[] { f.getType() });
 			method.invoke(object, new Object[] { sub });
 		}
+
+		return object;
+	}
+
+	public Set<Object> parseSetStruct(String type, Element el,
+			HashMap<String, Object> vars)
+			throws ClassNotFoundException, InstantiationException,
+			IllegalAccessException, NoSuchFieldException,
+			SecurityException, NoSuchMethodException,
+			IllegalArgumentException, InvocationTargetException,
+			StepException {
+		Set set = new HashSet();
+		List list = el.selectNodes("item");
+		Object object = null;
+		for (Iterator<Element> it = list.iterator(); it.hasNext();) {
+			Element item = it.next();
+			object = parseStruct(type, item, vars);
+			set.add(object);
+		}
+
+		return set;
+
+	}
+
+	public Object parseStruct(String type, Element el,
+			HashMap<String, Object> vars)
+			throws ClassNotFoundException, InstantiationException,
+			IllegalAccessException, NoSuchFieldException,
+			SecurityException, NoSuchMethodException,
+			IllegalArgumentException, InvocationTargetException,
+			StepException {
+		String name = el.attributeValue("name");
+		List<Element> list = el.selectNodes("item");
+		type = type.replace(packageName + ".", "");
+		// logger.debug("new type " + type);
+		if (list.size() != 0) {
+			return parseSetStruct(type, el, vars);
+		}
+
+		// logger.debug("name " + name);
+
+		Object object = newInstance(type, el, vars);
+
+		return object;
+	}
+
+	public Object parseStruct(Element el, HashMap<String, Object> vars)
+			throws ClassNotFoundException, InstantiationException,
+			IllegalAccessException, NoSuchFieldException,
+			SecurityException, NoSuchMethodException,
+			IllegalArgumentException, InvocationTargetException,
+			StepException {
+		String type = el.attributeValue("type");
+		return parseStruct(type, el, vars);
 	}
 
 	@Override
@@ -165,12 +227,11 @@ public class ThriftHelper extends BaseHelper {
 			for (Iterator<Element> it = list.iterator(); it
 					.hasNext();) {
 				Element pel = it.next();
-				String type = pel.attributeValue("type");
-				Class param = getClass(type);
-				Object object = newInstance(type, pel, vars);
-				params.add(param);
+				Object object = parseStruct(pel, vars);
 				runParams.add(object);
+				params.add(object.getClass());
 			}
+
 			Class[] classParams = new Class[params.size()];
 			classParams = params.toArray(classParams);
 			method = client.getClass().getMethod(function,
@@ -204,6 +265,7 @@ public class ThriftHelper extends BaseHelper {
 					if (type == null) {
 						String retVal = String
 								.valueOf(retObj);
+						logger.debug("retVal " + retVal);
 						jo.addProperty(rvel
 								.attributeValue("name"),
 								retVal);
@@ -233,8 +295,9 @@ public class ThriftHelper extends BaseHelper {
 				FitsException ee = (FitsException) e
 						.getTargetException();
 				jo.addProperty("exceptionCode", ee.getCode());
-				Utils.debugLog("FitsException: "
-						+ e.getCause().getMessage());
+				JsonObject exceptionObject = new JsonObject();
+				vars.put("exception_code", ee.getCode());
+				vars.put("exception_messsage", ee.getMessage());
 				return jo;
 			} else if (e.getCause() instanceof TTransportException) {
 
@@ -275,4 +338,5 @@ public class ThriftHelper extends BaseHelper {
 
 		return jo;
 	}
+
 }
