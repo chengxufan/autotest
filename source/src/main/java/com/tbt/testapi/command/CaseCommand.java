@@ -153,7 +153,10 @@ public class CaseCommand extends BaseCommand {
 						}
 						jel = data;
 					}
-					vars.put(key, jel.toString());
+					logger.debug("vars put key " + key
+							+ " jel "
+							+ jel.getAsString());
+					vars.put(key, jel.getAsString());
 				}
 			}
 

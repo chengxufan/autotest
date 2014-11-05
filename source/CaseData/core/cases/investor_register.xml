@@ -1,26 +1,19 @@
-<case id="BankSign">
-	<context>
-		<item name="INVESTOR_ID">00X00060</item>	<!--投资人ID  -->
-		<item name="ID_TYPE">0</item>				<!--有效身份证件类型 0中国居民身份证、2港澳居民来往内地通行证、3台湾居民来往大陆通行证、4外国人永久居留证、5外国护照、6其他  -->
-		<item name="ID_NAME">gll</item>				<!-- 有效身份证件的姓名 -->
-		<item name="ID_NUMBER">131022497802042028</item>	<!--有效身份证件的号码  -->
-		<item name="ID_AUTHORITY">河北省廊坊市公安局</item>			<!--  有效身份证件的发证单位-->
-		<item name="ID_ADDRESS">河北省廊坊市</item>			<!-- 有效身份证件所记录的地址 -->
-		<item name="ID_CARD_VAILD_DATE">20141028</item>	<!--  有效身份证件的有效期-->
-		<item name="GENDER">1</item>				<!--性别  -->
-		<item name="CLEARBANK_ID">1</item>
-		<item name="bank_account">622788012455</item>				<!-- 普通结算户号码 -->
+<case id="institution_getallproduct">
+	<context>	
 	</context>
-	
-	<step note="检查数据库-客户状态变化">
-		<helper name="helper.mysql.execute">
-			<item name="sql" format="INVESTOR_ID" statement="select"><![CDATA[SELECT INVESTOR_STATE as s FROM INVESTOR WHERE INVESTOR_ID ='%s']]></item>
+	<step note="获取产品列表">
+		<helper name="helper.thrift">
+			<item name="call" function="institution_getallproduct">
+				<ret type="ProductListReultStruct">	
+					<val name="products" type="list">products</val>
+				</ret>
+			</item>
 		</helper>
 		<return>
-			<item name="INVESTOR_STATE">s</item>
+			<item name="products">products</item>
 		</return>
 		<assert>
-			<item name="equals" var="INVESTOR_STATE" param="0"></item>
+			<item name="notnull" var="products"></item> 
 		</assert>
 	</step>
 </case>

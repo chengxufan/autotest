@@ -42,7 +42,7 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 			if (statement == null
 					|| statement.toString()
 							.equals("select")) {
-
+				logger.debug("sql " + sql.getText());
 				ResultSet rs = stmt.executeQuery(sql.getText());
 
 				ResultSetMetaData rsmd = (ResultSetMetaData) rs
@@ -51,8 +51,8 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 				JsonElement je = null;
 				while (rs.next()) {
 					for (int i = 1; i <= cols; i++) {
-						// logger.debug("rs "
-						// + rs.getInt(i));
+						logger.debug("rs "
+								+ rs.getString(i));
 						String cname = rsmd
 								.getColumnLabel(i);
 						int type = rsmd.getColumnType(i);

@@ -24,10 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.tbt.testapi.BaseHelper;
 import com.tbt.testapi.EnvConfig;
 import com.tbt.testapi.TestApiException;
@@ -269,8 +266,7 @@ public class ThriftHelper extends BaseHelper {
 					if (type == null) {
 						String retVal = String
 								.valueOf(retObj);
-						// logger.debug("retVal " +
-						// retVal);
+						logger.debug("retVal " + retVal);
 						jo.addProperty(rvel
 								.attributeValue("name"),
 								retVal);
@@ -279,13 +275,16 @@ public class ThriftHelper extends BaseHelper {
 							Gson gson = new Gson();
 							String jsonString = gson
 									.toJson(retObj);
-							JsonParser jp = new JsonParser();
-							JsonElement je = jp
-									.parse(jsonString);
-							JsonArray ja = je
-									.getAsJsonArray();
-							jo.add(rvel.attributeValue("name"),
-									ja);
+							// JsonParser jp = new
+							// JsonParser();
+							// JsonElement je = jp
+							// .parse(jsonString);
+							// JsonArray ja = je
+							// .getAsJsonArray();
+							//
+							jo.addProperty(rvel
+									.attributeValue("name"),
+									jsonString);
 
 						}
 					}
