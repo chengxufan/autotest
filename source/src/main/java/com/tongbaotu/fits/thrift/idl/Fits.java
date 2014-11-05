@@ -56,9 +56,17 @@ public class Fits {
 
     public ProductListReultStruct institution_getallproduct() throws FitsException, org.apache.thrift.TException;
 
+    public ProductInfoStruct institution_getproduct(String productid) throws FitsException, org.apache.thrift.TException;
+
+    public ProductListReultStruct institution_getauditproduct(String institutionid) throws FitsException, org.apache.thrift.TException;
+
+    public ProductListReultStruct institution_getissuproduct(String institutionid) throws FitsException, org.apache.thrift.TException;
+
     public ProductAuditResultStruct institution_productaudit(ProductAuditStruct productaudit) throws FitsException, org.apache.thrift.TException;
 
     public InstitutionInfoStruct institution_getInfo(String institutionid) throws FitsException, org.apache.thrift.TException;
+
+    public InvestorInfoStruct investor_getInfo(String investorid) throws FitsException, org.apache.thrift.TException;
 
   }
 
@@ -84,9 +92,17 @@ public class Fits {
 
     public void institution_getallproduct(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
+    public void institution_getproduct(String productid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void institution_getauditproduct(String institutionid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void institution_getissuproduct(String institutionid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
     public void institution_productaudit(ProductAuditStruct productaudit, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void institution_getInfo(String institutionid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void investor_getInfo(String investorid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -361,6 +377,84 @@ public class Fits {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "institution_getallproduct failed: unknown result");
     }
 
+    public ProductInfoStruct institution_getproduct(String productid) throws FitsException, org.apache.thrift.TException
+    {
+      send_institution_getproduct(productid);
+      return recv_institution_getproduct();
+    }
+
+    public void send_institution_getproduct(String productid) throws org.apache.thrift.TException
+    {
+      institution_getproduct_args args = new institution_getproduct_args();
+      args.setProductid(productid);
+      sendBase("institution_getproduct", args);
+    }
+
+    public ProductInfoStruct recv_institution_getproduct() throws FitsException, org.apache.thrift.TException
+    {
+      institution_getproduct_result result = new institution_getproduct_result();
+      receiveBase(result, "institution_getproduct");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.fe != null) {
+        throw result.fe;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "institution_getproduct failed: unknown result");
+    }
+
+    public ProductListReultStruct institution_getauditproduct(String institutionid) throws FitsException, org.apache.thrift.TException
+    {
+      send_institution_getauditproduct(institutionid);
+      return recv_institution_getauditproduct();
+    }
+
+    public void send_institution_getauditproduct(String institutionid) throws org.apache.thrift.TException
+    {
+      institution_getauditproduct_args args = new institution_getauditproduct_args();
+      args.setInstitutionid(institutionid);
+      sendBase("institution_getauditproduct", args);
+    }
+
+    public ProductListReultStruct recv_institution_getauditproduct() throws FitsException, org.apache.thrift.TException
+    {
+      institution_getauditproduct_result result = new institution_getauditproduct_result();
+      receiveBase(result, "institution_getauditproduct");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.fe != null) {
+        throw result.fe;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "institution_getauditproduct failed: unknown result");
+    }
+
+    public ProductListReultStruct institution_getissuproduct(String institutionid) throws FitsException, org.apache.thrift.TException
+    {
+      send_institution_getissuproduct(institutionid);
+      return recv_institution_getissuproduct();
+    }
+
+    public void send_institution_getissuproduct(String institutionid) throws org.apache.thrift.TException
+    {
+      institution_getissuproduct_args args = new institution_getissuproduct_args();
+      args.setInstitutionid(institutionid);
+      sendBase("institution_getissuproduct", args);
+    }
+
+    public ProductListReultStruct recv_institution_getissuproduct() throws FitsException, org.apache.thrift.TException
+    {
+      institution_getissuproduct_result result = new institution_getissuproduct_result();
+      receiveBase(result, "institution_getissuproduct");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.fe != null) {
+        throw result.fe;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "institution_getissuproduct failed: unknown result");
+    }
+
     public ProductAuditResultStruct institution_productaudit(ProductAuditStruct productaudit) throws FitsException, org.apache.thrift.TException
     {
       send_institution_productaudit(productaudit);
@@ -411,6 +505,32 @@ public class Fits {
         throw result.fe;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "institution_getInfo failed: unknown result");
+    }
+
+    public InvestorInfoStruct investor_getInfo(String investorid) throws FitsException, org.apache.thrift.TException
+    {
+      send_investor_getInfo(investorid);
+      return recv_investor_getInfo();
+    }
+
+    public void send_investor_getInfo(String investorid) throws org.apache.thrift.TException
+    {
+      investor_getInfo_args args = new investor_getInfo_args();
+      args.setInvestorid(investorid);
+      sendBase("investor_getInfo", args);
+    }
+
+    public InvestorInfoStruct recv_investor_getInfo() throws FitsException, org.apache.thrift.TException
+    {
+      investor_getInfo_result result = new investor_getInfo_result();
+      receiveBase(result, "investor_getInfo");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.fe != null) {
+        throw result.fe;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "investor_getInfo failed: unknown result");
     }
 
   }
@@ -751,6 +871,102 @@ public class Fits {
       }
     }
 
+    public void institution_getproduct(String productid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      institution_getproduct_call method_call = new institution_getproduct_call(productid, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class institution_getproduct_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String productid;
+      public institution_getproduct_call(String productid, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.productid = productid;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("institution_getproduct", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        institution_getproduct_args args = new institution_getproduct_args();
+        args.setProductid(productid);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public ProductInfoStruct getResult() throws FitsException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_institution_getproduct();
+      }
+    }
+
+    public void institution_getauditproduct(String institutionid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      institution_getauditproduct_call method_call = new institution_getauditproduct_call(institutionid, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class institution_getauditproduct_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String institutionid;
+      public institution_getauditproduct_call(String institutionid, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.institutionid = institutionid;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("institution_getauditproduct", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        institution_getauditproduct_args args = new institution_getauditproduct_args();
+        args.setInstitutionid(institutionid);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public ProductListReultStruct getResult() throws FitsException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_institution_getauditproduct();
+      }
+    }
+
+    public void institution_getissuproduct(String institutionid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      institution_getissuproduct_call method_call = new institution_getissuproduct_call(institutionid, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class institution_getissuproduct_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String institutionid;
+      public institution_getissuproduct_call(String institutionid, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.institutionid = institutionid;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("institution_getissuproduct", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        institution_getissuproduct_args args = new institution_getissuproduct_args();
+        args.setInstitutionid(institutionid);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public ProductListReultStruct getResult() throws FitsException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_institution_getissuproduct();
+      }
+    }
+
     public void institution_productaudit(ProductAuditStruct productaudit, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       institution_productaudit_call method_call = new institution_productaudit_call(productaudit, resultHandler, this, ___protocolFactory, ___transport);
@@ -815,6 +1031,38 @@ public class Fits {
       }
     }
 
+    public void investor_getInfo(String investorid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      investor_getInfo_call method_call = new investor_getInfo_call(investorid, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class investor_getInfo_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String investorid;
+      public investor_getInfo_call(String investorid, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.investorid = investorid;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("investor_getInfo", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        investor_getInfo_args args = new investor_getInfo_args();
+        args.setInvestorid(investorid);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public InvestorInfoStruct getResult() throws FitsException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_investor_getInfo();
+      }
+    }
+
   }
 
   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
@@ -838,8 +1086,12 @@ public class Fits {
       processMap.put("issubank_productupdate", new issubank_productupdate());
       processMap.put("institution_regist", new institution_regist());
       processMap.put("institution_getallproduct", new institution_getallproduct());
+      processMap.put("institution_getproduct", new institution_getproduct());
+      processMap.put("institution_getauditproduct", new institution_getauditproduct());
+      processMap.put("institution_getissuproduct", new institution_getissuproduct());
       processMap.put("institution_productaudit", new institution_productaudit());
       processMap.put("institution_getInfo", new institution_getInfo());
+      processMap.put("investor_getInfo", new investor_getInfo());
       return processMap;
     }
 
@@ -1083,6 +1335,78 @@ public class Fits {
       }
     }
 
+    public static class institution_getproduct<I extends Iface> extends org.apache.thrift.ProcessFunction<I, institution_getproduct_args> {
+      public institution_getproduct() {
+        super("institution_getproduct");
+      }
+
+      public institution_getproduct_args getEmptyArgsInstance() {
+        return new institution_getproduct_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public institution_getproduct_result getResult(I iface, institution_getproduct_args args) throws org.apache.thrift.TException {
+        institution_getproduct_result result = new institution_getproduct_result();
+        try {
+          result.success = iface.institution_getproduct(args.productid);
+        } catch (FitsException fe) {
+          result.fe = fe;
+        }
+        return result;
+      }
+    }
+
+    public static class institution_getauditproduct<I extends Iface> extends org.apache.thrift.ProcessFunction<I, institution_getauditproduct_args> {
+      public institution_getauditproduct() {
+        super("institution_getauditproduct");
+      }
+
+      public institution_getauditproduct_args getEmptyArgsInstance() {
+        return new institution_getauditproduct_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public institution_getauditproduct_result getResult(I iface, institution_getauditproduct_args args) throws org.apache.thrift.TException {
+        institution_getauditproduct_result result = new institution_getauditproduct_result();
+        try {
+          result.success = iface.institution_getauditproduct(args.institutionid);
+        } catch (FitsException fe) {
+          result.fe = fe;
+        }
+        return result;
+      }
+    }
+
+    public static class institution_getissuproduct<I extends Iface> extends org.apache.thrift.ProcessFunction<I, institution_getissuproduct_args> {
+      public institution_getissuproduct() {
+        super("institution_getissuproduct");
+      }
+
+      public institution_getissuproduct_args getEmptyArgsInstance() {
+        return new institution_getissuproduct_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public institution_getissuproduct_result getResult(I iface, institution_getissuproduct_args args) throws org.apache.thrift.TException {
+        institution_getissuproduct_result result = new institution_getissuproduct_result();
+        try {
+          result.success = iface.institution_getissuproduct(args.institutionid);
+        } catch (FitsException fe) {
+          result.fe = fe;
+        }
+        return result;
+      }
+    }
+
     public static class institution_productaudit<I extends Iface> extends org.apache.thrift.ProcessFunction<I, institution_productaudit_args> {
       public institution_productaudit() {
         super("institution_productaudit");
@@ -1131,6 +1455,30 @@ public class Fits {
       }
     }
 
+    public static class investor_getInfo<I extends Iface> extends org.apache.thrift.ProcessFunction<I, investor_getInfo_args> {
+      public investor_getInfo() {
+        super("investor_getInfo");
+      }
+
+      public investor_getInfo_args getEmptyArgsInstance() {
+        return new investor_getInfo_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public investor_getInfo_result getResult(I iface, investor_getInfo_args args) throws org.apache.thrift.TException {
+        investor_getInfo_result result = new investor_getInfo_result();
+        try {
+          result.success = iface.investor_getInfo(args.investorid);
+        } catch (FitsException fe) {
+          result.fe = fe;
+        }
+        return result;
+      }
+    }
+
   }
 
   public static class AsyncProcessor<I extends AsyncIface> extends org.apache.thrift.TBaseAsyncProcessor<I> {
@@ -1154,8 +1502,12 @@ public class Fits {
       processMap.put("issubank_productupdate", new issubank_productupdate());
       processMap.put("institution_regist", new institution_regist());
       processMap.put("institution_getallproduct", new institution_getallproduct());
+      processMap.put("institution_getproduct", new institution_getproduct());
+      processMap.put("institution_getauditproduct", new institution_getauditproduct());
+      processMap.put("institution_getissuproduct", new institution_getissuproduct());
       processMap.put("institution_productaudit", new institution_productaudit());
       processMap.put("institution_getInfo", new institution_getInfo());
+      processMap.put("investor_getInfo", new investor_getInfo());
       return processMap;
     }
 
@@ -1726,6 +2078,177 @@ public class Fits {
       }
     }
 
+    public static class institution_getproduct<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, institution_getproduct_args, ProductInfoStruct> {
+      public institution_getproduct() {
+        super("institution_getproduct");
+      }
+
+      public institution_getproduct_args getEmptyArgsInstance() {
+        return new institution_getproduct_args();
+      }
+
+      public AsyncMethodCallback<ProductInfoStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<ProductInfoStruct>() { 
+          public void onComplete(ProductInfoStruct o) {
+            institution_getproduct_result result = new institution_getproduct_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            institution_getproduct_result result = new institution_getproduct_result();
+            if (e instanceof FitsException) {
+                        result.fe = (FitsException) e;
+                        result.setFeIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, institution_getproduct_args args, org.apache.thrift.async.AsyncMethodCallback<ProductInfoStruct> resultHandler) throws TException {
+        iface.institution_getproduct(args.productid,resultHandler);
+      }
+    }
+
+    public static class institution_getauditproduct<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, institution_getauditproduct_args, ProductListReultStruct> {
+      public institution_getauditproduct() {
+        super("institution_getauditproduct");
+      }
+
+      public institution_getauditproduct_args getEmptyArgsInstance() {
+        return new institution_getauditproduct_args();
+      }
+
+      public AsyncMethodCallback<ProductListReultStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<ProductListReultStruct>() { 
+          public void onComplete(ProductListReultStruct o) {
+            institution_getauditproduct_result result = new institution_getauditproduct_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            institution_getauditproduct_result result = new institution_getauditproduct_result();
+            if (e instanceof FitsException) {
+                        result.fe = (FitsException) e;
+                        result.setFeIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, institution_getauditproduct_args args, org.apache.thrift.async.AsyncMethodCallback<ProductListReultStruct> resultHandler) throws TException {
+        iface.institution_getauditproduct(args.institutionid,resultHandler);
+      }
+    }
+
+    public static class institution_getissuproduct<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, institution_getissuproduct_args, ProductListReultStruct> {
+      public institution_getissuproduct() {
+        super("institution_getissuproduct");
+      }
+
+      public institution_getissuproduct_args getEmptyArgsInstance() {
+        return new institution_getissuproduct_args();
+      }
+
+      public AsyncMethodCallback<ProductListReultStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<ProductListReultStruct>() { 
+          public void onComplete(ProductListReultStruct o) {
+            institution_getissuproduct_result result = new institution_getissuproduct_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            institution_getissuproduct_result result = new institution_getissuproduct_result();
+            if (e instanceof FitsException) {
+                        result.fe = (FitsException) e;
+                        result.setFeIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, institution_getissuproduct_args args, org.apache.thrift.async.AsyncMethodCallback<ProductListReultStruct> resultHandler) throws TException {
+        iface.institution_getissuproduct(args.institutionid,resultHandler);
+      }
+    }
+
     public static class institution_productaudit<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, institution_productaudit_args, ProductAuditResultStruct> {
       public institution_productaudit() {
         super("institution_productaudit");
@@ -1837,6 +2360,63 @@ public class Fits {
 
       public void start(I iface, institution_getInfo_args args, org.apache.thrift.async.AsyncMethodCallback<InstitutionInfoStruct> resultHandler) throws TException {
         iface.institution_getInfo(args.institutionid,resultHandler);
+      }
+    }
+
+    public static class investor_getInfo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, investor_getInfo_args, InvestorInfoStruct> {
+      public investor_getInfo() {
+        super("investor_getInfo");
+      }
+
+      public investor_getInfo_args getEmptyArgsInstance() {
+        return new investor_getInfo_args();
+      }
+
+      public AsyncMethodCallback<InvestorInfoStruct> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<InvestorInfoStruct>() { 
+          public void onComplete(InvestorInfoStruct o) {
+            investor_getInfo_result result = new investor_getInfo_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            investor_getInfo_result result = new investor_getInfo_result();
+            if (e instanceof FitsException) {
+                        result.fe = (FitsException) e;
+                        result.setFeIsSet(true);
+                        msg = result;
+            }
+             else 
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, investor_getInfo_args args, org.apache.thrift.async.AsyncMethodCallback<InvestorInfoStruct> resultHandler) throws TException {
+        iface.investor_getInfo(args.investorid,resultHandler);
       }
     }
 
@@ -9707,6 +10287,2451 @@ public class Fits {
 
   }
 
+  public static class institution_getproduct_args implements org.apache.thrift.TBase<institution_getproduct_args, institution_getproduct_args._Fields>, java.io.Serializable, Cloneable, Comparable<institution_getproduct_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("institution_getproduct_args");
+
+    private static final org.apache.thrift.protocol.TField PRODUCTID_FIELD_DESC = new org.apache.thrift.protocol.TField("productid", org.apache.thrift.protocol.TType.STRING, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new institution_getproduct_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new institution_getproduct_argsTupleSchemeFactory());
+    }
+
+    public String productid; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      PRODUCTID((short)1, "productid");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // PRODUCTID
+            return PRODUCTID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.PRODUCTID, new org.apache.thrift.meta_data.FieldMetaData("productid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(institution_getproduct_args.class, metaDataMap);
+    }
+
+    public institution_getproduct_args() {
+    }
+
+    public institution_getproduct_args(
+      String productid)
+    {
+      this();
+      this.productid = productid;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public institution_getproduct_args(institution_getproduct_args other) {
+      if (other.isSetProductid()) {
+        this.productid = other.productid;
+      }
+    }
+
+    public institution_getproduct_args deepCopy() {
+      return new institution_getproduct_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.productid = null;
+    }
+
+    public String getProductid() {
+      return this.productid;
+    }
+
+    public institution_getproduct_args setProductid(String productid) {
+      this.productid = productid;
+      return this;
+    }
+
+    public void unsetProductid() {
+      this.productid = null;
+    }
+
+    /** Returns true if field productid is set (has been assigned a value) and false otherwise */
+    public boolean isSetProductid() {
+      return this.productid != null;
+    }
+
+    public void setProductidIsSet(boolean value) {
+      if (!value) {
+        this.productid = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case PRODUCTID:
+        if (value == null) {
+          unsetProductid();
+        } else {
+          setProductid((String)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case PRODUCTID:
+        return getProductid();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case PRODUCTID:
+        return isSetProductid();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof institution_getproduct_args)
+        return this.equals((institution_getproduct_args)that);
+      return false;
+    }
+
+    public boolean equals(institution_getproduct_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_productid = true && this.isSetProductid();
+      boolean that_present_productid = true && that.isSetProductid();
+      if (this_present_productid || that_present_productid) {
+        if (!(this_present_productid && that_present_productid))
+          return false;
+        if (!this.productid.equals(that.productid))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(institution_getproduct_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetProductid()).compareTo(other.isSetProductid());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetProductid()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.productid, other.productid);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("institution_getproduct_args(");
+      boolean first = true;
+
+      sb.append("productid:");
+      if (this.productid == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.productid);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class institution_getproduct_argsStandardSchemeFactory implements SchemeFactory {
+      public institution_getproduct_argsStandardScheme getScheme() {
+        return new institution_getproduct_argsStandardScheme();
+      }
+    }
+
+    private static class institution_getproduct_argsStandardScheme extends StandardScheme<institution_getproduct_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, institution_getproduct_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // PRODUCTID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.productid = iprot.readString();
+                struct.setProductidIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, institution_getproduct_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.productid != null) {
+          oprot.writeFieldBegin(PRODUCTID_FIELD_DESC);
+          oprot.writeString(struct.productid);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class institution_getproduct_argsTupleSchemeFactory implements SchemeFactory {
+      public institution_getproduct_argsTupleScheme getScheme() {
+        return new institution_getproduct_argsTupleScheme();
+      }
+    }
+
+    private static class institution_getproduct_argsTupleScheme extends TupleScheme<institution_getproduct_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, institution_getproduct_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetProductid()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetProductid()) {
+          oprot.writeString(struct.productid);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, institution_getproduct_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.productid = iprot.readString();
+          struct.setProductidIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class institution_getproduct_result implements org.apache.thrift.TBase<institution_getproduct_result, institution_getproduct_result._Fields>, java.io.Serializable, Cloneable, Comparable<institution_getproduct_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("institution_getproduct_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new institution_getproduct_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new institution_getproduct_resultTupleSchemeFactory());
+    }
+
+    public ProductInfoStruct success; // required
+    public FitsException fe; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      FE((short)1, "fe");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // FE
+            return FE;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ProductInfoStruct.class)));
+      tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(institution_getproduct_result.class, metaDataMap);
+    }
+
+    public institution_getproduct_result() {
+    }
+
+    public institution_getproduct_result(
+      ProductInfoStruct success,
+      FitsException fe)
+    {
+      this();
+      this.success = success;
+      this.fe = fe;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public institution_getproduct_result(institution_getproduct_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new ProductInfoStruct(other.success);
+      }
+      if (other.isSetFe()) {
+        this.fe = new FitsException(other.fe);
+      }
+    }
+
+    public institution_getproduct_result deepCopy() {
+      return new institution_getproduct_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.fe = null;
+    }
+
+    public ProductInfoStruct getSuccess() {
+      return this.success;
+    }
+
+    public institution_getproduct_result setSuccess(ProductInfoStruct success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public FitsException getFe() {
+      return this.fe;
+    }
+
+    public institution_getproduct_result setFe(FitsException fe) {
+      this.fe = fe;
+      return this;
+    }
+
+    public void unsetFe() {
+      this.fe = null;
+    }
+
+    /** Returns true if field fe is set (has been assigned a value) and false otherwise */
+    public boolean isSetFe() {
+      return this.fe != null;
+    }
+
+    public void setFeIsSet(boolean value) {
+      if (!value) {
+        this.fe = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((ProductInfoStruct)value);
+        }
+        break;
+
+      case FE:
+        if (value == null) {
+          unsetFe();
+        } else {
+          setFe((FitsException)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case FE:
+        return getFe();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case FE:
+        return isSetFe();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof institution_getproduct_result)
+        return this.equals((institution_getproduct_result)that);
+      return false;
+    }
+
+    public boolean equals(institution_getproduct_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_fe = true && this.isSetFe();
+      boolean that_present_fe = true && that.isSetFe();
+      if (this_present_fe || that_present_fe) {
+        if (!(this_present_fe && that_present_fe))
+          return false;
+        if (!this.fe.equals(that.fe))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(institution_getproduct_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetFe()).compareTo(other.isSetFe());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFe()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fe, other.fe);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("institution_getproduct_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("fe:");
+      if (this.fe == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.fe);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class institution_getproduct_resultStandardSchemeFactory implements SchemeFactory {
+      public institution_getproduct_resultStandardScheme getScheme() {
+        return new institution_getproduct_resultStandardScheme();
+      }
+    }
+
+    private static class institution_getproduct_resultStandardScheme extends StandardScheme<institution_getproduct_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, institution_getproduct_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new ProductInfoStruct();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // FE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.fe = new FitsException();
+                struct.fe.read(iprot);
+                struct.setFeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, institution_getproduct_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.fe != null) {
+          oprot.writeFieldBegin(FE_FIELD_DESC);
+          struct.fe.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class institution_getproduct_resultTupleSchemeFactory implements SchemeFactory {
+      public institution_getproduct_resultTupleScheme getScheme() {
+        return new institution_getproduct_resultTupleScheme();
+      }
+    }
+
+    private static class institution_getproduct_resultTupleScheme extends TupleScheme<institution_getproduct_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, institution_getproduct_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetFe()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetFe()) {
+          struct.fe.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, institution_getproduct_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new ProductInfoStruct();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.fe = new FitsException();
+          struct.fe.read(iprot);
+          struct.setFeIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class institution_getauditproduct_args implements org.apache.thrift.TBase<institution_getauditproduct_args, institution_getauditproduct_args._Fields>, java.io.Serializable, Cloneable, Comparable<institution_getauditproduct_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("institution_getauditproduct_args");
+
+    private static final org.apache.thrift.protocol.TField INSTITUTIONID_FIELD_DESC = new org.apache.thrift.protocol.TField("institutionid", org.apache.thrift.protocol.TType.STRING, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new institution_getauditproduct_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new institution_getauditproduct_argsTupleSchemeFactory());
+    }
+
+    public String institutionid; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      INSTITUTIONID((short)1, "institutionid");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // INSTITUTIONID
+            return INSTITUTIONID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.INSTITUTIONID, new org.apache.thrift.meta_data.FieldMetaData("institutionid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(institution_getauditproduct_args.class, metaDataMap);
+    }
+
+    public institution_getauditproduct_args() {
+    }
+
+    public institution_getauditproduct_args(
+      String institutionid)
+    {
+      this();
+      this.institutionid = institutionid;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public institution_getauditproduct_args(institution_getauditproduct_args other) {
+      if (other.isSetInstitutionid()) {
+        this.institutionid = other.institutionid;
+      }
+    }
+
+    public institution_getauditproduct_args deepCopy() {
+      return new institution_getauditproduct_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.institutionid = null;
+    }
+
+    public String getInstitutionid() {
+      return this.institutionid;
+    }
+
+    public institution_getauditproduct_args setInstitutionid(String institutionid) {
+      this.institutionid = institutionid;
+      return this;
+    }
+
+    public void unsetInstitutionid() {
+      this.institutionid = null;
+    }
+
+    /** Returns true if field institutionid is set (has been assigned a value) and false otherwise */
+    public boolean isSetInstitutionid() {
+      return this.institutionid != null;
+    }
+
+    public void setInstitutionidIsSet(boolean value) {
+      if (!value) {
+        this.institutionid = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case INSTITUTIONID:
+        if (value == null) {
+          unsetInstitutionid();
+        } else {
+          setInstitutionid((String)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case INSTITUTIONID:
+        return getInstitutionid();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case INSTITUTIONID:
+        return isSetInstitutionid();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof institution_getauditproduct_args)
+        return this.equals((institution_getauditproduct_args)that);
+      return false;
+    }
+
+    public boolean equals(institution_getauditproduct_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_institutionid = true && this.isSetInstitutionid();
+      boolean that_present_institutionid = true && that.isSetInstitutionid();
+      if (this_present_institutionid || that_present_institutionid) {
+        if (!(this_present_institutionid && that_present_institutionid))
+          return false;
+        if (!this.institutionid.equals(that.institutionid))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(institution_getauditproduct_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetInstitutionid()).compareTo(other.isSetInstitutionid());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetInstitutionid()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.institutionid, other.institutionid);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("institution_getauditproduct_args(");
+      boolean first = true;
+
+      sb.append("institutionid:");
+      if (this.institutionid == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.institutionid);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class institution_getauditproduct_argsStandardSchemeFactory implements SchemeFactory {
+      public institution_getauditproduct_argsStandardScheme getScheme() {
+        return new institution_getauditproduct_argsStandardScheme();
+      }
+    }
+
+    private static class institution_getauditproduct_argsStandardScheme extends StandardScheme<institution_getauditproduct_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, institution_getauditproduct_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // INSTITUTIONID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.institutionid = iprot.readString();
+                struct.setInstitutionidIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, institution_getauditproduct_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.institutionid != null) {
+          oprot.writeFieldBegin(INSTITUTIONID_FIELD_DESC);
+          oprot.writeString(struct.institutionid);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class institution_getauditproduct_argsTupleSchemeFactory implements SchemeFactory {
+      public institution_getauditproduct_argsTupleScheme getScheme() {
+        return new institution_getauditproduct_argsTupleScheme();
+      }
+    }
+
+    private static class institution_getauditproduct_argsTupleScheme extends TupleScheme<institution_getauditproduct_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, institution_getauditproduct_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetInstitutionid()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetInstitutionid()) {
+          oprot.writeString(struct.institutionid);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, institution_getauditproduct_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.institutionid = iprot.readString();
+          struct.setInstitutionidIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class institution_getauditproduct_result implements org.apache.thrift.TBase<institution_getauditproduct_result, institution_getauditproduct_result._Fields>, java.io.Serializable, Cloneable, Comparable<institution_getauditproduct_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("institution_getauditproduct_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new institution_getauditproduct_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new institution_getauditproduct_resultTupleSchemeFactory());
+    }
+
+    public ProductListReultStruct success; // required
+    public FitsException fe; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      FE((short)1, "fe");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // FE
+            return FE;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ProductListReultStruct.class)));
+      tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(institution_getauditproduct_result.class, metaDataMap);
+    }
+
+    public institution_getauditproduct_result() {
+    }
+
+    public institution_getauditproduct_result(
+      ProductListReultStruct success,
+      FitsException fe)
+    {
+      this();
+      this.success = success;
+      this.fe = fe;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public institution_getauditproduct_result(institution_getauditproduct_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new ProductListReultStruct(other.success);
+      }
+      if (other.isSetFe()) {
+        this.fe = new FitsException(other.fe);
+      }
+    }
+
+    public institution_getauditproduct_result deepCopy() {
+      return new institution_getauditproduct_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.fe = null;
+    }
+
+    public ProductListReultStruct getSuccess() {
+      return this.success;
+    }
+
+    public institution_getauditproduct_result setSuccess(ProductListReultStruct success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public FitsException getFe() {
+      return this.fe;
+    }
+
+    public institution_getauditproduct_result setFe(FitsException fe) {
+      this.fe = fe;
+      return this;
+    }
+
+    public void unsetFe() {
+      this.fe = null;
+    }
+
+    /** Returns true if field fe is set (has been assigned a value) and false otherwise */
+    public boolean isSetFe() {
+      return this.fe != null;
+    }
+
+    public void setFeIsSet(boolean value) {
+      if (!value) {
+        this.fe = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((ProductListReultStruct)value);
+        }
+        break;
+
+      case FE:
+        if (value == null) {
+          unsetFe();
+        } else {
+          setFe((FitsException)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case FE:
+        return getFe();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case FE:
+        return isSetFe();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof institution_getauditproduct_result)
+        return this.equals((institution_getauditproduct_result)that);
+      return false;
+    }
+
+    public boolean equals(institution_getauditproduct_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_fe = true && this.isSetFe();
+      boolean that_present_fe = true && that.isSetFe();
+      if (this_present_fe || that_present_fe) {
+        if (!(this_present_fe && that_present_fe))
+          return false;
+        if (!this.fe.equals(that.fe))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(institution_getauditproduct_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetFe()).compareTo(other.isSetFe());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFe()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fe, other.fe);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("institution_getauditproduct_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("fe:");
+      if (this.fe == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.fe);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class institution_getauditproduct_resultStandardSchemeFactory implements SchemeFactory {
+      public institution_getauditproduct_resultStandardScheme getScheme() {
+        return new institution_getauditproduct_resultStandardScheme();
+      }
+    }
+
+    private static class institution_getauditproduct_resultStandardScheme extends StandardScheme<institution_getauditproduct_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, institution_getauditproduct_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new ProductListReultStruct();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // FE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.fe = new FitsException();
+                struct.fe.read(iprot);
+                struct.setFeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, institution_getauditproduct_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.fe != null) {
+          oprot.writeFieldBegin(FE_FIELD_DESC);
+          struct.fe.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class institution_getauditproduct_resultTupleSchemeFactory implements SchemeFactory {
+      public institution_getauditproduct_resultTupleScheme getScheme() {
+        return new institution_getauditproduct_resultTupleScheme();
+      }
+    }
+
+    private static class institution_getauditproduct_resultTupleScheme extends TupleScheme<institution_getauditproduct_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, institution_getauditproduct_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetFe()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetFe()) {
+          struct.fe.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, institution_getauditproduct_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new ProductListReultStruct();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.fe = new FitsException();
+          struct.fe.read(iprot);
+          struct.setFeIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class institution_getissuproduct_args implements org.apache.thrift.TBase<institution_getissuproduct_args, institution_getissuproduct_args._Fields>, java.io.Serializable, Cloneable, Comparable<institution_getissuproduct_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("institution_getissuproduct_args");
+
+    private static final org.apache.thrift.protocol.TField INSTITUTIONID_FIELD_DESC = new org.apache.thrift.protocol.TField("institutionid", org.apache.thrift.protocol.TType.STRING, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new institution_getissuproduct_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new institution_getissuproduct_argsTupleSchemeFactory());
+    }
+
+    public String institutionid; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      INSTITUTIONID((short)1, "institutionid");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // INSTITUTIONID
+            return INSTITUTIONID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.INSTITUTIONID, new org.apache.thrift.meta_data.FieldMetaData("institutionid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(institution_getissuproduct_args.class, metaDataMap);
+    }
+
+    public institution_getissuproduct_args() {
+    }
+
+    public institution_getissuproduct_args(
+      String institutionid)
+    {
+      this();
+      this.institutionid = institutionid;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public institution_getissuproduct_args(institution_getissuproduct_args other) {
+      if (other.isSetInstitutionid()) {
+        this.institutionid = other.institutionid;
+      }
+    }
+
+    public institution_getissuproduct_args deepCopy() {
+      return new institution_getissuproduct_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.institutionid = null;
+    }
+
+    public String getInstitutionid() {
+      return this.institutionid;
+    }
+
+    public institution_getissuproduct_args setInstitutionid(String institutionid) {
+      this.institutionid = institutionid;
+      return this;
+    }
+
+    public void unsetInstitutionid() {
+      this.institutionid = null;
+    }
+
+    /** Returns true if field institutionid is set (has been assigned a value) and false otherwise */
+    public boolean isSetInstitutionid() {
+      return this.institutionid != null;
+    }
+
+    public void setInstitutionidIsSet(boolean value) {
+      if (!value) {
+        this.institutionid = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case INSTITUTIONID:
+        if (value == null) {
+          unsetInstitutionid();
+        } else {
+          setInstitutionid((String)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case INSTITUTIONID:
+        return getInstitutionid();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case INSTITUTIONID:
+        return isSetInstitutionid();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof institution_getissuproduct_args)
+        return this.equals((institution_getissuproduct_args)that);
+      return false;
+    }
+
+    public boolean equals(institution_getissuproduct_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_institutionid = true && this.isSetInstitutionid();
+      boolean that_present_institutionid = true && that.isSetInstitutionid();
+      if (this_present_institutionid || that_present_institutionid) {
+        if (!(this_present_institutionid && that_present_institutionid))
+          return false;
+        if (!this.institutionid.equals(that.institutionid))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(institution_getissuproduct_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetInstitutionid()).compareTo(other.isSetInstitutionid());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetInstitutionid()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.institutionid, other.institutionid);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("institution_getissuproduct_args(");
+      boolean first = true;
+
+      sb.append("institutionid:");
+      if (this.institutionid == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.institutionid);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class institution_getissuproduct_argsStandardSchemeFactory implements SchemeFactory {
+      public institution_getissuproduct_argsStandardScheme getScheme() {
+        return new institution_getissuproduct_argsStandardScheme();
+      }
+    }
+
+    private static class institution_getissuproduct_argsStandardScheme extends StandardScheme<institution_getissuproduct_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, institution_getissuproduct_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // INSTITUTIONID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.institutionid = iprot.readString();
+                struct.setInstitutionidIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, institution_getissuproduct_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.institutionid != null) {
+          oprot.writeFieldBegin(INSTITUTIONID_FIELD_DESC);
+          oprot.writeString(struct.institutionid);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class institution_getissuproduct_argsTupleSchemeFactory implements SchemeFactory {
+      public institution_getissuproduct_argsTupleScheme getScheme() {
+        return new institution_getissuproduct_argsTupleScheme();
+      }
+    }
+
+    private static class institution_getissuproduct_argsTupleScheme extends TupleScheme<institution_getissuproduct_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, institution_getissuproduct_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetInstitutionid()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetInstitutionid()) {
+          oprot.writeString(struct.institutionid);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, institution_getissuproduct_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.institutionid = iprot.readString();
+          struct.setInstitutionidIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class institution_getissuproduct_result implements org.apache.thrift.TBase<institution_getissuproduct_result, institution_getissuproduct_result._Fields>, java.io.Serializable, Cloneable, Comparable<institution_getissuproduct_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("institution_getissuproduct_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new institution_getissuproduct_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new institution_getissuproduct_resultTupleSchemeFactory());
+    }
+
+    public ProductListReultStruct success; // required
+    public FitsException fe; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      FE((short)1, "fe");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // FE
+            return FE;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ProductListReultStruct.class)));
+      tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(institution_getissuproduct_result.class, metaDataMap);
+    }
+
+    public institution_getissuproduct_result() {
+    }
+
+    public institution_getissuproduct_result(
+      ProductListReultStruct success,
+      FitsException fe)
+    {
+      this();
+      this.success = success;
+      this.fe = fe;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public institution_getissuproduct_result(institution_getissuproduct_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new ProductListReultStruct(other.success);
+      }
+      if (other.isSetFe()) {
+        this.fe = new FitsException(other.fe);
+      }
+    }
+
+    public institution_getissuproduct_result deepCopy() {
+      return new institution_getissuproduct_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.fe = null;
+    }
+
+    public ProductListReultStruct getSuccess() {
+      return this.success;
+    }
+
+    public institution_getissuproduct_result setSuccess(ProductListReultStruct success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public FitsException getFe() {
+      return this.fe;
+    }
+
+    public institution_getissuproduct_result setFe(FitsException fe) {
+      this.fe = fe;
+      return this;
+    }
+
+    public void unsetFe() {
+      this.fe = null;
+    }
+
+    /** Returns true if field fe is set (has been assigned a value) and false otherwise */
+    public boolean isSetFe() {
+      return this.fe != null;
+    }
+
+    public void setFeIsSet(boolean value) {
+      if (!value) {
+        this.fe = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((ProductListReultStruct)value);
+        }
+        break;
+
+      case FE:
+        if (value == null) {
+          unsetFe();
+        } else {
+          setFe((FitsException)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case FE:
+        return getFe();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case FE:
+        return isSetFe();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof institution_getissuproduct_result)
+        return this.equals((institution_getissuproduct_result)that);
+      return false;
+    }
+
+    public boolean equals(institution_getissuproduct_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_fe = true && this.isSetFe();
+      boolean that_present_fe = true && that.isSetFe();
+      if (this_present_fe || that_present_fe) {
+        if (!(this_present_fe && that_present_fe))
+          return false;
+        if (!this.fe.equals(that.fe))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(institution_getissuproduct_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetFe()).compareTo(other.isSetFe());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFe()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fe, other.fe);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("institution_getissuproduct_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("fe:");
+      if (this.fe == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.fe);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class institution_getissuproduct_resultStandardSchemeFactory implements SchemeFactory {
+      public institution_getissuproduct_resultStandardScheme getScheme() {
+        return new institution_getissuproduct_resultStandardScheme();
+      }
+    }
+
+    private static class institution_getissuproduct_resultStandardScheme extends StandardScheme<institution_getissuproduct_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, institution_getissuproduct_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new ProductListReultStruct();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // FE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.fe = new FitsException();
+                struct.fe.read(iprot);
+                struct.setFeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, institution_getissuproduct_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.fe != null) {
+          oprot.writeFieldBegin(FE_FIELD_DESC);
+          struct.fe.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class institution_getissuproduct_resultTupleSchemeFactory implements SchemeFactory {
+      public institution_getissuproduct_resultTupleScheme getScheme() {
+        return new institution_getissuproduct_resultTupleScheme();
+      }
+    }
+
+    private static class institution_getissuproduct_resultTupleScheme extends TupleScheme<institution_getissuproduct_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, institution_getissuproduct_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetFe()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetFe()) {
+          struct.fe.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, institution_getissuproduct_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new ProductListReultStruct();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.fe = new FitsException();
+          struct.fe.read(iprot);
+          struct.setFeIsSet(true);
+        }
+      }
+    }
+
+  }
+
   public static class institution_productaudit_args implements org.apache.thrift.TBase<institution_productaudit_args, institution_productaudit_args._Fields>, java.io.Serializable, Cloneable, Comparable<institution_productaudit_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("institution_productaudit_args");
 
@@ -11329,6 +14354,821 @@ public class Fits {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           struct.success = new InstitutionInfoStruct();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.fe = new FitsException();
+          struct.fe.read(iprot);
+          struct.setFeIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class investor_getInfo_args implements org.apache.thrift.TBase<investor_getInfo_args, investor_getInfo_args._Fields>, java.io.Serializable, Cloneable, Comparable<investor_getInfo_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("investor_getInfo_args");
+
+    private static final org.apache.thrift.protocol.TField INVESTORID_FIELD_DESC = new org.apache.thrift.protocol.TField("investorid", org.apache.thrift.protocol.TType.STRING, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new investor_getInfo_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new investor_getInfo_argsTupleSchemeFactory());
+    }
+
+    public String investorid; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      INVESTORID((short)1, "investorid");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // INVESTORID
+            return INVESTORID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.INVESTORID, new org.apache.thrift.meta_data.FieldMetaData("investorid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(investor_getInfo_args.class, metaDataMap);
+    }
+
+    public investor_getInfo_args() {
+    }
+
+    public investor_getInfo_args(
+      String investorid)
+    {
+      this();
+      this.investorid = investorid;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public investor_getInfo_args(investor_getInfo_args other) {
+      if (other.isSetInvestorid()) {
+        this.investorid = other.investorid;
+      }
+    }
+
+    public investor_getInfo_args deepCopy() {
+      return new investor_getInfo_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.investorid = null;
+    }
+
+    public String getInvestorid() {
+      return this.investorid;
+    }
+
+    public investor_getInfo_args setInvestorid(String investorid) {
+      this.investorid = investorid;
+      return this;
+    }
+
+    public void unsetInvestorid() {
+      this.investorid = null;
+    }
+
+    /** Returns true if field investorid is set (has been assigned a value) and false otherwise */
+    public boolean isSetInvestorid() {
+      return this.investorid != null;
+    }
+
+    public void setInvestoridIsSet(boolean value) {
+      if (!value) {
+        this.investorid = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case INVESTORID:
+        if (value == null) {
+          unsetInvestorid();
+        } else {
+          setInvestorid((String)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case INVESTORID:
+        return getInvestorid();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case INVESTORID:
+        return isSetInvestorid();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof investor_getInfo_args)
+        return this.equals((investor_getInfo_args)that);
+      return false;
+    }
+
+    public boolean equals(investor_getInfo_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_investorid = true && this.isSetInvestorid();
+      boolean that_present_investorid = true && that.isSetInvestorid();
+      if (this_present_investorid || that_present_investorid) {
+        if (!(this_present_investorid && that_present_investorid))
+          return false;
+        if (!this.investorid.equals(that.investorid))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(investor_getInfo_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetInvestorid()).compareTo(other.isSetInvestorid());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetInvestorid()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.investorid, other.investorid);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("investor_getInfo_args(");
+      boolean first = true;
+
+      sb.append("investorid:");
+      if (this.investorid == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.investorid);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class investor_getInfo_argsStandardSchemeFactory implements SchemeFactory {
+      public investor_getInfo_argsStandardScheme getScheme() {
+        return new investor_getInfo_argsStandardScheme();
+      }
+    }
+
+    private static class investor_getInfo_argsStandardScheme extends StandardScheme<investor_getInfo_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, investor_getInfo_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // INVESTORID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.investorid = iprot.readString();
+                struct.setInvestoridIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, investor_getInfo_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.investorid != null) {
+          oprot.writeFieldBegin(INVESTORID_FIELD_DESC);
+          oprot.writeString(struct.investorid);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class investor_getInfo_argsTupleSchemeFactory implements SchemeFactory {
+      public investor_getInfo_argsTupleScheme getScheme() {
+        return new investor_getInfo_argsTupleScheme();
+      }
+    }
+
+    private static class investor_getInfo_argsTupleScheme extends TupleScheme<investor_getInfo_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, investor_getInfo_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetInvestorid()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetInvestorid()) {
+          oprot.writeString(struct.investorid);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, investor_getInfo_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.investorid = iprot.readString();
+          struct.setInvestoridIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class investor_getInfo_result implements org.apache.thrift.TBase<investor_getInfo_result, investor_getInfo_result._Fields>, java.io.Serializable, Cloneable, Comparable<investor_getInfo_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("investor_getInfo_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField FE_FIELD_DESC = new org.apache.thrift.protocol.TField("fe", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new investor_getInfo_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new investor_getInfo_resultTupleSchemeFactory());
+    }
+
+    public InvestorInfoStruct success; // required
+    public FitsException fe; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      FE((short)1, "fe");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // FE
+            return FE;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, InvestorInfoStruct.class)));
+      tmpMap.put(_Fields.FE, new org.apache.thrift.meta_data.FieldMetaData("fe", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(investor_getInfo_result.class, metaDataMap);
+    }
+
+    public investor_getInfo_result() {
+    }
+
+    public investor_getInfo_result(
+      InvestorInfoStruct success,
+      FitsException fe)
+    {
+      this();
+      this.success = success;
+      this.fe = fe;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public investor_getInfo_result(investor_getInfo_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new InvestorInfoStruct(other.success);
+      }
+      if (other.isSetFe()) {
+        this.fe = new FitsException(other.fe);
+      }
+    }
+
+    public investor_getInfo_result deepCopy() {
+      return new investor_getInfo_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.fe = null;
+    }
+
+    public InvestorInfoStruct getSuccess() {
+      return this.success;
+    }
+
+    public investor_getInfo_result setSuccess(InvestorInfoStruct success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public FitsException getFe() {
+      return this.fe;
+    }
+
+    public investor_getInfo_result setFe(FitsException fe) {
+      this.fe = fe;
+      return this;
+    }
+
+    public void unsetFe() {
+      this.fe = null;
+    }
+
+    /** Returns true if field fe is set (has been assigned a value) and false otherwise */
+    public boolean isSetFe() {
+      return this.fe != null;
+    }
+
+    public void setFeIsSet(boolean value) {
+      if (!value) {
+        this.fe = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((InvestorInfoStruct)value);
+        }
+        break;
+
+      case FE:
+        if (value == null) {
+          unsetFe();
+        } else {
+          setFe((FitsException)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case FE:
+        return getFe();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case FE:
+        return isSetFe();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof investor_getInfo_result)
+        return this.equals((investor_getInfo_result)that);
+      return false;
+    }
+
+    public boolean equals(investor_getInfo_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_fe = true && this.isSetFe();
+      boolean that_present_fe = true && that.isSetFe();
+      if (this_present_fe || that_present_fe) {
+        if (!(this_present_fe && that_present_fe))
+          return false;
+        if (!this.fe.equals(that.fe))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(investor_getInfo_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetFe()).compareTo(other.isSetFe());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFe()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fe, other.fe);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("investor_getInfo_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("fe:");
+      if (this.fe == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.fe);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class investor_getInfo_resultStandardSchemeFactory implements SchemeFactory {
+      public investor_getInfo_resultStandardScheme getScheme() {
+        return new investor_getInfo_resultStandardScheme();
+      }
+    }
+
+    private static class investor_getInfo_resultStandardScheme extends StandardScheme<investor_getInfo_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, investor_getInfo_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new InvestorInfoStruct();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // FE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.fe = new FitsException();
+                struct.fe.read(iprot);
+                struct.setFeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, investor_getInfo_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.fe != null) {
+          oprot.writeFieldBegin(FE_FIELD_DESC);
+          struct.fe.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class investor_getInfo_resultTupleSchemeFactory implements SchemeFactory {
+      public investor_getInfo_resultTupleScheme getScheme() {
+        return new investor_getInfo_resultTupleScheme();
+      }
+    }
+
+    private static class investor_getInfo_resultTupleScheme extends TupleScheme<investor_getInfo_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, investor_getInfo_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetFe()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetFe()) {
+          struct.fe.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, investor_getInfo_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new InvestorInfoStruct();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }

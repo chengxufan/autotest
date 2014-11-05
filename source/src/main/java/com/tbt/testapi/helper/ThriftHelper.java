@@ -14,6 +14,7 @@ import java.util.Set;
 import org.apache.thrift.TApplicationException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.protocol.TProtocolException;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
@@ -300,17 +301,33 @@ public class ThriftHelper extends BaseHelper {
 						.getTargetException();
 				jo.addProperty("exceptionCode", ee.getCode());
 				JsonObject exceptionObject = new JsonObject();
+				logger.info("thrift FitsException" + ee);
 				vars.put("exception_code", ee.getCode());
 				vars.put("exception_messsage", ee.getMessage());
 				return jo;
 			} else if (e.getCause() instanceof TTransportException) {
-
+				TTransportException ee = (TTransportException) e
+						.getTargetException();
+				logger.info("thrift TTransportException" + ee);
 				return null;
 			} else if (e.getCause() instanceof TApplicationException) {
+				TApplicationException ee = (TApplicationException) e
+						.getTargetException();
+				logger.info("thrift TApplicationException" + ee);
+				throw new HelperException("ThriftHelper "
+						+ e.getCause().getMessage());
+
+			} else if (e.getCause() instanceof TProtocolException) {
+				TProtocolException ee = (TProtocolException) e
+						.getTargetException();
+
 				throw new HelperException("ThriftHelper "
 						+ e.getCause().getMessage());
 
 			}
+
+			logger.info("thrift InvocationTargetException"
+					+ e.getCause());
 
 		} catch (TTransportException e) {
 			throw new HelperException(
@@ -334,7 +351,6 @@ public class ThriftHelper extends BaseHelper {
 			throw new HelperException("field not found "
 					+ e.getMessage());
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
 			throw new HelperException("method not found "
 					+ e.getMessage());
 		}

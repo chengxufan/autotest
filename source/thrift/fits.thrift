@@ -100,44 +100,23 @@ struct InstitutionInfoStruct
   //机构名称
   4: required string name
 
-  //机构组织机构代码
-  5: required string organizationCode
-
-  //机构地址
-  6: required string address
-
-  //机构邮编
-  7: required string ZIP
-
   //固定联系电话
-  8: required string fixedTelephone
-
-  //传真
-  9: required string FAX
-
-  //网站站点
-  10: required string webSite
+  5: required string fixedTelephone
 
   //通报图资金归集(代销行)/清算(发行行)账户
-  11: required string TBTCapitalAccountID
+  6: required string TBTCapitalAccountID
 
   //联系人姓名
-  12: required string contactName
+  7: required string contactName
 
   //联系人移动电话号码
-  13: required string mobilePhoneNumber
-
-  //联系人电子邮箱
-  14: required string email
-
-  //联系人住址
-  15: required string contactAddress
+  8: required string mobilePhoneNumber
 
   //请求日期 
-  16: i32 registerDate
+  9: i32 registerDate
 
   //初始状态
-  17: i32 status
+  10: i32 status
 }
 
 //代销行注册结果信息
@@ -166,62 +145,53 @@ struct ProductInfoStruct
    //资产管理人ID
    5: required string assetManager
    
-   //资产托管人ID
-   6: required string assetTrustee
-   
    //发行行ID
-   7: required string issubankid
+   6: required string issubankid
    
    //币种 0 人民币；1 港币；2 美元；3 其他
-   8: required  i32 currency
+   7: required  i32 currency
    
-   //风险级别
-   9: required i32 risk_level
+   //产品风险级别
+   8: required i32 risk_level
    
    // 目标收益率
-   10: required double target_rate
+   9: required double target_rate
    
    // 募集金额上限
-   11: required double raise_upper
+   10: required double raise_upper
    
    //募集金额下限
-   12: required double raise_low
+   11: required double raise_low
    
    //单一投资人申购上限
-   13: required double investment_upper_limit
+   12: required double investment_upper_limit
    
    //单一投资人申购下限
-   14: required double investment_low_limit
+   13: required double investment_low_limit
    
    //募集人数上限
-   15: required i32 max_raise_number
-   
-   //产品上线日
-   16: required i32 launch_date
+   14: required i32 max_raise_number
    
    //募集起始日
-   17: required i32 raise_start_date
+   15: required i32 raise_start_date
    
    //募集截止日
-   18: required i32 raise_end_date
+   16: required i32 raise_end_date
    
    //产品起息日
-   19: required i32 value_date
+   17: required i32 value_date
    
    //产品到期日
-   20: required i32 due_date
+   18: required i32 due_date
    
    //产品清算日
-   21: required  i32 reckon_date
-   
-   //预计回款日
-   22: required  i32 expected_payment_date
+   19: required  i32 reckon_date
    
    //状态 0 正常；1 无效；2 已清算
-   23: i32 productStatus
+   20: i32 productStatus
    
    //产品id
-   24: string id
+   21: string id
 }
 
 //发行行产品注册处理结果信息
@@ -332,6 +302,76 @@ struct ProductListReultStruct
   1: required list<ProductInfoStruct> products
 }
 
+//资金信息
+struct AccountFundInfoStruct
+{
+  //账户id
+  1: required string accountfundid
+
+  //当前资金
+  2: required double curbalance
+  
+  //可用资金金额
+  3: required double validbalance
+  
+  //冻结资金
+  4: required double frozenfund
+  
+  //未到账资金
+  5: required double notcollectedfund
+}
+
+//产品持仓信息
+struct AccountProductPositionInfoStruct
+{
+  //产品ID
+  1: required string productid
+  
+  //当前余额
+  2: required double curbalance
+  
+  //可用余额
+  3: required double validbalance
+  
+  //冻结数量
+  4: required double frozenquantity
+  
+  //未到账数量
+  5: required double notcollectedquantity
+}
+
+//产品账户信息
+struct AccountProductInfoStruct
+{
+  //产品账户ID
+  1: required string accountproductid
+  
+  //产品持仓信息
+  2: required list<AccountProductPositionInfoStruct> productpositioninfo
+}
+
+//投资者资料
+struct InvestorInfoStruct
+{
+  //投资者ID
+  1: required string investorid
+  
+  //投资者手机号
+  2: required string mobilePhoneNumber
+  
+  //投资者风险级别
+  3: required i32 riskLevel
+
+  //基本信息
+  4: required BankSignInfoStruct banksigninfo
+  
+  //资金账户信息
+  5: required list<AccountFundInfoStruct> accountfundinfo
+  
+  //产品账户信息
+  6: required list<AccountProductInfoStruct> productpositioninfo
+}
+
 service  Fits {
 	
   //投资者注册
@@ -372,9 +412,21 @@ service  Fits {
   //获取全部产品产品列表
   ProductListReultStruct institution_getallproduct()  throws (1: FitsException fe),
   
+  //获取产品
+  ProductInfoStruct institution_getproduct(1:string productid)  throws (1: FitsException fe),
+  
+  //获取代销产品
+  ProductListReultStruct institution_getauditproduct(1:string institutionid)  throws (1: FitsException fe),
+  
+  //获取所发行的产品
+  ProductListReultStruct institution_getissuproduct(1:string institutionid)  throws (1: FitsException fe),
+  
   //产品审核后进行关联
   ProductAuditResultStruct institution_productaudit(1: ProductAuditStruct productaudit)  throws (1: FitsException fe),
   
   //获取机构信息
   InstitutionInfoStruct institution_getInfo(1:string institutionid)  throws (1: FitsException fe),
+  
+  //查询投资者信息
+  InvestorInfoStruct investor_getInfo(1:string investorid)  throws (1: FitsException fe),
 }

@@ -39,19 +39,12 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
   private static final org.apache.thrift.protocol.TField SUPERID_FIELD_DESC = new org.apache.thrift.protocol.TField("superid", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("type", org.apache.thrift.protocol.TType.I32, (short)3);
   private static final org.apache.thrift.protocol.TField NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("name", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField ORGANIZATION_CODE_FIELD_DESC = new org.apache.thrift.protocol.TField("organizationCode", org.apache.thrift.protocol.TType.STRING, (short)5);
-  private static final org.apache.thrift.protocol.TField ADDRESS_FIELD_DESC = new org.apache.thrift.protocol.TField("address", org.apache.thrift.protocol.TType.STRING, (short)6);
-  private static final org.apache.thrift.protocol.TField ZIP_FIELD_DESC = new org.apache.thrift.protocol.TField("ZIP", org.apache.thrift.protocol.TType.STRING, (short)7);
-  private static final org.apache.thrift.protocol.TField FIXED_TELEPHONE_FIELD_DESC = new org.apache.thrift.protocol.TField("fixedTelephone", org.apache.thrift.protocol.TType.STRING, (short)8);
-  private static final org.apache.thrift.protocol.TField FAX_FIELD_DESC = new org.apache.thrift.protocol.TField("FAX", org.apache.thrift.protocol.TType.STRING, (short)9);
-  private static final org.apache.thrift.protocol.TField WEB_SITE_FIELD_DESC = new org.apache.thrift.protocol.TField("webSite", org.apache.thrift.protocol.TType.STRING, (short)10);
-  private static final org.apache.thrift.protocol.TField TBTCAPITAL_ACCOUNT_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("TBTCapitalAccountID", org.apache.thrift.protocol.TType.STRING, (short)11);
-  private static final org.apache.thrift.protocol.TField CONTACT_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("contactName", org.apache.thrift.protocol.TType.STRING, (short)12);
-  private static final org.apache.thrift.protocol.TField MOBILE_PHONE_NUMBER_FIELD_DESC = new org.apache.thrift.protocol.TField("mobilePhoneNumber", org.apache.thrift.protocol.TType.STRING, (short)13);
-  private static final org.apache.thrift.protocol.TField EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("email", org.apache.thrift.protocol.TType.STRING, (short)14);
-  private static final org.apache.thrift.protocol.TField CONTACT_ADDRESS_FIELD_DESC = new org.apache.thrift.protocol.TField("contactAddress", org.apache.thrift.protocol.TType.STRING, (short)15);
-  private static final org.apache.thrift.protocol.TField REGISTER_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("registerDate", org.apache.thrift.protocol.TType.I32, (short)16);
-  private static final org.apache.thrift.protocol.TField STATUS_FIELD_DESC = new org.apache.thrift.protocol.TField("status", org.apache.thrift.protocol.TType.I32, (short)17);
+  private static final org.apache.thrift.protocol.TField FIXED_TELEPHONE_FIELD_DESC = new org.apache.thrift.protocol.TField("fixedTelephone", org.apache.thrift.protocol.TType.STRING, (short)5);
+  private static final org.apache.thrift.protocol.TField TBTCAPITAL_ACCOUNT_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("TBTCapitalAccountID", org.apache.thrift.protocol.TType.STRING, (short)6);
+  private static final org.apache.thrift.protocol.TField CONTACT_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("contactName", org.apache.thrift.protocol.TType.STRING, (short)7);
+  private static final org.apache.thrift.protocol.TField MOBILE_PHONE_NUMBER_FIELD_DESC = new org.apache.thrift.protocol.TField("mobilePhoneNumber", org.apache.thrift.protocol.TType.STRING, (short)8);
+  private static final org.apache.thrift.protocol.TField REGISTER_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("registerDate", org.apache.thrift.protocol.TType.I32, (short)9);
+  private static final org.apache.thrift.protocol.TField STATUS_FIELD_DESC = new org.apache.thrift.protocol.TField("status", org.apache.thrift.protocol.TType.I32, (short)10);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -63,17 +56,10 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
   public String superid; // required
   public int type; // required
   public String name; // required
-  public String organizationCode; // required
-  public String address; // required
-  public String ZIP; // required
   public String fixedTelephone; // required
-  public String FAX; // required
-  public String webSite; // required
   public String TBTCapitalAccountID; // required
   public String contactName; // required
   public String mobilePhoneNumber; // required
-  public String email; // required
-  public String contactAddress; // required
   public int registerDate; // required
   public int status; // required
 
@@ -83,19 +69,12 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     SUPERID((short)2, "superid"),
     TYPE((short)3, "type"),
     NAME((short)4, "name"),
-    ORGANIZATION_CODE((short)5, "organizationCode"),
-    ADDRESS((short)6, "address"),
-    ZIP((short)7, "ZIP"),
-    FIXED_TELEPHONE((short)8, "fixedTelephone"),
-    FAX((short)9, "FAX"),
-    WEB_SITE((short)10, "webSite"),
-    TBTCAPITAL_ACCOUNT_ID((short)11, "TBTCapitalAccountID"),
-    CONTACT_NAME((short)12, "contactName"),
-    MOBILE_PHONE_NUMBER((short)13, "mobilePhoneNumber"),
-    EMAIL((short)14, "email"),
-    CONTACT_ADDRESS((short)15, "contactAddress"),
-    REGISTER_DATE((short)16, "registerDate"),
-    STATUS((short)17, "status");
+    FIXED_TELEPHONE((short)5, "fixedTelephone"),
+    TBTCAPITAL_ACCOUNT_ID((short)6, "TBTCapitalAccountID"),
+    CONTACT_NAME((short)7, "contactName"),
+    MOBILE_PHONE_NUMBER((short)8, "mobilePhoneNumber"),
+    REGISTER_DATE((short)9, "registerDate"),
+    STATUS((short)10, "status");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -118,31 +97,17 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
           return TYPE;
         case 4: // NAME
           return NAME;
-        case 5: // ORGANIZATION_CODE
-          return ORGANIZATION_CODE;
-        case 6: // ADDRESS
-          return ADDRESS;
-        case 7: // ZIP
-          return ZIP;
-        case 8: // FIXED_TELEPHONE
+        case 5: // FIXED_TELEPHONE
           return FIXED_TELEPHONE;
-        case 9: // FAX
-          return FAX;
-        case 10: // WEB_SITE
-          return WEB_SITE;
-        case 11: // TBTCAPITAL_ACCOUNT_ID
+        case 6: // TBTCAPITAL_ACCOUNT_ID
           return TBTCAPITAL_ACCOUNT_ID;
-        case 12: // CONTACT_NAME
+        case 7: // CONTACT_NAME
           return CONTACT_NAME;
-        case 13: // MOBILE_PHONE_NUMBER
+        case 8: // MOBILE_PHONE_NUMBER
           return MOBILE_PHONE_NUMBER;
-        case 14: // EMAIL
-          return EMAIL;
-        case 15: // CONTACT_ADDRESS
-          return CONTACT_ADDRESS;
-        case 16: // REGISTER_DATE
+        case 9: // REGISTER_DATE
           return REGISTER_DATE;
-        case 17: // STATUS
+        case 10: // STATUS
           return STATUS;
         default:
           return null;
@@ -199,27 +164,13 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.NAME, new org.apache.thrift.meta_data.FieldMetaData("name", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.ORGANIZATION_CODE, new org.apache.thrift.meta_data.FieldMetaData("organizationCode", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.ADDRESS, new org.apache.thrift.meta_data.FieldMetaData("address", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.ZIP, new org.apache.thrift.meta_data.FieldMetaData("ZIP", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.FIXED_TELEPHONE, new org.apache.thrift.meta_data.FieldMetaData("fixedTelephone", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.FAX, new org.apache.thrift.meta_data.FieldMetaData("FAX", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.WEB_SITE, new org.apache.thrift.meta_data.FieldMetaData("webSite", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.TBTCAPITAL_ACCOUNT_ID, new org.apache.thrift.meta_data.FieldMetaData("TBTCapitalAccountID", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.CONTACT_NAME, new org.apache.thrift.meta_data.FieldMetaData("contactName", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.MOBILE_PHONE_NUMBER, new org.apache.thrift.meta_data.FieldMetaData("mobilePhoneNumber", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.EMAIL, new org.apache.thrift.meta_data.FieldMetaData("email", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.CONTACT_ADDRESS, new org.apache.thrift.meta_data.FieldMetaData("contactAddress", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.REGISTER_DATE, new org.apache.thrift.meta_data.FieldMetaData("registerDate", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
@@ -237,17 +188,10 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     String superid,
     int type,
     String name,
-    String organizationCode,
-    String address,
-    String ZIP,
     String fixedTelephone,
-    String FAX,
-    String webSite,
     String TBTCapitalAccountID,
     String contactName,
     String mobilePhoneNumber,
-    String email,
-    String contactAddress,
     int registerDate,
     int status)
   {
@@ -257,17 +201,10 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     this.type = type;
     setTypeIsSet(true);
     this.name = name;
-    this.organizationCode = organizationCode;
-    this.address = address;
-    this.ZIP = ZIP;
     this.fixedTelephone = fixedTelephone;
-    this.FAX = FAX;
-    this.webSite = webSite;
     this.TBTCapitalAccountID = TBTCapitalAccountID;
     this.contactName = contactName;
     this.mobilePhoneNumber = mobilePhoneNumber;
-    this.email = email;
-    this.contactAddress = contactAddress;
     this.registerDate = registerDate;
     setRegisterDateIsSet(true);
     this.status = status;
@@ -289,23 +226,8 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     if (other.isSetName()) {
       this.name = other.name;
     }
-    if (other.isSetOrganizationCode()) {
-      this.organizationCode = other.organizationCode;
-    }
-    if (other.isSetAddress()) {
-      this.address = other.address;
-    }
-    if (other.isSetZIP()) {
-      this.ZIP = other.ZIP;
-    }
     if (other.isSetFixedTelephone()) {
       this.fixedTelephone = other.fixedTelephone;
-    }
-    if (other.isSetFAX()) {
-      this.FAX = other.FAX;
-    }
-    if (other.isSetWebSite()) {
-      this.webSite = other.webSite;
     }
     if (other.isSetTBTCapitalAccountID()) {
       this.TBTCapitalAccountID = other.TBTCapitalAccountID;
@@ -315,12 +237,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     }
     if (other.isSetMobilePhoneNumber()) {
       this.mobilePhoneNumber = other.mobilePhoneNumber;
-    }
-    if (other.isSetEmail()) {
-      this.email = other.email;
-    }
-    if (other.isSetContactAddress()) {
-      this.contactAddress = other.contactAddress;
     }
     this.registerDate = other.registerDate;
     this.status = other.status;
@@ -337,17 +253,10 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     setTypeIsSet(false);
     this.type = 0;
     this.name = null;
-    this.organizationCode = null;
-    this.address = null;
-    this.ZIP = null;
     this.fixedTelephone = null;
-    this.FAX = null;
-    this.webSite = null;
     this.TBTCapitalAccountID = null;
     this.contactName = null;
     this.mobilePhoneNumber = null;
-    this.email = null;
-    this.contactAddress = null;
     setRegisterDateIsSet(false);
     this.registerDate = 0;
     setStatusIsSet(false);
@@ -449,78 +358,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     }
   }
 
-  public String getOrganizationCode() {
-    return this.organizationCode;
-  }
-
-  public InstitutionInfoStruct setOrganizationCode(String organizationCode) {
-    this.organizationCode = organizationCode;
-    return this;
-  }
-
-  public void unsetOrganizationCode() {
-    this.organizationCode = null;
-  }
-
-  /** Returns true if field organizationCode is set (has been assigned a value) and false otherwise */
-  public boolean isSetOrganizationCode() {
-    return this.organizationCode != null;
-  }
-
-  public void setOrganizationCodeIsSet(boolean value) {
-    if (!value) {
-      this.organizationCode = null;
-    }
-  }
-
-  public String getAddress() {
-    return this.address;
-  }
-
-  public InstitutionInfoStruct setAddress(String address) {
-    this.address = address;
-    return this;
-  }
-
-  public void unsetAddress() {
-    this.address = null;
-  }
-
-  /** Returns true if field address is set (has been assigned a value) and false otherwise */
-  public boolean isSetAddress() {
-    return this.address != null;
-  }
-
-  public void setAddressIsSet(boolean value) {
-    if (!value) {
-      this.address = null;
-    }
-  }
-
-  public String getZIP() {
-    return this.ZIP;
-  }
-
-  public InstitutionInfoStruct setZIP(String ZIP) {
-    this.ZIP = ZIP;
-    return this;
-  }
-
-  public void unsetZIP() {
-    this.ZIP = null;
-  }
-
-  /** Returns true if field ZIP is set (has been assigned a value) and false otherwise */
-  public boolean isSetZIP() {
-    return this.ZIP != null;
-  }
-
-  public void setZIPIsSet(boolean value) {
-    if (!value) {
-      this.ZIP = null;
-    }
-  }
-
   public String getFixedTelephone() {
     return this.fixedTelephone;
   }
@@ -542,54 +379,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
   public void setFixedTelephoneIsSet(boolean value) {
     if (!value) {
       this.fixedTelephone = null;
-    }
-  }
-
-  public String getFAX() {
-    return this.FAX;
-  }
-
-  public InstitutionInfoStruct setFAX(String FAX) {
-    this.FAX = FAX;
-    return this;
-  }
-
-  public void unsetFAX() {
-    this.FAX = null;
-  }
-
-  /** Returns true if field FAX is set (has been assigned a value) and false otherwise */
-  public boolean isSetFAX() {
-    return this.FAX != null;
-  }
-
-  public void setFAXIsSet(boolean value) {
-    if (!value) {
-      this.FAX = null;
-    }
-  }
-
-  public String getWebSite() {
-    return this.webSite;
-  }
-
-  public InstitutionInfoStruct setWebSite(String webSite) {
-    this.webSite = webSite;
-    return this;
-  }
-
-  public void unsetWebSite() {
-    this.webSite = null;
-  }
-
-  /** Returns true if field webSite is set (has been assigned a value) and false otherwise */
-  public boolean isSetWebSite() {
-    return this.webSite != null;
-  }
-
-  public void setWebSiteIsSet(boolean value) {
-    if (!value) {
-      this.webSite = null;
     }
   }
 
@@ -662,54 +451,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
   public void setMobilePhoneNumberIsSet(boolean value) {
     if (!value) {
       this.mobilePhoneNumber = null;
-    }
-  }
-
-  public String getEmail() {
-    return this.email;
-  }
-
-  public InstitutionInfoStruct setEmail(String email) {
-    this.email = email;
-    return this;
-  }
-
-  public void unsetEmail() {
-    this.email = null;
-  }
-
-  /** Returns true if field email is set (has been assigned a value) and false otherwise */
-  public boolean isSetEmail() {
-    return this.email != null;
-  }
-
-  public void setEmailIsSet(boolean value) {
-    if (!value) {
-      this.email = null;
-    }
-  }
-
-  public String getContactAddress() {
-    return this.contactAddress;
-  }
-
-  public InstitutionInfoStruct setContactAddress(String contactAddress) {
-    this.contactAddress = contactAddress;
-    return this;
-  }
-
-  public void unsetContactAddress() {
-    this.contactAddress = null;
-  }
-
-  /** Returns true if field contactAddress is set (has been assigned a value) and false otherwise */
-  public boolean isSetContactAddress() {
-    return this.contactAddress != null;
-  }
-
-  public void setContactAddressIsSet(boolean value) {
-    if (!value) {
-      this.contactAddress = null;
     }
   }
 
@@ -793,51 +534,11 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
       }
       break;
 
-    case ORGANIZATION_CODE:
-      if (value == null) {
-        unsetOrganizationCode();
-      } else {
-        setOrganizationCode((String)value);
-      }
-      break;
-
-    case ADDRESS:
-      if (value == null) {
-        unsetAddress();
-      } else {
-        setAddress((String)value);
-      }
-      break;
-
-    case ZIP:
-      if (value == null) {
-        unsetZIP();
-      } else {
-        setZIP((String)value);
-      }
-      break;
-
     case FIXED_TELEPHONE:
       if (value == null) {
         unsetFixedTelephone();
       } else {
         setFixedTelephone((String)value);
-      }
-      break;
-
-    case FAX:
-      if (value == null) {
-        unsetFAX();
-      } else {
-        setFAX((String)value);
-      }
-      break;
-
-    case WEB_SITE:
-      if (value == null) {
-        unsetWebSite();
-      } else {
-        setWebSite((String)value);
       }
       break;
 
@@ -862,22 +563,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
         unsetMobilePhoneNumber();
       } else {
         setMobilePhoneNumber((String)value);
-      }
-      break;
-
-    case EMAIL:
-      if (value == null) {
-        unsetEmail();
-      } else {
-        setEmail((String)value);
-      }
-      break;
-
-    case CONTACT_ADDRESS:
-      if (value == null) {
-        unsetContactAddress();
-      } else {
-        setContactAddress((String)value);
       }
       break;
 
@@ -914,23 +599,8 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     case NAME:
       return getName();
 
-    case ORGANIZATION_CODE:
-      return getOrganizationCode();
-
-    case ADDRESS:
-      return getAddress();
-
-    case ZIP:
-      return getZIP();
-
     case FIXED_TELEPHONE:
       return getFixedTelephone();
-
-    case FAX:
-      return getFAX();
-
-    case WEB_SITE:
-      return getWebSite();
 
     case TBTCAPITAL_ACCOUNT_ID:
       return getTBTCapitalAccountID();
@@ -940,12 +610,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
 
     case MOBILE_PHONE_NUMBER:
       return getMobilePhoneNumber();
-
-    case EMAIL:
-      return getEmail();
-
-    case CONTACT_ADDRESS:
-      return getContactAddress();
 
     case REGISTER_DATE:
       return Integer.valueOf(getRegisterDate());
@@ -972,28 +636,14 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
       return isSetType();
     case NAME:
       return isSetName();
-    case ORGANIZATION_CODE:
-      return isSetOrganizationCode();
-    case ADDRESS:
-      return isSetAddress();
-    case ZIP:
-      return isSetZIP();
     case FIXED_TELEPHONE:
       return isSetFixedTelephone();
-    case FAX:
-      return isSetFAX();
-    case WEB_SITE:
-      return isSetWebSite();
     case TBTCAPITAL_ACCOUNT_ID:
       return isSetTBTCapitalAccountID();
     case CONTACT_NAME:
       return isSetContactName();
     case MOBILE_PHONE_NUMBER:
       return isSetMobilePhoneNumber();
-    case EMAIL:
-      return isSetEmail();
-    case CONTACT_ADDRESS:
-      return isSetContactAddress();
     case REGISTER_DATE:
       return isSetRegisterDate();
     case STATUS:
@@ -1051,57 +701,12 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
         return false;
     }
 
-    boolean this_present_organizationCode = true && this.isSetOrganizationCode();
-    boolean that_present_organizationCode = true && that.isSetOrganizationCode();
-    if (this_present_organizationCode || that_present_organizationCode) {
-      if (!(this_present_organizationCode && that_present_organizationCode))
-        return false;
-      if (!this.organizationCode.equals(that.organizationCode))
-        return false;
-    }
-
-    boolean this_present_address = true && this.isSetAddress();
-    boolean that_present_address = true && that.isSetAddress();
-    if (this_present_address || that_present_address) {
-      if (!(this_present_address && that_present_address))
-        return false;
-      if (!this.address.equals(that.address))
-        return false;
-    }
-
-    boolean this_present_ZIP = true && this.isSetZIP();
-    boolean that_present_ZIP = true && that.isSetZIP();
-    if (this_present_ZIP || that_present_ZIP) {
-      if (!(this_present_ZIP && that_present_ZIP))
-        return false;
-      if (!this.ZIP.equals(that.ZIP))
-        return false;
-    }
-
     boolean this_present_fixedTelephone = true && this.isSetFixedTelephone();
     boolean that_present_fixedTelephone = true && that.isSetFixedTelephone();
     if (this_present_fixedTelephone || that_present_fixedTelephone) {
       if (!(this_present_fixedTelephone && that_present_fixedTelephone))
         return false;
       if (!this.fixedTelephone.equals(that.fixedTelephone))
-        return false;
-    }
-
-    boolean this_present_FAX = true && this.isSetFAX();
-    boolean that_present_FAX = true && that.isSetFAX();
-    if (this_present_FAX || that_present_FAX) {
-      if (!(this_present_FAX && that_present_FAX))
-        return false;
-      if (!this.FAX.equals(that.FAX))
-        return false;
-    }
-
-    boolean this_present_webSite = true && this.isSetWebSite();
-    boolean that_present_webSite = true && that.isSetWebSite();
-    if (this_present_webSite || that_present_webSite) {
-      if (!(this_present_webSite && that_present_webSite))
-        return false;
-      if (!this.webSite.equals(that.webSite))
         return false;
     }
 
@@ -1129,24 +734,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
       if (!(this_present_mobilePhoneNumber && that_present_mobilePhoneNumber))
         return false;
       if (!this.mobilePhoneNumber.equals(that.mobilePhoneNumber))
-        return false;
-    }
-
-    boolean this_present_email = true && this.isSetEmail();
-    boolean that_present_email = true && that.isSetEmail();
-    if (this_present_email || that_present_email) {
-      if (!(this_present_email && that_present_email))
-        return false;
-      if (!this.email.equals(that.email))
-        return false;
-    }
-
-    boolean this_present_contactAddress = true && this.isSetContactAddress();
-    boolean that_present_contactAddress = true && that.isSetContactAddress();
-    if (this_present_contactAddress || that_present_contactAddress) {
-      if (!(this_present_contactAddress && that_present_contactAddress))
-        return false;
-      if (!this.contactAddress.equals(that.contactAddress))
         return false;
     }
 
@@ -1224,62 +811,12 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetOrganizationCode()).compareTo(other.isSetOrganizationCode());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetOrganizationCode()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.organizationCode, other.organizationCode);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetAddress()).compareTo(other.isSetAddress());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetAddress()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.address, other.address);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetZIP()).compareTo(other.isSetZIP());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetZIP()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.ZIP, other.ZIP);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
     lastComparison = Boolean.valueOf(isSetFixedTelephone()).compareTo(other.isSetFixedTelephone());
     if (lastComparison != 0) {
       return lastComparison;
     }
     if (isSetFixedTelephone()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fixedTelephone, other.fixedTelephone);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetFAX()).compareTo(other.isSetFAX());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetFAX()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.FAX, other.FAX);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetWebSite()).compareTo(other.isSetWebSite());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetWebSite()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.webSite, other.webSite);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -1310,26 +847,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     }
     if (isSetMobilePhoneNumber()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.mobilePhoneNumber, other.mobilePhoneNumber);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetEmail()).compareTo(other.isSetEmail());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetEmail()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.email, other.email);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetContactAddress()).compareTo(other.isSetContactAddress());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetContactAddress()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.contactAddress, other.contactAddress);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -1402,51 +919,11 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("organizationCode:");
-    if (this.organizationCode == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.organizationCode);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("address:");
-    if (this.address == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.address);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("ZIP:");
-    if (this.ZIP == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.ZIP);
-    }
-    first = false;
-    if (!first) sb.append(", ");
     sb.append("fixedTelephone:");
     if (this.fixedTelephone == null) {
       sb.append("null");
     } else {
       sb.append(this.fixedTelephone);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("FAX:");
-    if (this.FAX == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.FAX);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("webSite:");
-    if (this.webSite == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.webSite);
     }
     first = false;
     if (!first) sb.append(", ");
@@ -1474,22 +951,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("email:");
-    if (this.email == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.email);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("contactAddress:");
-    if (this.contactAddress == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.contactAddress);
-    }
-    first = false;
-    if (!first) sb.append(", ");
     sb.append("registerDate:");
     sb.append(this.registerDate);
     first = false;
@@ -1507,23 +968,8 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     if (name == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'name' was not present! Struct: " + toString());
     }
-    if (organizationCode == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'organizationCode' was not present! Struct: " + toString());
-    }
-    if (address == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'address' was not present! Struct: " + toString());
-    }
-    if (ZIP == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'ZIP' was not present! Struct: " + toString());
-    }
     if (fixedTelephone == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'fixedTelephone' was not present! Struct: " + toString());
-    }
-    if (FAX == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'FAX' was not present! Struct: " + toString());
-    }
-    if (webSite == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'webSite' was not present! Struct: " + toString());
     }
     if (TBTCapitalAccountID == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'TBTCapitalAccountID' was not present! Struct: " + toString());
@@ -1533,12 +979,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
     }
     if (mobilePhoneNumber == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'mobilePhoneNumber' was not present! Struct: " + toString());
-    }
-    if (email == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'email' was not present! Struct: " + toString());
-    }
-    if (contactAddress == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'contactAddress' was not present! Struct: " + toString());
     }
     // check for sub-struct validity
   }
@@ -1611,31 +1051,7 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 5: // ORGANIZATION_CODE
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.organizationCode = iprot.readString();
-              struct.setOrganizationCodeIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 6: // ADDRESS
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.address = iprot.readString();
-              struct.setAddressIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 7: // ZIP
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.ZIP = iprot.readString();
-              struct.setZIPIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 8: // FIXED_TELEPHONE
+          case 5: // FIXED_TELEPHONE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.fixedTelephone = iprot.readString();
               struct.setFixedTelephoneIsSet(true);
@@ -1643,23 +1059,7 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 9: // FAX
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.FAX = iprot.readString();
-              struct.setFAXIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 10: // WEB_SITE
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.webSite = iprot.readString();
-              struct.setWebSiteIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 11: // TBTCAPITAL_ACCOUNT_ID
+          case 6: // TBTCAPITAL_ACCOUNT_ID
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.TBTCapitalAccountID = iprot.readString();
               struct.setTBTCapitalAccountIDIsSet(true);
@@ -1667,7 +1067,7 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 12: // CONTACT_NAME
+          case 7: // CONTACT_NAME
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.contactName = iprot.readString();
               struct.setContactNameIsSet(true);
@@ -1675,7 +1075,7 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 13: // MOBILE_PHONE_NUMBER
+          case 8: // MOBILE_PHONE_NUMBER
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.mobilePhoneNumber = iprot.readString();
               struct.setMobilePhoneNumberIsSet(true);
@@ -1683,23 +1083,7 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 14: // EMAIL
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.email = iprot.readString();
-              struct.setEmailIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 15: // CONTACT_ADDRESS
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.contactAddress = iprot.readString();
-              struct.setContactAddressIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 16: // REGISTER_DATE
+          case 9: // REGISTER_DATE
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.registerDate = iprot.readI32();
               struct.setRegisterDateIsSet(true);
@@ -1707,7 +1091,7 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 17: // STATUS
+          case 10: // STATUS
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.status = iprot.readI32();
               struct.setStatusIsSet(true);
@@ -1751,34 +1135,9 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
         oprot.writeString(struct.name);
         oprot.writeFieldEnd();
       }
-      if (struct.organizationCode != null) {
-        oprot.writeFieldBegin(ORGANIZATION_CODE_FIELD_DESC);
-        oprot.writeString(struct.organizationCode);
-        oprot.writeFieldEnd();
-      }
-      if (struct.address != null) {
-        oprot.writeFieldBegin(ADDRESS_FIELD_DESC);
-        oprot.writeString(struct.address);
-        oprot.writeFieldEnd();
-      }
-      if (struct.ZIP != null) {
-        oprot.writeFieldBegin(ZIP_FIELD_DESC);
-        oprot.writeString(struct.ZIP);
-        oprot.writeFieldEnd();
-      }
       if (struct.fixedTelephone != null) {
         oprot.writeFieldBegin(FIXED_TELEPHONE_FIELD_DESC);
         oprot.writeString(struct.fixedTelephone);
-        oprot.writeFieldEnd();
-      }
-      if (struct.FAX != null) {
-        oprot.writeFieldBegin(FAX_FIELD_DESC);
-        oprot.writeString(struct.FAX);
-        oprot.writeFieldEnd();
-      }
-      if (struct.webSite != null) {
-        oprot.writeFieldBegin(WEB_SITE_FIELD_DESC);
-        oprot.writeString(struct.webSite);
         oprot.writeFieldEnd();
       }
       if (struct.TBTCapitalAccountID != null) {
@@ -1794,16 +1153,6 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
       if (struct.mobilePhoneNumber != null) {
         oprot.writeFieldBegin(MOBILE_PHONE_NUMBER_FIELD_DESC);
         oprot.writeString(struct.mobilePhoneNumber);
-        oprot.writeFieldEnd();
-      }
-      if (struct.email != null) {
-        oprot.writeFieldBegin(EMAIL_FIELD_DESC);
-        oprot.writeString(struct.email);
-        oprot.writeFieldEnd();
-      }
-      if (struct.contactAddress != null) {
-        oprot.writeFieldBegin(CONTACT_ADDRESS_FIELD_DESC);
-        oprot.writeString(struct.contactAddress);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldBegin(REGISTER_DATE_FIELD_DESC);
@@ -1831,17 +1180,10 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI32(struct.type);
       oprot.writeString(struct.name);
-      oprot.writeString(struct.organizationCode);
-      oprot.writeString(struct.address);
-      oprot.writeString(struct.ZIP);
       oprot.writeString(struct.fixedTelephone);
-      oprot.writeString(struct.FAX);
-      oprot.writeString(struct.webSite);
       oprot.writeString(struct.TBTCapitalAccountID);
       oprot.writeString(struct.contactName);
       oprot.writeString(struct.mobilePhoneNumber);
-      oprot.writeString(struct.email);
-      oprot.writeString(struct.contactAddress);
       BitSet optionals = new BitSet();
       if (struct.isSetId()) {
         optionals.set(0);
@@ -1877,28 +1219,14 @@ public class InstitutionInfoStruct implements org.apache.thrift.TBase<Institutio
       struct.setTypeIsSet(true);
       struct.name = iprot.readString();
       struct.setNameIsSet(true);
-      struct.organizationCode = iprot.readString();
-      struct.setOrganizationCodeIsSet(true);
-      struct.address = iprot.readString();
-      struct.setAddressIsSet(true);
-      struct.ZIP = iprot.readString();
-      struct.setZIPIsSet(true);
       struct.fixedTelephone = iprot.readString();
       struct.setFixedTelephoneIsSet(true);
-      struct.FAX = iprot.readString();
-      struct.setFAXIsSet(true);
-      struct.webSite = iprot.readString();
-      struct.setWebSiteIsSet(true);
       struct.TBTCapitalAccountID = iprot.readString();
       struct.setTBTCapitalAccountIDIsSet(true);
       struct.contactName = iprot.readString();
       struct.setContactNameIsSet(true);
       struct.mobilePhoneNumber = iprot.readString();
       struct.setMobilePhoneNumberIsSet(true);
-      struct.email = iprot.readString();
-      struct.setEmailIsSet(true);
-      struct.contactAddress = iprot.readString();
-      struct.setContactAddressIsSet(true);
       BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         struct.id = iprot.readString();

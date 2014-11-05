@@ -73,7 +73,6 @@ public class CaseCommand extends BaseCommand {
 						"case %s step is null", id));
 			}
 		} catch (HelperException e) {
-			e.printStackTrace();
 			ret = false;
 			logger.debug("helper exception\n" + e.getMessage());
 		} catch (DocumentException e) {
@@ -116,7 +115,6 @@ public class CaseCommand extends BaseCommand {
 
 			JsonObject jo = BaseHelper.execute(helperNamespace,
 					caseXml, vars);
-
 			if (jo == null)
 				return false;
 			if (jo.toString().equals("{}"))
@@ -155,8 +153,7 @@ public class CaseCommand extends BaseCommand {
 						}
 						jel = data;
 					}
-
-					vars.put(key, jel.getAsString());
+					vars.put(key, jel.toString());
 				}
 			}
 
@@ -188,6 +185,7 @@ public class CaseCommand extends BaseCommand {
 				}
 			}
 		} catch (StepException e) {
+
 			logger.debug("step exception\n" + e.getMessage());
 			return false;
 		}
