@@ -1,6 +1,10 @@
 namespace java com.tongbaotu.fits.thrift.idl
 namespace php fits
 
+//默认约定
+//1 核心系统的日期都是int类型的，格式是YYYYMMDD, 入参中的格式由调用方检查，出参和返回值的格式由核心系统保证
+//2 FitsException中的code有4位和6位两种，一般而言，4位定义的是系统错误，比如数据库连接，sql错误等。6位定义的是业务错误，比如产品不存在或账户已冻结等等
+
 //FITS的Thrift异常
 exception FitsException {
   //异常码
@@ -13,7 +17,10 @@ exception FitsException {
 //通用处理结果消息
 struct ResultInfoStruct
 {
+  //结果码
   1: required i32 retCode
+  
+  //结果消息
   2: required string mess
 }
 
@@ -83,6 +90,16 @@ struct BankSignResultStruct
 {
    //投资专用资金账户
    1: string invest_special_account
+}
+
+//银行卡绑定冻结申请信息
+struct BankSignFrozenInfoStruct
+{
+  //投资人ID
+  1: required string investorID
+  
+  //投资资金账户
+  2: required string accountfundid
 }
 
 //机构注册信息
@@ -172,13 +189,13 @@ struct ProductInfoStruct
    //募集人数上限
    14: required i32 max_raise_number
    
-   //募集起始日
+   //募集起始日 YYYYMMDD
    15: required i32 raise_start_date
    
    //募集截止日
    16: required i32 raise_end_date
    
-   //产品起息日
+   //产品收益起始日
    17: required i32 value_date
    
    //产品到期日
@@ -234,8 +251,12 @@ struct TransferResultStruct
   
   //投资账户当前余额
   4: required  double currentbalance
+  
+  //转账订单号
+  5: required string serialno
 }
 
+//产品购买请求信息
 struct PurchaseInfoStruct
 {
   //投资人ID
@@ -251,6 +272,7 @@ struct PurchaseInfoStruct
   4: required double amount
 }
 
+//产品购买结果信息
 struct PurchaseResultStruct
 {
   //投资人ID
@@ -264,8 +286,12 @@ struct PurchaseResultStruct
   
   //订单号
   4: required string orderno
+  
+  //代销机构ID
+  5: required string institutionid
 }
 
+//产品审核条目
 struct ProductAuditItem
 {
    //产品ID
@@ -319,6 +345,9 @@ struct AccountFundInfoStruct
   
   //未到账资金
   5: required double notcollectedfund
+  
+  //账户状态 0 正常；1 冻结;  2注销
+  6: required i32 status
 }
 
 //产品持仓信息
@@ -338,6 +367,23 @@ struct AccountProductPositionInfoStruct
   
   //未到账数量
   5: required double notcollectedquantity
+  
+  //账面盈利
+  6: required double assets_profits
+  
+  //以下其实是产品的部分信息
+  //每份账面值
+  7: required double  assets_value
+  
+  //收益计算基础
+  // 0 '30/360';  1 'Act/360';  2 'Act/366'
+  8: required i32 target_rate_formula
+  
+  //产品收益起始日
+  9: required i32 value_date
+  
+  //产品到期日
+  10: required i32 due_date
 }
 
 //产品账户信息
@@ -363,13 +409,155 @@ struct InvestorInfoStruct
   3: required i32 riskLevel
 
   //基本信息
-  4: required BankSignInfoStruct banksigninfo
+  4: BankSignInfoStruct banksigninfo
   
   //资金账户信息
-  5: required list<AccountFundInfoStruct> accountfundinfo
+  5: list<AccountFundInfoStruct> accountfundinfo
   
   //产品账户信息
-  6: required list<AccountProductInfoStruct> productpositioninfo
+  6: list<AccountProductInfoStruct> productpositioninfo
+}
+
+//转账历史查询条件
+//日期时间段是前闭后关闭, 即: [begindate, enddate]
+struct TransferQueryConditionStruct
+{
+  //投资人ID
+  1: required string investorID
+  
+  //投资专用资金账户
+  2: required string invest_special_account
+  
+  //开始日期 YYYYMMDD格式
+  3: required i32 begindate
+  
+  //结束日期 YYYYMMDD格式
+  4: required i32 enddate
+  
+  //状态: 0 成功; 1 失败; 2 全部
+  5: required i32 status
+}
+
+//历史查询条目
+struct TransferQueryResultItemStruct
+{
+  //流水号
+  1: required string serialno
+  
+  //物理时间
+  2: required string phytime
+  
+  //币种 0 人民币；1 港币；2 美元；3 其他
+  3: required i32 currency
+  
+  //转账类型 1 银投转账；2 投银转账
+  4: required i32 type
+  
+  //金额
+  5: required double amount
+  
+  //结果代码： 0 成功； 1 失败
+  6: required i32 procode
+  
+  //结果消息
+  7: required string promess
+}
+
+//历史查询结果
+struct TransferQueryResultStruct
+{
+  //投资人ID
+  1: required string investorID
+  
+  //投资专用资金账户
+  2: required string invest_special_account
+  
+  //普通结算户号码
+  3: required string bank_account
+  
+  //历史查询结果
+  4: required list<TransferQueryResultItemStruct> transferitems
+}
+
+//订单号列表
+struct TradeQuerySerialsStruct
+{
+    //投资人ID
+  1: required string investorID
+  
+  //投资专用资金账户
+  2: required string invest_special_account
+  
+  //订单号列表
+  3: required set<string> serialnos
+}
+
+//交易历史查询条件
+struct TradeQueryConditionStruct
+{
+    //投资人ID
+  1: required string investorID
+  
+  //投资专用资金账户
+  2: required string invest_special_account
+  
+  //产品ID
+  3: string productid
+  
+    //开始日期 YYYYMMDD格式
+  4: required i32 begindate
+  
+  //结束日期 YYYYMMDD格式
+  5: required i32 enddate
+  
+  //交易类别: 1 买入 2 卖出 3 全部
+  6: required i32 type
+  
+  //状态: 0 成功; 1 失败; 2 全部
+  7: required i32 status
+}
+
+//历史交易查询结果
+struct TradeQueryItemStruct
+{
+  //投资人ID
+  1: required string investorID
+  
+  //投资专用资金账户
+  2: required string invest_special_account
+  
+  //流水号
+  3: required string serialno
+  
+  //产品id
+  4: required string productid
+  
+  //金额
+  5: required double amount
+  
+  //交易类别: 1 买入 2 卖出
+  6: required i32 type
+  
+  //折扣
+  7: required double discount
+  
+  //买卖数量
+  8: required double quantity
+  
+  //物理时间
+  9: required string phytime
+  
+  //处理结果: 0 成功; 1 失败
+  10: required i32 procode
+  
+  //处理结果消息: 0 成功; 1 失败
+  11: required string promess
+}
+
+//历史交易查询结果
+struct TradeQueryResultStruct
+{
+  1: required list<TradeQueryItemStruct> tradelogs
 }
 
 service  Fits {
@@ -392,11 +580,36 @@ service  Fits {
   //投资者银行签约
   BankSignResultStruct investor_bankSign(1:BankSignInfoStruct bankSignInfo)  throws (1: FitsException fe),
   
+  //投资者银行签约冻结
+  void investor_bankSignFrozen(1:BankSignFrozenInfoStruct bankSignFrozenInfo)  throws (1: FitsException fe),
+  
   //银投/投银转账
   TransferResultStruct silverInvestTransfer(1:TransferInfoStruct transferInfo)  throws (1: FitsException fe),
   
+  //银投/投银转账历史查询
+  TransferQueryResultStruct getTransferLog(1:TransferQueryConditionStruct transferInfo)  throws (1: FitsException fe),
+  
+  //投资账户查询
+  //investorid: 投资者id
+  //accountfundid: 投资资金账户id
+  AccountFundInfoStruct investor_getaccountfundinfo(1:string investorid, 2:string accountfundid)  throws (1: FitsException fe),
+  
+  //产品持仓查询
+  //investorid: 投资者id
+  //accountfundid: 投资资金账户id
+  AccountProductInfoStruct investor_getaccountproductinfo(1:string investorid, 2:string accountfundid)  throws (1: FitsException fe),
+  
+  //产品购买检测
+  void purchaseProductDetect(1:PurchaseInfoStruct purchaseInfo)  throws (1: FitsException fe),
+  
   //产品购买
   PurchaseResultStruct purchaseProduct(1:PurchaseInfoStruct purchaseInfo)  throws (1: FitsException fe),
+  
+  //产品交易查询 根据查询条件
+  TradeQueryResultStruct getTradeLog(1:TradeQueryConditionStruct tradequerycondition)  throws (1: FitsException fe),
+  
+  //产品交易查询 根据订单号
+  TradeQueryResultStruct getTradeLogBySerialNo(1:TradeQuerySerialsStruct tradequerycondition)  throws (1: FitsException fe),
   
   //发行行产品注册
   IssuBankProductInfoResultStruct issubank_productregister(1:ProductInfoStruct productInfo)  throws (1: FitsException fe),
@@ -426,6 +639,9 @@ service  Fits {
   
   //获取机构信息
   InstitutionInfoStruct institution_getInfo(1:string institutionid)  throws (1: FitsException fe),
+  
+  //机构信息更新
+  void institution_update(1:InstitutionInfoStruct institutioninfo)  throws (1: FitsException fe),
   
   //查询投资者信息
   InvestorInfoStruct investor_getInfo(1:string investorid)  throws (1: FitsException fe),

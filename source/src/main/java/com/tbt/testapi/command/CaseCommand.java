@@ -74,12 +74,12 @@ public class CaseCommand extends BaseCommand {
 			}
 		} catch (HelperException e) {
 			ret = false;
-			logger.debug("helper exception\n" + e.getMessage());
+			logger.info("helper exception\n" + e.getMessage());
 		} catch (DocumentException e) {
-			Utils.debugLog("case parse error, " + e.getMessage());
+			logger.info("case parse error, " + e.getMessage());
 			ret = false;
 		} catch (TestApiException e) {
-			logger.debug("Case Exception", e);
+			logger.info("Case Exception", e);
 			ret = false;
 		} finally {
 			Report.getInstance().add(caseId, ret);

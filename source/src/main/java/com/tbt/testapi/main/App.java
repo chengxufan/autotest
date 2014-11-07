@@ -18,7 +18,7 @@ public class App {
 		try {
 			new App().run(args);
 		} catch (TestApiException e) {
-			logger.debug("TestApiException", e);
+			logger.info("TestApiException", e);
 			System.exit(1);
 		}
 	}
@@ -34,7 +34,7 @@ public class App {
 		try {
 			command.run(Command.options.name);
 		} catch (DocumentException e) {
-			logger.debug("Unable to parse xml file", e);
+			logger.info("Unable to parse xml file", e);
 		}
 
 		Report.getInstance().print();

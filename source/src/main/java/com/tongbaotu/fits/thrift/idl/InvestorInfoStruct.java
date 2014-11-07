@@ -140,12 +140,12 @@ public class InvestorInfoStruct implements org.apache.thrift.TBase<InvestorInfoS
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.RISK_LEVEL, new org.apache.thrift.meta_data.FieldMetaData("riskLevel", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
-    tmpMap.put(_Fields.BANKSIGNINFO, new org.apache.thrift.meta_data.FieldMetaData("banksigninfo", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.BANKSIGNINFO, new org.apache.thrift.meta_data.FieldMetaData("banksigninfo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, BankSignInfoStruct.class)));
-    tmpMap.put(_Fields.ACCOUNTFUNDINFO, new org.apache.thrift.meta_data.FieldMetaData("accountfundinfo", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.ACCOUNTFUNDINFO, new org.apache.thrift.meta_data.FieldMetaData("accountfundinfo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, AccountFundInfoStruct.class))));
-    tmpMap.put(_Fields.PRODUCTPOSITIONINFO, new org.apache.thrift.meta_data.FieldMetaData("productpositioninfo", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.PRODUCTPOSITIONINFO, new org.apache.thrift.meta_data.FieldMetaData("productpositioninfo", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, AccountProductInfoStruct.class))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -711,15 +711,6 @@ public class InvestorInfoStruct implements org.apache.thrift.TBase<InvestorInfoS
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'mobilePhoneNumber' was not present! Struct: " + toString());
     }
     // alas, we cannot check 'riskLevel' because it's a primitive and you chose the non-beans generator.
-    if (banksigninfo == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'banksigninfo' was not present! Struct: " + toString());
-    }
-    if (accountfundinfo == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'accountfundinfo' was not present! Struct: " + toString());
-    }
-    if (productpositioninfo == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'productpositioninfo' was not present! Struct: " + toString());
-    }
     // check for sub-struct validity
     if (banksigninfo != null) {
       banksigninfo.validate();
@@ -913,19 +904,36 @@ public class InvestorInfoStruct implements org.apache.thrift.TBase<InvestorInfoS
       oprot.writeString(struct.investorid);
       oprot.writeString(struct.mobilePhoneNumber);
       oprot.writeI32(struct.riskLevel);
-      struct.banksigninfo.write(oprot);
-      {
-        oprot.writeI32(struct.accountfundinfo.size());
-        for (AccountFundInfoStruct _iter32 : struct.accountfundinfo)
+      BitSet optionals = new BitSet();
+      if (struct.isSetBanksigninfo()) {
+        optionals.set(0);
+      }
+      if (struct.isSetAccountfundinfo()) {
+        optionals.set(1);
+      }
+      if (struct.isSetProductpositioninfo()) {
+        optionals.set(2);
+      }
+      oprot.writeBitSet(optionals, 3);
+      if (struct.isSetBanksigninfo()) {
+        struct.banksigninfo.write(oprot);
+      }
+      if (struct.isSetAccountfundinfo()) {
         {
-          _iter32.write(oprot);
+          oprot.writeI32(struct.accountfundinfo.size());
+          for (AccountFundInfoStruct _iter32 : struct.accountfundinfo)
+          {
+            _iter32.write(oprot);
+          }
         }
       }
-      {
-        oprot.writeI32(struct.productpositioninfo.size());
-        for (AccountProductInfoStruct _iter33 : struct.productpositioninfo)
+      if (struct.isSetProductpositioninfo()) {
         {
-          _iter33.write(oprot);
+          oprot.writeI32(struct.productpositioninfo.size());
+          for (AccountProductInfoStruct _iter33 : struct.productpositioninfo)
+          {
+            _iter33.write(oprot);
+          }
         }
       }
     }
@@ -939,33 +947,40 @@ public class InvestorInfoStruct implements org.apache.thrift.TBase<InvestorInfoS
       struct.setMobilePhoneNumberIsSet(true);
       struct.riskLevel = iprot.readI32();
       struct.setRiskLevelIsSet(true);
-      struct.banksigninfo = new BankSignInfoStruct();
-      struct.banksigninfo.read(iprot);
-      struct.setBanksigninfoIsSet(true);
-      {
-        org.apache.thrift.protocol.TList _list34 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-        struct.accountfundinfo = new ArrayList<AccountFundInfoStruct>(_list34.size);
-        for (int _i35 = 0; _i35 < _list34.size; ++_i35)
-        {
-          AccountFundInfoStruct _elem36;
-          _elem36 = new AccountFundInfoStruct();
-          _elem36.read(iprot);
-          struct.accountfundinfo.add(_elem36);
-        }
+      BitSet incoming = iprot.readBitSet(3);
+      if (incoming.get(0)) {
+        struct.banksigninfo = new BankSignInfoStruct();
+        struct.banksigninfo.read(iprot);
+        struct.setBanksigninfoIsSet(true);
       }
-      struct.setAccountfundinfoIsSet(true);
-      {
-        org.apache.thrift.protocol.TList _list37 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-        struct.productpositioninfo = new ArrayList<AccountProductInfoStruct>(_list37.size);
-        for (int _i38 = 0; _i38 < _list37.size; ++_i38)
+      if (incoming.get(1)) {
         {
-          AccountProductInfoStruct _elem39;
-          _elem39 = new AccountProductInfoStruct();
-          _elem39.read(iprot);
-          struct.productpositioninfo.add(_elem39);
+          org.apache.thrift.protocol.TList _list34 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.accountfundinfo = new ArrayList<AccountFundInfoStruct>(_list34.size);
+          for (int _i35 = 0; _i35 < _list34.size; ++_i35)
+          {
+            AccountFundInfoStruct _elem36;
+            _elem36 = new AccountFundInfoStruct();
+            _elem36.read(iprot);
+            struct.accountfundinfo.add(_elem36);
+          }
         }
+        struct.setAccountfundinfoIsSet(true);
       }
-      struct.setProductpositioninfoIsSet(true);
+      if (incoming.get(2)) {
+        {
+          org.apache.thrift.protocol.TList _list37 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.productpositioninfo = new ArrayList<AccountProductInfoStruct>(_list37.size);
+          for (int _i38 = 0; _i38 < _list37.size; ++_i38)
+          {
+            AccountProductInfoStruct _elem39;
+            _elem39 = new AccountProductInfoStruct();
+            _elem39.read(iprot);
+            struct.productpositioninfo.add(_elem39);
+          }
+        }
+        struct.setProductpositioninfoIsSet(true);
+      }
     }
   }
 

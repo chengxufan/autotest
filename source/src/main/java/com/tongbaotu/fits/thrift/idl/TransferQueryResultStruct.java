@@ -32,34 +32,31 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TransferResultStruct implements org.apache.thrift.TBase<TransferResultStruct, TransferResultStruct._Fields>, java.io.Serializable, Cloneable, Comparable<TransferResultStruct> {
-  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("TransferResultStruct");
+public class TransferQueryResultStruct implements org.apache.thrift.TBase<TransferQueryResultStruct, TransferQueryResultStruct._Fields>, java.io.Serializable, Cloneable, Comparable<TransferQueryResultStruct> {
+  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("TransferQueryResultStruct");
 
   private static final org.apache.thrift.protocol.TField INVESTOR_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("investorID", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField INVEST_SPECIAL_ACCOUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("invest_special_account", org.apache.thrift.protocol.TType.STRING, (short)2);
-  private static final org.apache.thrift.protocol.TField AMOUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("amount", org.apache.thrift.protocol.TType.DOUBLE, (short)3);
-  private static final org.apache.thrift.protocol.TField CURRENTBALANCE_FIELD_DESC = new org.apache.thrift.protocol.TField("currentbalance", org.apache.thrift.protocol.TType.DOUBLE, (short)4);
-  private static final org.apache.thrift.protocol.TField SERIALNO_FIELD_DESC = new org.apache.thrift.protocol.TField("serialno", org.apache.thrift.protocol.TType.STRING, (short)5);
+  private static final org.apache.thrift.protocol.TField BANK_ACCOUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("bank_account", org.apache.thrift.protocol.TType.STRING, (short)3);
+  private static final org.apache.thrift.protocol.TField TRANSFERITEMS_FIELD_DESC = new org.apache.thrift.protocol.TField("transferitems", org.apache.thrift.protocol.TType.LIST, (short)4);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
-    schemes.put(StandardScheme.class, new TransferResultStructStandardSchemeFactory());
-    schemes.put(TupleScheme.class, new TransferResultStructTupleSchemeFactory());
+    schemes.put(StandardScheme.class, new TransferQueryResultStructStandardSchemeFactory());
+    schemes.put(TupleScheme.class, new TransferQueryResultStructTupleSchemeFactory());
   }
 
   public String investorID; // required
   public String invest_special_account; // required
-  public double amount; // required
-  public double currentbalance; // required
-  public String serialno; // required
+  public String bank_account; // required
+  public List<TransferQueryResultItemStruct> transferitems; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     INVESTOR_ID((short)1, "investorID"),
     INVEST_SPECIAL_ACCOUNT((short)2, "invest_special_account"),
-    AMOUNT((short)3, "amount"),
-    CURRENTBALANCE((short)4, "currentbalance"),
-    SERIALNO((short)5, "serialno");
+    BANK_ACCOUNT((short)3, "bank_account"),
+    TRANSFERITEMS((short)4, "transferitems");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -78,12 +75,10 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
           return INVESTOR_ID;
         case 2: // INVEST_SPECIAL_ACCOUNT
           return INVEST_SPECIAL_ACCOUNT;
-        case 3: // AMOUNT
-          return AMOUNT;
-        case 4: // CURRENTBALANCE
-          return CURRENTBALANCE;
-        case 5: // SERIALNO
-          return SERIALNO;
+        case 3: // BANK_ACCOUNT
+          return BANK_ACCOUNT;
+        case 4: // TRANSFERITEMS
+          return TRANSFERITEMS;
         default:
           return null;
       }
@@ -124,9 +119,6 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
   }
 
   // isset id assignments
-  private static final int __AMOUNT_ISSET_ID = 0;
-  private static final int __CURRENTBALANCE_ISSET_ID = 1;
-  private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -134,74 +126,70 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.INVEST_SPECIAL_ACCOUNT, new org.apache.thrift.meta_data.FieldMetaData("invest_special_account", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.AMOUNT, new org.apache.thrift.meta_data.FieldMetaData("amount", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
-    tmpMap.put(_Fields.CURRENTBALANCE, new org.apache.thrift.meta_data.FieldMetaData("currentbalance", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
-    tmpMap.put(_Fields.SERIALNO, new org.apache.thrift.meta_data.FieldMetaData("serialno", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.BANK_ACCOUNT, new org.apache.thrift.meta_data.FieldMetaData("bank_account", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.TRANSFERITEMS, new org.apache.thrift.meta_data.FieldMetaData("transferitems", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferQueryResultItemStruct.class))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
-    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TransferResultStruct.class, metaDataMap);
+    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TransferQueryResultStruct.class, metaDataMap);
   }
 
-  public TransferResultStruct() {
+  public TransferQueryResultStruct() {
   }
 
-  public TransferResultStruct(
+  public TransferQueryResultStruct(
     String investorID,
     String invest_special_account,
-    double amount,
-    double currentbalance,
-    String serialno)
+    String bank_account,
+    List<TransferQueryResultItemStruct> transferitems)
   {
     this();
     this.investorID = investorID;
     this.invest_special_account = invest_special_account;
-    this.amount = amount;
-    setAmountIsSet(true);
-    this.currentbalance = currentbalance;
-    setCurrentbalanceIsSet(true);
-    this.serialno = serialno;
+    this.bank_account = bank_account;
+    this.transferitems = transferitems;
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
-  public TransferResultStruct(TransferResultStruct other) {
-    __isset_bitfield = other.__isset_bitfield;
+  public TransferQueryResultStruct(TransferQueryResultStruct other) {
     if (other.isSetInvestorID()) {
       this.investorID = other.investorID;
     }
     if (other.isSetInvest_special_account()) {
       this.invest_special_account = other.invest_special_account;
     }
-    this.amount = other.amount;
-    this.currentbalance = other.currentbalance;
-    if (other.isSetSerialno()) {
-      this.serialno = other.serialno;
+    if (other.isSetBank_account()) {
+      this.bank_account = other.bank_account;
+    }
+    if (other.isSetTransferitems()) {
+      List<TransferQueryResultItemStruct> __this__transferitems = new ArrayList<TransferQueryResultItemStruct>(other.transferitems.size());
+      for (TransferQueryResultItemStruct other_element : other.transferitems) {
+        __this__transferitems.add(new TransferQueryResultItemStruct(other_element));
+      }
+      this.transferitems = __this__transferitems;
     }
   }
 
-  public TransferResultStruct deepCopy() {
-    return new TransferResultStruct(this);
+  public TransferQueryResultStruct deepCopy() {
+    return new TransferQueryResultStruct(this);
   }
 
   @Override
   public void clear() {
     this.investorID = null;
     this.invest_special_account = null;
-    setAmountIsSet(false);
-    this.amount = 0.0;
-    setCurrentbalanceIsSet(false);
-    this.currentbalance = 0.0;
-    this.serialno = null;
+    this.bank_account = null;
+    this.transferitems = null;
   }
 
   public String getInvestorID() {
     return this.investorID;
   }
 
-  public TransferResultStruct setInvestorID(String investorID) {
+  public TransferQueryResultStruct setInvestorID(String investorID) {
     this.investorID = investorID;
     return this;
   }
@@ -225,7 +213,7 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
     return this.invest_special_account;
   }
 
-  public TransferResultStruct setInvest_special_account(String invest_special_account) {
+  public TransferQueryResultStruct setInvest_special_account(String invest_special_account) {
     this.invest_special_account = invest_special_account;
     return this;
   }
@@ -245,73 +233,66 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
     }
   }
 
-  public double getAmount() {
-    return this.amount;
+  public String getBank_account() {
+    return this.bank_account;
   }
 
-  public TransferResultStruct setAmount(double amount) {
-    this.amount = amount;
-    setAmountIsSet(true);
+  public TransferQueryResultStruct setBank_account(String bank_account) {
+    this.bank_account = bank_account;
     return this;
   }
 
-  public void unsetAmount() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __AMOUNT_ISSET_ID);
+  public void unsetBank_account() {
+    this.bank_account = null;
   }
 
-  /** Returns true if field amount is set (has been assigned a value) and false otherwise */
-  public boolean isSetAmount() {
-    return EncodingUtils.testBit(__isset_bitfield, __AMOUNT_ISSET_ID);
+  /** Returns true if field bank_account is set (has been assigned a value) and false otherwise */
+  public boolean isSetBank_account() {
+    return this.bank_account != null;
   }
 
-  public void setAmountIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __AMOUNT_ISSET_ID, value);
-  }
-
-  public double getCurrentbalance() {
-    return this.currentbalance;
-  }
-
-  public TransferResultStruct setCurrentbalance(double currentbalance) {
-    this.currentbalance = currentbalance;
-    setCurrentbalanceIsSet(true);
-    return this;
-  }
-
-  public void unsetCurrentbalance() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __CURRENTBALANCE_ISSET_ID);
-  }
-
-  /** Returns true if field currentbalance is set (has been assigned a value) and false otherwise */
-  public boolean isSetCurrentbalance() {
-    return EncodingUtils.testBit(__isset_bitfield, __CURRENTBALANCE_ISSET_ID);
-  }
-
-  public void setCurrentbalanceIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __CURRENTBALANCE_ISSET_ID, value);
-  }
-
-  public String getSerialno() {
-    return this.serialno;
-  }
-
-  public TransferResultStruct setSerialno(String serialno) {
-    this.serialno = serialno;
-    return this;
-  }
-
-  public void unsetSerialno() {
-    this.serialno = null;
-  }
-
-  /** Returns true if field serialno is set (has been assigned a value) and false otherwise */
-  public boolean isSetSerialno() {
-    return this.serialno != null;
-  }
-
-  public void setSerialnoIsSet(boolean value) {
+  public void setBank_accountIsSet(boolean value) {
     if (!value) {
-      this.serialno = null;
+      this.bank_account = null;
+    }
+  }
+
+  public int getTransferitemsSize() {
+    return (this.transferitems == null) ? 0 : this.transferitems.size();
+  }
+
+  public java.util.Iterator<TransferQueryResultItemStruct> getTransferitemsIterator() {
+    return (this.transferitems == null) ? null : this.transferitems.iterator();
+  }
+
+  public void addToTransferitems(TransferQueryResultItemStruct elem) {
+    if (this.transferitems == null) {
+      this.transferitems = new ArrayList<TransferQueryResultItemStruct>();
+    }
+    this.transferitems.add(elem);
+  }
+
+  public List<TransferQueryResultItemStruct> getTransferitems() {
+    return this.transferitems;
+  }
+
+  public TransferQueryResultStruct setTransferitems(List<TransferQueryResultItemStruct> transferitems) {
+    this.transferitems = transferitems;
+    return this;
+  }
+
+  public void unsetTransferitems() {
+    this.transferitems = null;
+  }
+
+  /** Returns true if field transferitems is set (has been assigned a value) and false otherwise */
+  public boolean isSetTransferitems() {
+    return this.transferitems != null;
+  }
+
+  public void setTransferitemsIsSet(boolean value) {
+    if (!value) {
+      this.transferitems = null;
     }
   }
 
@@ -333,27 +314,19 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
       }
       break;
 
-    case AMOUNT:
+    case BANK_ACCOUNT:
       if (value == null) {
-        unsetAmount();
+        unsetBank_account();
       } else {
-        setAmount((Double)value);
+        setBank_account((String)value);
       }
       break;
 
-    case CURRENTBALANCE:
+    case TRANSFERITEMS:
       if (value == null) {
-        unsetCurrentbalance();
+        unsetTransferitems();
       } else {
-        setCurrentbalance((Double)value);
-      }
-      break;
-
-    case SERIALNO:
-      if (value == null) {
-        unsetSerialno();
-      } else {
-        setSerialno((String)value);
+        setTransferitems((List<TransferQueryResultItemStruct>)value);
       }
       break;
 
@@ -368,14 +341,11 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
     case INVEST_SPECIAL_ACCOUNT:
       return getInvest_special_account();
 
-    case AMOUNT:
-      return Double.valueOf(getAmount());
+    case BANK_ACCOUNT:
+      return getBank_account();
 
-    case CURRENTBALANCE:
-      return Double.valueOf(getCurrentbalance());
-
-    case SERIALNO:
-      return getSerialno();
+    case TRANSFERITEMS:
+      return getTransferitems();
 
     }
     throw new IllegalStateException();
@@ -392,12 +362,10 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
       return isSetInvestorID();
     case INVEST_SPECIAL_ACCOUNT:
       return isSetInvest_special_account();
-    case AMOUNT:
-      return isSetAmount();
-    case CURRENTBALANCE:
-      return isSetCurrentbalance();
-    case SERIALNO:
-      return isSetSerialno();
+    case BANK_ACCOUNT:
+      return isSetBank_account();
+    case TRANSFERITEMS:
+      return isSetTransferitems();
     }
     throw new IllegalStateException();
   }
@@ -406,12 +374,12 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
   public boolean equals(Object that) {
     if (that == null)
       return false;
-    if (that instanceof TransferResultStruct)
-      return this.equals((TransferResultStruct)that);
+    if (that instanceof TransferQueryResultStruct)
+      return this.equals((TransferQueryResultStruct)that);
     return false;
   }
 
-  public boolean equals(TransferResultStruct that) {
+  public boolean equals(TransferQueryResultStruct that) {
     if (that == null)
       return false;
 
@@ -433,30 +401,21 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
         return false;
     }
 
-    boolean this_present_amount = true;
-    boolean that_present_amount = true;
-    if (this_present_amount || that_present_amount) {
-      if (!(this_present_amount && that_present_amount))
+    boolean this_present_bank_account = true && this.isSetBank_account();
+    boolean that_present_bank_account = true && that.isSetBank_account();
+    if (this_present_bank_account || that_present_bank_account) {
+      if (!(this_present_bank_account && that_present_bank_account))
         return false;
-      if (this.amount != that.amount)
-        return false;
-    }
-
-    boolean this_present_currentbalance = true;
-    boolean that_present_currentbalance = true;
-    if (this_present_currentbalance || that_present_currentbalance) {
-      if (!(this_present_currentbalance && that_present_currentbalance))
-        return false;
-      if (this.currentbalance != that.currentbalance)
+      if (!this.bank_account.equals(that.bank_account))
         return false;
     }
 
-    boolean this_present_serialno = true && this.isSetSerialno();
-    boolean that_present_serialno = true && that.isSetSerialno();
-    if (this_present_serialno || that_present_serialno) {
-      if (!(this_present_serialno && that_present_serialno))
+    boolean this_present_transferitems = true && this.isSetTransferitems();
+    boolean that_present_transferitems = true && that.isSetTransferitems();
+    if (this_present_transferitems || that_present_transferitems) {
+      if (!(this_present_transferitems && that_present_transferitems))
         return false;
-      if (!this.serialno.equals(that.serialno))
+      if (!this.transferitems.equals(that.transferitems))
         return false;
     }
 
@@ -469,7 +428,7 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
   }
 
   @Override
-  public int compareTo(TransferResultStruct other) {
+  public int compareTo(TransferQueryResultStruct other) {
     if (!getClass().equals(other.getClass())) {
       return getClass().getName().compareTo(other.getClass().getName());
     }
@@ -496,32 +455,22 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetAmount()).compareTo(other.isSetAmount());
+    lastComparison = Boolean.valueOf(isSetBank_account()).compareTo(other.isSetBank_account());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetAmount()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.amount, other.amount);
+    if (isSetBank_account()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.bank_account, other.bank_account);
       if (lastComparison != 0) {
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetCurrentbalance()).compareTo(other.isSetCurrentbalance());
+    lastComparison = Boolean.valueOf(isSetTransferitems()).compareTo(other.isSetTransferitems());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetCurrentbalance()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.currentbalance, other.currentbalance);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetSerialno()).compareTo(other.isSetSerialno());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetSerialno()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.serialno, other.serialno);
+    if (isSetTransferitems()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.transferitems, other.transferitems);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -543,7 +492,7 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("TransferResultStruct(");
+    StringBuilder sb = new StringBuilder("TransferQueryResultStruct(");
     boolean first = true;
 
     sb.append("investorID:");
@@ -562,19 +511,19 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("amount:");
-    sb.append(this.amount);
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("currentbalance:");
-    sb.append(this.currentbalance);
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("serialno:");
-    if (this.serialno == null) {
+    sb.append("bank_account:");
+    if (this.bank_account == null) {
       sb.append("null");
     } else {
-      sb.append(this.serialno);
+      sb.append(this.bank_account);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("transferitems:");
+    if (this.transferitems == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.transferitems);
     }
     first = false;
     sb.append(")");
@@ -589,10 +538,11 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
     if (invest_special_account == null) {
       throw new org.apache.thrift.protocol.TProtocolException("Required field 'invest_special_account' was not present! Struct: " + toString());
     }
-    // alas, we cannot check 'amount' because it's a primitive and you chose the non-beans generator.
-    // alas, we cannot check 'currentbalance' because it's a primitive and you chose the non-beans generator.
-    if (serialno == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'serialno' was not present! Struct: " + toString());
+    if (bank_account == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'bank_account' was not present! Struct: " + toString());
+    }
+    if (transferitems == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'transferitems' was not present! Struct: " + toString());
     }
     // check for sub-struct validity
   }
@@ -607,23 +557,21 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
 
   private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
     try {
-      // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-      __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
     } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te);
     }
   }
 
-  private static class TransferResultStructStandardSchemeFactory implements SchemeFactory {
-    public TransferResultStructStandardScheme getScheme() {
-      return new TransferResultStructStandardScheme();
+  private static class TransferQueryResultStructStandardSchemeFactory implements SchemeFactory {
+    public TransferQueryResultStructStandardScheme getScheme() {
+      return new TransferQueryResultStructStandardScheme();
     }
   }
 
-  private static class TransferResultStructStandardScheme extends StandardScheme<TransferResultStruct> {
+  private static class TransferQueryResultStructStandardScheme extends StandardScheme<TransferQueryResultStruct> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, TransferResultStruct struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, TransferQueryResultStruct struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -649,26 +597,29 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // AMOUNT
-            if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
-              struct.amount = iprot.readDouble();
-              struct.setAmountIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 4: // CURRENTBALANCE
-            if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
-              struct.currentbalance = iprot.readDouble();
-              struct.setCurrentbalanceIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 5: // SERIALNO
+          case 3: // BANK_ACCOUNT
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.serialno = iprot.readString();
-              struct.setSerialnoIsSet(true);
+              struct.bank_account = iprot.readString();
+              struct.setBank_accountIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 4: // TRANSFERITEMS
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list40 = iprot.readListBegin();
+                struct.transferitems = new ArrayList<TransferQueryResultItemStruct>(_list40.size);
+                for (int _i41 = 0; _i41 < _list40.size; ++_i41)
+                {
+                  TransferQueryResultItemStruct _elem42;
+                  _elem42 = new TransferQueryResultItemStruct();
+                  _elem42.read(iprot);
+                  struct.transferitems.add(_elem42);
+                }
+                iprot.readListEnd();
+              }
+              struct.setTransferitemsIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -681,16 +632,10 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
       iprot.readStructEnd();
 
       // check for required fields of primitive type, which can't be checked in the validate method
-      if (!struct.isSetAmount()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'amount' was not found in serialized data! Struct: " + toString());
-      }
-      if (!struct.isSetCurrentbalance()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'currentbalance' was not found in serialized data! Struct: " + toString());
-      }
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, TransferResultStruct struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, TransferQueryResultStruct struct) throws org.apache.thrift.TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -704,15 +649,21 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
         oprot.writeString(struct.invest_special_account);
         oprot.writeFieldEnd();
       }
-      oprot.writeFieldBegin(AMOUNT_FIELD_DESC);
-      oprot.writeDouble(struct.amount);
-      oprot.writeFieldEnd();
-      oprot.writeFieldBegin(CURRENTBALANCE_FIELD_DESC);
-      oprot.writeDouble(struct.currentbalance);
-      oprot.writeFieldEnd();
-      if (struct.serialno != null) {
-        oprot.writeFieldBegin(SERIALNO_FIELD_DESC);
-        oprot.writeString(struct.serialno);
+      if (struct.bank_account != null) {
+        oprot.writeFieldBegin(BANK_ACCOUNT_FIELD_DESC);
+        oprot.writeString(struct.bank_account);
+        oprot.writeFieldEnd();
+      }
+      if (struct.transferitems != null) {
+        oprot.writeFieldBegin(TRANSFERITEMS_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.transferitems.size()));
+          for (TransferQueryResultItemStruct _iter43 : struct.transferitems)
+          {
+            _iter43.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -721,37 +672,50 @@ public class TransferResultStruct implements org.apache.thrift.TBase<TransferRes
 
   }
 
-  private static class TransferResultStructTupleSchemeFactory implements SchemeFactory {
-    public TransferResultStructTupleScheme getScheme() {
-      return new TransferResultStructTupleScheme();
+  private static class TransferQueryResultStructTupleSchemeFactory implements SchemeFactory {
+    public TransferQueryResultStructTupleScheme getScheme() {
+      return new TransferQueryResultStructTupleScheme();
     }
   }
 
-  private static class TransferResultStructTupleScheme extends TupleScheme<TransferResultStruct> {
+  private static class TransferQueryResultStructTupleScheme extends TupleScheme<TransferQueryResultStruct> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, TransferResultStruct struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, TransferQueryResultStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeString(struct.investorID);
       oprot.writeString(struct.invest_special_account);
-      oprot.writeDouble(struct.amount);
-      oprot.writeDouble(struct.currentbalance);
-      oprot.writeString(struct.serialno);
+      oprot.writeString(struct.bank_account);
+      {
+        oprot.writeI32(struct.transferitems.size());
+        for (TransferQueryResultItemStruct _iter44 : struct.transferitems)
+        {
+          _iter44.write(oprot);
+        }
+      }
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, TransferResultStruct struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, TransferQueryResultStruct struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.investorID = iprot.readString();
       struct.setInvestorIDIsSet(true);
       struct.invest_special_account = iprot.readString();
       struct.setInvest_special_accountIsSet(true);
-      struct.amount = iprot.readDouble();
-      struct.setAmountIsSet(true);
-      struct.currentbalance = iprot.readDouble();
-      struct.setCurrentbalanceIsSet(true);
-      struct.serialno = iprot.readString();
-      struct.setSerialnoIsSet(true);
+      struct.bank_account = iprot.readString();
+      struct.setBank_accountIsSet(true);
+      {
+        org.apache.thrift.protocol.TList _list45 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+        struct.transferitems = new ArrayList<TransferQueryResultItemStruct>(_list45.size);
+        for (int _i46 = 0; _i46 < _list45.size; ++_i46)
+        {
+          TransferQueryResultItemStruct _elem47;
+          _elem47 = new TransferQueryResultItemStruct();
+          _elem47.read(iprot);
+          struct.transferitems.add(_elem47);
+        }
+      }
+      struct.setTransferitemsIsSet(true);
     }
   }
 

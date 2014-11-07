@@ -103,7 +103,7 @@ public class MysqlExecuteHelper extends BaseMysqlHelper {
 			}
 		}
 
-		logger.debug("mysql helper response " + jo);
+		logger.info("mysql helper response " + jo);
 
 		return jo;
 	}

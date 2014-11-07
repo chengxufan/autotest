@@ -40,6 +40,11 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
   private static final org.apache.thrift.protocol.TField VALIDBALANCE_FIELD_DESC = new org.apache.thrift.protocol.TField("validbalance", org.apache.thrift.protocol.TType.DOUBLE, (short)3);
   private static final org.apache.thrift.protocol.TField FROZENQUANTITY_FIELD_DESC = new org.apache.thrift.protocol.TField("frozenquantity", org.apache.thrift.protocol.TType.DOUBLE, (short)4);
   private static final org.apache.thrift.protocol.TField NOTCOLLECTEDQUANTITY_FIELD_DESC = new org.apache.thrift.protocol.TField("notcollectedquantity", org.apache.thrift.protocol.TType.DOUBLE, (short)5);
+  private static final org.apache.thrift.protocol.TField ASSETS_PROFITS_FIELD_DESC = new org.apache.thrift.protocol.TField("assets_profits", org.apache.thrift.protocol.TType.DOUBLE, (short)6);
+  private static final org.apache.thrift.protocol.TField ASSETS_VALUE_FIELD_DESC = new org.apache.thrift.protocol.TField("assets_value", org.apache.thrift.protocol.TType.DOUBLE, (short)7);
+  private static final org.apache.thrift.protocol.TField TARGET_RATE_FORMULA_FIELD_DESC = new org.apache.thrift.protocol.TField("target_rate_formula", org.apache.thrift.protocol.TType.I32, (short)8);
+  private static final org.apache.thrift.protocol.TField VALUE_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("value_date", org.apache.thrift.protocol.TType.I32, (short)9);
+  private static final org.apache.thrift.protocol.TField DUE_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("due_date", org.apache.thrift.protocol.TType.I32, (short)10);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -52,6 +57,11 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
   public double validbalance; // required
   public double frozenquantity; // required
   public double notcollectedquantity; // required
+  public double assets_profits; // required
+  public double assets_value; // required
+  public int target_rate_formula; // required
+  public int value_date; // required
+  public int due_date; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -59,7 +69,12 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
     CURBALANCE((short)2, "curbalance"),
     VALIDBALANCE((short)3, "validbalance"),
     FROZENQUANTITY((short)4, "frozenquantity"),
-    NOTCOLLECTEDQUANTITY((short)5, "notcollectedquantity");
+    NOTCOLLECTEDQUANTITY((short)5, "notcollectedquantity"),
+    ASSETS_PROFITS((short)6, "assets_profits"),
+    ASSETS_VALUE((short)7, "assets_value"),
+    TARGET_RATE_FORMULA((short)8, "target_rate_formula"),
+    VALUE_DATE((short)9, "value_date"),
+    DUE_DATE((short)10, "due_date");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -84,6 +99,16 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
           return FROZENQUANTITY;
         case 5: // NOTCOLLECTEDQUANTITY
           return NOTCOLLECTEDQUANTITY;
+        case 6: // ASSETS_PROFITS
+          return ASSETS_PROFITS;
+        case 7: // ASSETS_VALUE
+          return ASSETS_VALUE;
+        case 8: // TARGET_RATE_FORMULA
+          return TARGET_RATE_FORMULA;
+        case 9: // VALUE_DATE
+          return VALUE_DATE;
+        case 10: // DUE_DATE
+          return DUE_DATE;
         default:
           return null;
       }
@@ -128,7 +153,12 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
   private static final int __VALIDBALANCE_ISSET_ID = 1;
   private static final int __FROZENQUANTITY_ISSET_ID = 2;
   private static final int __NOTCOLLECTEDQUANTITY_ISSET_ID = 3;
-  private byte __isset_bitfield = 0;
+  private static final int __ASSETS_PROFITS_ISSET_ID = 4;
+  private static final int __ASSETS_VALUE_ISSET_ID = 5;
+  private static final int __TARGET_RATE_FORMULA_ISSET_ID = 6;
+  private static final int __VALUE_DATE_ISSET_ID = 7;
+  private static final int __DUE_DATE_ISSET_ID = 8;
+  private short __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -142,6 +172,16 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     tmpMap.put(_Fields.NOTCOLLECTEDQUANTITY, new org.apache.thrift.meta_data.FieldMetaData("notcollectedquantity", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
+    tmpMap.put(_Fields.ASSETS_PROFITS, new org.apache.thrift.meta_data.FieldMetaData("assets_profits", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
+    tmpMap.put(_Fields.ASSETS_VALUE, new org.apache.thrift.meta_data.FieldMetaData("assets_value", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
+    tmpMap.put(_Fields.TARGET_RATE_FORMULA, new org.apache.thrift.meta_data.FieldMetaData("target_rate_formula", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+    tmpMap.put(_Fields.VALUE_DATE, new org.apache.thrift.meta_data.FieldMetaData("value_date", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+    tmpMap.put(_Fields.DUE_DATE, new org.apache.thrift.meta_data.FieldMetaData("due_date", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(AccountProductPositionInfoStruct.class, metaDataMap);
   }
@@ -154,7 +194,12 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
     double curbalance,
     double validbalance,
     double frozenquantity,
-    double notcollectedquantity)
+    double notcollectedquantity,
+    double assets_profits,
+    double assets_value,
+    int target_rate_formula,
+    int value_date,
+    int due_date)
   {
     this();
     this.productid = productid;
@@ -166,6 +211,16 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
     setFrozenquantityIsSet(true);
     this.notcollectedquantity = notcollectedquantity;
     setNotcollectedquantityIsSet(true);
+    this.assets_profits = assets_profits;
+    setAssets_profitsIsSet(true);
+    this.assets_value = assets_value;
+    setAssets_valueIsSet(true);
+    this.target_rate_formula = target_rate_formula;
+    setTarget_rate_formulaIsSet(true);
+    this.value_date = value_date;
+    setValue_dateIsSet(true);
+    this.due_date = due_date;
+    setDue_dateIsSet(true);
   }
 
   /**
@@ -180,6 +235,11 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
     this.validbalance = other.validbalance;
     this.frozenquantity = other.frozenquantity;
     this.notcollectedquantity = other.notcollectedquantity;
+    this.assets_profits = other.assets_profits;
+    this.assets_value = other.assets_value;
+    this.target_rate_formula = other.target_rate_formula;
+    this.value_date = other.value_date;
+    this.due_date = other.due_date;
   }
 
   public AccountProductPositionInfoStruct deepCopy() {
@@ -197,6 +257,16 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
     this.frozenquantity = 0.0;
     setNotcollectedquantityIsSet(false);
     this.notcollectedquantity = 0.0;
+    setAssets_profitsIsSet(false);
+    this.assets_profits = 0.0;
+    setAssets_valueIsSet(false);
+    this.assets_value = 0.0;
+    setTarget_rate_formulaIsSet(false);
+    this.target_rate_formula = 0;
+    setValue_dateIsSet(false);
+    this.value_date = 0;
+    setDue_dateIsSet(false);
+    this.due_date = 0;
   }
 
   public String getProductid() {
@@ -315,6 +385,121 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __NOTCOLLECTEDQUANTITY_ISSET_ID, value);
   }
 
+  public double getAssets_profits() {
+    return this.assets_profits;
+  }
+
+  public AccountProductPositionInfoStruct setAssets_profits(double assets_profits) {
+    this.assets_profits = assets_profits;
+    setAssets_profitsIsSet(true);
+    return this;
+  }
+
+  public void unsetAssets_profits() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ASSETS_PROFITS_ISSET_ID);
+  }
+
+  /** Returns true if field assets_profits is set (has been assigned a value) and false otherwise */
+  public boolean isSetAssets_profits() {
+    return EncodingUtils.testBit(__isset_bitfield, __ASSETS_PROFITS_ISSET_ID);
+  }
+
+  public void setAssets_profitsIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ASSETS_PROFITS_ISSET_ID, value);
+  }
+
+  public double getAssets_value() {
+    return this.assets_value;
+  }
+
+  public AccountProductPositionInfoStruct setAssets_value(double assets_value) {
+    this.assets_value = assets_value;
+    setAssets_valueIsSet(true);
+    return this;
+  }
+
+  public void unsetAssets_value() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ASSETS_VALUE_ISSET_ID);
+  }
+
+  /** Returns true if field assets_value is set (has been assigned a value) and false otherwise */
+  public boolean isSetAssets_value() {
+    return EncodingUtils.testBit(__isset_bitfield, __ASSETS_VALUE_ISSET_ID);
+  }
+
+  public void setAssets_valueIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ASSETS_VALUE_ISSET_ID, value);
+  }
+
+  public int getTarget_rate_formula() {
+    return this.target_rate_formula;
+  }
+
+  public AccountProductPositionInfoStruct setTarget_rate_formula(int target_rate_formula) {
+    this.target_rate_formula = target_rate_formula;
+    setTarget_rate_formulaIsSet(true);
+    return this;
+  }
+
+  public void unsetTarget_rate_formula() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __TARGET_RATE_FORMULA_ISSET_ID);
+  }
+
+  /** Returns true if field target_rate_formula is set (has been assigned a value) and false otherwise */
+  public boolean isSetTarget_rate_formula() {
+    return EncodingUtils.testBit(__isset_bitfield, __TARGET_RATE_FORMULA_ISSET_ID);
+  }
+
+  public void setTarget_rate_formulaIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __TARGET_RATE_FORMULA_ISSET_ID, value);
+  }
+
+  public int getValue_date() {
+    return this.value_date;
+  }
+
+  public AccountProductPositionInfoStruct setValue_date(int value_date) {
+    this.value_date = value_date;
+    setValue_dateIsSet(true);
+    return this;
+  }
+
+  public void unsetValue_date() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __VALUE_DATE_ISSET_ID);
+  }
+
+  /** Returns true if field value_date is set (has been assigned a value) and false otherwise */
+  public boolean isSetValue_date() {
+    return EncodingUtils.testBit(__isset_bitfield, __VALUE_DATE_ISSET_ID);
+  }
+
+  public void setValue_dateIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __VALUE_DATE_ISSET_ID, value);
+  }
+
+  public int getDue_date() {
+    return this.due_date;
+  }
+
+  public AccountProductPositionInfoStruct setDue_date(int due_date) {
+    this.due_date = due_date;
+    setDue_dateIsSet(true);
+    return this;
+  }
+
+  public void unsetDue_date() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __DUE_DATE_ISSET_ID);
+  }
+
+  /** Returns true if field due_date is set (has been assigned a value) and false otherwise */
+  public boolean isSetDue_date() {
+    return EncodingUtils.testBit(__isset_bitfield, __DUE_DATE_ISSET_ID);
+  }
+
+  public void setDue_dateIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __DUE_DATE_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case PRODUCTID:
@@ -357,6 +542,46 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
       }
       break;
 
+    case ASSETS_PROFITS:
+      if (value == null) {
+        unsetAssets_profits();
+      } else {
+        setAssets_profits((Double)value);
+      }
+      break;
+
+    case ASSETS_VALUE:
+      if (value == null) {
+        unsetAssets_value();
+      } else {
+        setAssets_value((Double)value);
+      }
+      break;
+
+    case TARGET_RATE_FORMULA:
+      if (value == null) {
+        unsetTarget_rate_formula();
+      } else {
+        setTarget_rate_formula((Integer)value);
+      }
+      break;
+
+    case VALUE_DATE:
+      if (value == null) {
+        unsetValue_date();
+      } else {
+        setValue_date((Integer)value);
+      }
+      break;
+
+    case DUE_DATE:
+      if (value == null) {
+        unsetDue_date();
+      } else {
+        setDue_date((Integer)value);
+      }
+      break;
+
     }
   }
 
@@ -376,6 +601,21 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
 
     case NOTCOLLECTEDQUANTITY:
       return Double.valueOf(getNotcollectedquantity());
+
+    case ASSETS_PROFITS:
+      return Double.valueOf(getAssets_profits());
+
+    case ASSETS_VALUE:
+      return Double.valueOf(getAssets_value());
+
+    case TARGET_RATE_FORMULA:
+      return Integer.valueOf(getTarget_rate_formula());
+
+    case VALUE_DATE:
+      return Integer.valueOf(getValue_date());
+
+    case DUE_DATE:
+      return Integer.valueOf(getDue_date());
 
     }
     throw new IllegalStateException();
@@ -398,6 +638,16 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
       return isSetFrozenquantity();
     case NOTCOLLECTEDQUANTITY:
       return isSetNotcollectedquantity();
+    case ASSETS_PROFITS:
+      return isSetAssets_profits();
+    case ASSETS_VALUE:
+      return isSetAssets_value();
+    case TARGET_RATE_FORMULA:
+      return isSetTarget_rate_formula();
+    case VALUE_DATE:
+      return isSetValue_date();
+    case DUE_DATE:
+      return isSetDue_date();
     }
     throw new IllegalStateException();
   }
@@ -457,6 +707,51 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
       if (!(this_present_notcollectedquantity && that_present_notcollectedquantity))
         return false;
       if (this.notcollectedquantity != that.notcollectedquantity)
+        return false;
+    }
+
+    boolean this_present_assets_profits = true;
+    boolean that_present_assets_profits = true;
+    if (this_present_assets_profits || that_present_assets_profits) {
+      if (!(this_present_assets_profits && that_present_assets_profits))
+        return false;
+      if (this.assets_profits != that.assets_profits)
+        return false;
+    }
+
+    boolean this_present_assets_value = true;
+    boolean that_present_assets_value = true;
+    if (this_present_assets_value || that_present_assets_value) {
+      if (!(this_present_assets_value && that_present_assets_value))
+        return false;
+      if (this.assets_value != that.assets_value)
+        return false;
+    }
+
+    boolean this_present_target_rate_formula = true;
+    boolean that_present_target_rate_formula = true;
+    if (this_present_target_rate_formula || that_present_target_rate_formula) {
+      if (!(this_present_target_rate_formula && that_present_target_rate_formula))
+        return false;
+      if (this.target_rate_formula != that.target_rate_formula)
+        return false;
+    }
+
+    boolean this_present_value_date = true;
+    boolean that_present_value_date = true;
+    if (this_present_value_date || that_present_value_date) {
+      if (!(this_present_value_date && that_present_value_date))
+        return false;
+      if (this.value_date != that.value_date)
+        return false;
+    }
+
+    boolean this_present_due_date = true;
+    boolean that_present_due_date = true;
+    if (this_present_due_date || that_present_due_date) {
+      if (!(this_present_due_date && that_present_due_date))
+        return false;
+      if (this.due_date != that.due_date)
         return false;
     }
 
@@ -526,6 +821,56 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetAssets_profits()).compareTo(other.isSetAssets_profits());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetAssets_profits()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.assets_profits, other.assets_profits);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetAssets_value()).compareTo(other.isSetAssets_value());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetAssets_value()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.assets_value, other.assets_value);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetTarget_rate_formula()).compareTo(other.isSetTarget_rate_formula());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetTarget_rate_formula()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.target_rate_formula, other.target_rate_formula);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetValue_date()).compareTo(other.isSetValue_date());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetValue_date()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.value_date, other.value_date);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetDue_date()).compareTo(other.isSetDue_date());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetDue_date()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.due_date, other.due_date);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -569,6 +914,26 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
     sb.append("notcollectedquantity:");
     sb.append(this.notcollectedquantity);
     first = false;
+    if (!first) sb.append(", ");
+    sb.append("assets_profits:");
+    sb.append(this.assets_profits);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("assets_value:");
+    sb.append(this.assets_value);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("target_rate_formula:");
+    sb.append(this.target_rate_formula);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("value_date:");
+    sb.append(this.value_date);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("due_date:");
+    sb.append(this.due_date);
+    first = false;
     sb.append(")");
     return sb.toString();
   }
@@ -582,6 +947,11 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
     // alas, we cannot check 'validbalance' because it's a primitive and you chose the non-beans generator.
     // alas, we cannot check 'frozenquantity' because it's a primitive and you chose the non-beans generator.
     // alas, we cannot check 'notcollectedquantity' because it's a primitive and you chose the non-beans generator.
+    // alas, we cannot check 'assets_profits' because it's a primitive and you chose the non-beans generator.
+    // alas, we cannot check 'assets_value' because it's a primitive and you chose the non-beans generator.
+    // alas, we cannot check 'target_rate_formula' because it's a primitive and you chose the non-beans generator.
+    // alas, we cannot check 'value_date' because it's a primitive and you chose the non-beans generator.
+    // alas, we cannot check 'due_date' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
   }
 
@@ -661,6 +1031,46 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 6: // ASSETS_PROFITS
+            if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+              struct.assets_profits = iprot.readDouble();
+              struct.setAssets_profitsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 7: // ASSETS_VALUE
+            if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+              struct.assets_value = iprot.readDouble();
+              struct.setAssets_valueIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 8: // TARGET_RATE_FORMULA
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.target_rate_formula = iprot.readI32();
+              struct.setTarget_rate_formulaIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 9: // VALUE_DATE
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.value_date = iprot.readI32();
+              struct.setValue_dateIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 10: // DUE_DATE
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.due_date = iprot.readI32();
+              struct.setDue_dateIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -680,6 +1090,21 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
       }
       if (!struct.isSetNotcollectedquantity()) {
         throw new org.apache.thrift.protocol.TProtocolException("Required field 'notcollectedquantity' was not found in serialized data! Struct: " + toString());
+      }
+      if (!struct.isSetAssets_profits()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'assets_profits' was not found in serialized data! Struct: " + toString());
+      }
+      if (!struct.isSetAssets_value()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'assets_value' was not found in serialized data! Struct: " + toString());
+      }
+      if (!struct.isSetTarget_rate_formula()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'target_rate_formula' was not found in serialized data! Struct: " + toString());
+      }
+      if (!struct.isSetValue_date()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'value_date' was not found in serialized data! Struct: " + toString());
+      }
+      if (!struct.isSetDue_date()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'due_date' was not found in serialized data! Struct: " + toString());
       }
       struct.validate();
     }
@@ -705,6 +1130,21 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
       oprot.writeFieldBegin(NOTCOLLECTEDQUANTITY_FIELD_DESC);
       oprot.writeDouble(struct.notcollectedquantity);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(ASSETS_PROFITS_FIELD_DESC);
+      oprot.writeDouble(struct.assets_profits);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(ASSETS_VALUE_FIELD_DESC);
+      oprot.writeDouble(struct.assets_value);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(TARGET_RATE_FORMULA_FIELD_DESC);
+      oprot.writeI32(struct.target_rate_formula);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(VALUE_DATE_FIELD_DESC);
+      oprot.writeI32(struct.value_date);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(DUE_DATE_FIELD_DESC);
+      oprot.writeI32(struct.due_date);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -727,6 +1167,11 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
       oprot.writeDouble(struct.validbalance);
       oprot.writeDouble(struct.frozenquantity);
       oprot.writeDouble(struct.notcollectedquantity);
+      oprot.writeDouble(struct.assets_profits);
+      oprot.writeDouble(struct.assets_value);
+      oprot.writeI32(struct.target_rate_formula);
+      oprot.writeI32(struct.value_date);
+      oprot.writeI32(struct.due_date);
     }
 
     @Override
@@ -742,6 +1187,16 @@ public class AccountProductPositionInfoStruct implements org.apache.thrift.TBase
       struct.setFrozenquantityIsSet(true);
       struct.notcollectedquantity = iprot.readDouble();
       struct.setNotcollectedquantityIsSet(true);
+      struct.assets_profits = iprot.readDouble();
+      struct.setAssets_profitsIsSet(true);
+      struct.assets_value = iprot.readDouble();
+      struct.setAssets_valueIsSet(true);
+      struct.target_rate_formula = iprot.readI32();
+      struct.setTarget_rate_formulaIsSet(true);
+      struct.value_date = iprot.readI32();
+      struct.setValue_dateIsSet(true);
+      struct.due_date = iprot.readI32();
+      struct.setDue_dateIsSet(true);
     }
   }
 

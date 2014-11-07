@@ -98,14 +98,15 @@ public class ThriftHelper extends BaseHelper {
 			String valName = val.attributeValue("name");
 			Field f = object.getClass().getDeclaredField(valName);
 			String varType = f.getType().getName();
-
+			logger.debug("valName " + valName + " varType "
+					+ varType);
 			if (varType.equals("java.util.Set")) {
 				ParameterizedType pt = (ParameterizedType) f
 						.getGenericType();
 				varType = pt.getActualTypeArguments()[0]
 						.toString();
 				varType = varType.replace("class ", "");
-				// logger.debug("varType " + varType);
+				logger.debug("varType " + varType);
 			}
 
 			Object sub = parseStruct(varType, val, vars);
@@ -130,6 +131,7 @@ public class ThriftHelper extends BaseHelper {
 			StepException {
 		Set set = new HashSet();
 		List list = el.selectNodes("item");
+		logger.debug("set list size " + list.size());
 		Object object = null;
 		for (Iterator<Element> it = list.iterator(); it.hasNext();) {
 			Element item = it.next();
@@ -151,7 +153,7 @@ public class ThriftHelper extends BaseHelper {
 		String name = el.attributeValue("name");
 		List<Element> list = el.selectNodes("item");
 		type = type.replace(packageName + ".", "");
-		// logger.debug("new type " + type);
+		logger.debug("new type " + type + " el " + el);
 		if (list.size() != 0) {
 			return parseSetStruct(type, el, vars);
 		}
@@ -239,7 +241,7 @@ public class ThriftHelper extends BaseHelper {
 					classParams);
 
 			Object ret = method.invoke(client, runParams.toArray());
-			logger.debug("thrift helper response obj " + ret);
+			logger.info("thrift helper response obj " + ret);
 			Element rel = (Element) el.selectSingleNode("ret");
 			if (rel != null) {
 				list = rel.selectNodes("val");

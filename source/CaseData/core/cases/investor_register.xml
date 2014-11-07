@@ -1,19 +1,31 @@
-<case id="institution_getallproduct">
-	<context>	
+<case id="getTradeLogBySerialNo">
+	<context>
+		<item name="investorID">00X00060</item>
+		<item name="invest_special_account">AC00X00060</item>
+		<item name="serialno_1">2014110500017</item>
+		<item name="serialno_2">2014110500018</item>
 	</context>
-	<step note="获取产品列表">
+	<step note="根据订单号_交易查询">
 		<helper name="helper.thrift">
-			<item name="call" function="institution_getallproduct">
-				<ret type="ProductListReultStruct">	
-					<val name="products" type="list">products</val>
+			<item name="call" function="getTradeLogBySerialNo">
+				<param type="TradeQuerySerialsStruct" name="ProductAuditStruct">
+					<val name="investorID" format="investorID">%s</val>
+					<val name="invest_special_account" format="invest_special_account">%s</val>
+					<val name="serialnos">
+						<item format="serialno_1">%s</item>
+						<item format="serialno_2">%s</item>
+					</val>
+				</param>
+				<ret type="TradeQueryResultStruct">
+					<val name="tradelogs" type="list">tradelogs</val>
 				</ret>
 			</item>
 		</helper>
 		<return>
-			<item name="products">products</item>
+			<item name="tradelogs">tradelogs</item>
 		</return>
 		<assert>
-			<item name="notnull" var="products"></item> 
+			<item name="jsonNotNull" var="tradelogs"></item>
 		</assert>
 	</step>
 </case>

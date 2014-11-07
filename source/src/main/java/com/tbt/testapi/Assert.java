@@ -17,6 +17,8 @@ public class Assert {
 			return notNull(message);
 		} else if (name.equals("than")) {
 			return than(message, param);
+		} else if (name.equals("jsonNotNull")) {
+			return jsonNotNull(message);
 		}
 		return false;
 	}
@@ -29,8 +31,18 @@ public class Assert {
 		return !(message.equals(expected));
 	}
 
-	static protected boolean notNull(String message) {
+	static protected boolean jsonNotNull(String message) {
+		if (message == null)
+			return false;
+		if (message.equals("{}"))
+			return false;
+		if (message.equals("[]"))
+			return false;
+		return true;
+	}
 
+	static protected boolean notNull(String message) {
+		logger.debug("not null input " + message);
 		if (message == null)
 			return false;
 		if (message == "")

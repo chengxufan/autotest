@@ -40,6 +40,7 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
   private static final org.apache.thrift.protocol.TField VALIDBALANCE_FIELD_DESC = new org.apache.thrift.protocol.TField("validbalance", org.apache.thrift.protocol.TType.DOUBLE, (short)3);
   private static final org.apache.thrift.protocol.TField FROZENFUND_FIELD_DESC = new org.apache.thrift.protocol.TField("frozenfund", org.apache.thrift.protocol.TType.DOUBLE, (short)4);
   private static final org.apache.thrift.protocol.TField NOTCOLLECTEDFUND_FIELD_DESC = new org.apache.thrift.protocol.TField("notcollectedfund", org.apache.thrift.protocol.TType.DOUBLE, (short)5);
+  private static final org.apache.thrift.protocol.TField STATUS_FIELD_DESC = new org.apache.thrift.protocol.TField("status", org.apache.thrift.protocol.TType.I32, (short)6);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -52,6 +53,7 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
   public double validbalance; // required
   public double frozenfund; // required
   public double notcollectedfund; // required
+  public int status; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -59,7 +61,8 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
     CURBALANCE((short)2, "curbalance"),
     VALIDBALANCE((short)3, "validbalance"),
     FROZENFUND((short)4, "frozenfund"),
-    NOTCOLLECTEDFUND((short)5, "notcollectedfund");
+    NOTCOLLECTEDFUND((short)5, "notcollectedfund"),
+    STATUS((short)6, "status");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -84,6 +87,8 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
           return FROZENFUND;
         case 5: // NOTCOLLECTEDFUND
           return NOTCOLLECTEDFUND;
+        case 6: // STATUS
+          return STATUS;
         default:
           return null;
       }
@@ -128,6 +133,7 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
   private static final int __VALIDBALANCE_ISSET_ID = 1;
   private static final int __FROZENFUND_ISSET_ID = 2;
   private static final int __NOTCOLLECTEDFUND_ISSET_ID = 3;
+  private static final int __STATUS_ISSET_ID = 4;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -142,6 +148,8 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     tmpMap.put(_Fields.NOTCOLLECTEDFUND, new org.apache.thrift.meta_data.FieldMetaData("notcollectedfund", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
+    tmpMap.put(_Fields.STATUS, new org.apache.thrift.meta_data.FieldMetaData("status", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(AccountFundInfoStruct.class, metaDataMap);
   }
@@ -154,7 +162,8 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
     double curbalance,
     double validbalance,
     double frozenfund,
-    double notcollectedfund)
+    double notcollectedfund,
+    int status)
   {
     this();
     this.accountfundid = accountfundid;
@@ -166,6 +175,8 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
     setFrozenfundIsSet(true);
     this.notcollectedfund = notcollectedfund;
     setNotcollectedfundIsSet(true);
+    this.status = status;
+    setStatusIsSet(true);
   }
 
   /**
@@ -180,6 +191,7 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
     this.validbalance = other.validbalance;
     this.frozenfund = other.frozenfund;
     this.notcollectedfund = other.notcollectedfund;
+    this.status = other.status;
   }
 
   public AccountFundInfoStruct deepCopy() {
@@ -197,6 +209,8 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
     this.frozenfund = 0.0;
     setNotcollectedfundIsSet(false);
     this.notcollectedfund = 0.0;
+    setStatusIsSet(false);
+    this.status = 0;
   }
 
   public String getAccountfundid() {
@@ -315,6 +329,29 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __NOTCOLLECTEDFUND_ISSET_ID, value);
   }
 
+  public int getStatus() {
+    return this.status;
+  }
+
+  public AccountFundInfoStruct setStatus(int status) {
+    this.status = status;
+    setStatusIsSet(true);
+    return this;
+  }
+
+  public void unsetStatus() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __STATUS_ISSET_ID);
+  }
+
+  /** Returns true if field status is set (has been assigned a value) and false otherwise */
+  public boolean isSetStatus() {
+    return EncodingUtils.testBit(__isset_bitfield, __STATUS_ISSET_ID);
+  }
+
+  public void setStatusIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __STATUS_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case ACCOUNTFUNDID:
@@ -357,6 +394,14 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
       }
       break;
 
+    case STATUS:
+      if (value == null) {
+        unsetStatus();
+      } else {
+        setStatus((Integer)value);
+      }
+      break;
+
     }
   }
 
@@ -376,6 +421,9 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
 
     case NOTCOLLECTEDFUND:
       return Double.valueOf(getNotcollectedfund());
+
+    case STATUS:
+      return Integer.valueOf(getStatus());
 
     }
     throw new IllegalStateException();
@@ -398,6 +446,8 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
       return isSetFrozenfund();
     case NOTCOLLECTEDFUND:
       return isSetNotcollectedfund();
+    case STATUS:
+      return isSetStatus();
     }
     throw new IllegalStateException();
   }
@@ -457,6 +507,15 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
       if (!(this_present_notcollectedfund && that_present_notcollectedfund))
         return false;
       if (this.notcollectedfund != that.notcollectedfund)
+        return false;
+    }
+
+    boolean this_present_status = true;
+    boolean that_present_status = true;
+    if (this_present_status || that_present_status) {
+      if (!(this_present_status && that_present_status))
+        return false;
+      if (this.status != that.status)
         return false;
     }
 
@@ -526,6 +585,16 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetStatus()).compareTo(other.isSetStatus());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetStatus()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.status, other.status);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -569,6 +638,10 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
     sb.append("notcollectedfund:");
     sb.append(this.notcollectedfund);
     first = false;
+    if (!first) sb.append(", ");
+    sb.append("status:");
+    sb.append(this.status);
+    first = false;
     sb.append(")");
     return sb.toString();
   }
@@ -582,6 +655,7 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
     // alas, we cannot check 'validbalance' because it's a primitive and you chose the non-beans generator.
     // alas, we cannot check 'frozenfund' because it's a primitive and you chose the non-beans generator.
     // alas, we cannot check 'notcollectedfund' because it's a primitive and you chose the non-beans generator.
+    // alas, we cannot check 'status' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
   }
 
@@ -661,6 +735,14 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 6: // STATUS
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.status = iprot.readI32();
+              struct.setStatusIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -680,6 +762,9 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
       }
       if (!struct.isSetNotcollectedfund()) {
         throw new org.apache.thrift.protocol.TProtocolException("Required field 'notcollectedfund' was not found in serialized data! Struct: " + toString());
+      }
+      if (!struct.isSetStatus()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' was not found in serialized data! Struct: " + toString());
       }
       struct.validate();
     }
@@ -705,6 +790,9 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
       oprot.writeFieldBegin(NOTCOLLECTEDFUND_FIELD_DESC);
       oprot.writeDouble(struct.notcollectedfund);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(STATUS_FIELD_DESC);
+      oprot.writeI32(struct.status);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -727,6 +815,7 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
       oprot.writeDouble(struct.validbalance);
       oprot.writeDouble(struct.frozenfund);
       oprot.writeDouble(struct.notcollectedfund);
+      oprot.writeI32(struct.status);
     }
 
     @Override
@@ -742,6 +831,8 @@ public class AccountFundInfoStruct implements org.apache.thrift.TBase<AccountFun
       struct.setFrozenfundIsSet(true);
       struct.notcollectedfund = iprot.readDouble();
       struct.setNotcollectedfundIsSet(true);
+      struct.status = iprot.readI32();
+      struct.setStatusIsSet(true);
     }
   }
 
